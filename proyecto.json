@@ -1,0 +1,107 @@
+{
+  "tienda": {
+    "usuarios": {
+      "-Mv8Sgjz_tpSIvsvGt8J": {
+        "admin": false,
+        "bloqueado": false,
+        "contraseña": "emi",
+        "correo": "emilio@gmail.com",
+        "id": "-Mv8Sgjz_tpSIvsvGt8J",
+        "nombre": "Emilio",
+        "url_foto": "https://firebasestorage.googleapis.com/v0/b/tienda-7c863.appspot.com/o/tienda%2Ffotos%2F-Mv8Sgjz_tpSIvsvGt8J?alt=media&token=a1f6a0b7-6fa5-4454-a02c-94e2a4f4e784"
+      },
+      //...
+      "-Mv_dAIr02c_dJvtBAj5": {
+        "admin": true,
+        "contraseña": "admin",
+        "correo": "admin@gmail.com",
+        "id": "-Mv_dAIr02c_dJvtBAj5",
+        "nombre": "Admin",
+        "url_foto": "https://firebasestorage.googleapis.com/v0/b/tienda-7c863.appspot.com/o/tienda%2Ffotos%2F-Mv_dAIr02c_dJvtBAj5?alt=media&token=e8a40472-cd85-4ab9-9395-28d4d489da87"
+      },
+      //...
+    },
+    "producto": {
+      "-MvDkLzDUb7X6bCMheio": {
+        "color": 0,
+        "disponible": true,
+        "id": "-MvDkLzDUb7X6bCMheio",
+        "nombre": "Judith,the Scourge",
+        "precio": 10,
+        "categoria": "general",
+        "url_foto": "https://firebasestorage.googleapis.com/v0/b/tienda-7c863.appspot.com/o/tienda%2Ffotos%2F-MvDkLzDUb7X6bCMheio?alt=media&token=9e25aeda-e90e-4ad6-ab7f-7ea0ce70786d"
+      },
+      //...
+    },
+    "eventos": {
+      "-MvNy6A5r9Z4kuKMN26j": {
+        "aforo_max": 23,
+        "aforo_ocupado": 0,
+        "fecha": "2022-05-30",
+        "id": "-MvNy6A5r9Z4kuKMN26j",
+        "nombre": "Gran desafío",
+        "precio": 2.5,
+        "url_foto": "https://firebasestorage.googleapis.com/v0/b/tienda-7c863.appspot.com/o/tienda%2Ffotos%2F-MvNy6A5r9Z4kuKMN26j?alt=media&token=b533082a-48d1-4a90-8d8a-30427ef095b5"
+      },
+      //...
+    },
+    "reserva_producto": {
+      "-Mw5pfurGZJGj6R-o7X3": {
+        "aceptada": true, //false rechazada informar al respecto Rechazada porque el usuario se considera no de fiar
+        "estado": 3,//0 pedido realizado 1 pedido aceptado 2 esperando recogerlo 3 recogido
+        "id": "-Mw5pfurGZJGj6R-o7X3",
+        "id_producto_comprada": "-MvDkLzDUb7X6bCMheio",
+        "id_usuario": "-MvtB8JdeXKuqzzJ896w"
+      },
+      //...
+    },
+    "reserva_eventos": {
+      "-Mv_XihlgOhoDvR4Aad0": {
+        "id": "-Mv_XihlgOhoDvR4Aad0",
+        "id_evento_apuntado": "-MvNy6A5r9Z4kuKMN26j",
+        "id_usuario_apuntado": "-Mv8Sgjz_tpSIvsvGt8J",
+        "estado": 3,//0 pendiente 1 aceptada 2 rechazada
+        "aceptada":false //Rechazada porque el usuario se considera no de fiar para asistir al evento se pelea
+      },
+      //...
+    },
+    "chat_publico": {
+      "mensajes": {
+        "-N3KpQfB6uvKZ0ncI1Xq": {
+          "contenido": "Hola",
+          "fecha_hora": "2022-05-30 18:38:56",
+          "id": "-N3KpQfB6uvKZ0ncI1Xq",
+          "id_adaptador": "-N2aT-MfGLLbS5u7PL1E",
+          "id_emisor": "-N2aT-MfGLLbS5u7PL1E",
+        },
+        ...
+      }
+    },
+    "chat_pedidos": {
+      "mensajes": {
+        "-N3jwhGOta2ZkWMlU2ib": {
+          "contenido": "Hola tengo quejas",
+          "fecha": "2022-05-30 18:38:56",
+          "id": "-N3jwhGOta2ZkWMlU2ib",
+          "id_emisor": "-MvtB8JdeXKuqzzJ896w",
+          "id_adaptador": "-N2aT-MfGLLbS5u7PL1E",
+          "idPedido": "-MyDoChSlh9z6jjG8yF2"
+        },
+        ...
+      },
+    },
+    "chat_eventos": {
+      "mensajes": {
+        "-N3jwhGOta2ZkWMlU2ib": {
+          "contenido": "Hola tengo quejas",
+          "fecha": "2022-05-30 18:38:56",
+          "id": "-N3jwhGOta2ZkWMlU2ib",
+          "id_emisor": "-MvtB8JdeXKuqzzJ896w",
+          "id_adaptador": "-N2aT-MfGLLbS5u7PL1E",
+          "id_evento": "-MyDoChSlh9z6jjG8yF2"
+        },
+        ...
+      },
+    },
+  }
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registro">
+
+    <EditText
+        android:id="@+id/registro_contrasena2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Repite tu contraseña"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/registro_contrasena"
+        app:layout_constraintStart_toStartOf="@+id/registro_contrasena"
+        app:layout_constraintTop_toBottomOf="@+id/registro_contrasena" />
+
+    <EditText
+        android:id="@+id/registro_contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Elige una contraseña"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/registro_nombre"
+        app:layout_constraintStart_toStartOf="@+id/registro_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/registro_nombre" />
+
+    <EditText
+        android:id="@+id/registro_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Dinos tu nombre"
+        android:inputType="textPersonName"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/registro_titulo"
+        app:layout_constraintStart_toStartOf="@+id/registro_titulo"
+        app:layout_constraintTop_toBottomOf="@+id/registro_titulo" />
+
+    <EditText
+        android:id="@+id/registro_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Introduce tu email"
+        android:inputType="textEmailAddress"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/registro_contrasena2"
+        app:layout_constraintStart_toStartOf="@+id/registro_contrasena2"
+        app:layout_constraintTop_toBottomOf="@+id/registro_contrasena2" />
+
+    <ImageView
+        android:id="@+id/registro_avatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/registro_mail"
+        app:layout_constraintStart_toStartOf="@+id/registro_mail"
+        app:layout_constraintTop_toBottomOf="@+id/registro_mail"
+        app:srcCompat="@drawable/anadir_imagen_symbol_sc" />
+
+    <Button
+        android:id="@+id/registro_boton_registrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Completar \nregistro"
+        app:layout_constraintEnd_toEndOf="@+id/registro_avatar"
+        app:layout_constraintStart_toStartOf="@+id/registro_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/registro_avatar" />
+
+    <ImageView
+        android:id="@+id/registro_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />
+
+    <ImageView
+        android:id="@+id/registro_titulo"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/texto_logo1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

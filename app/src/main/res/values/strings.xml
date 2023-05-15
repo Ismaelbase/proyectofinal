@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tiendav1</string>
+    <string name="app_id">com.example.tiendav1</string>
+    <string name="sc">SecondCharm</string>
+</resources>

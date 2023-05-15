@@ -1,0 +1,27 @@
+1)Diseñar y programar la gestion de usuarios:
+	pantalla de inicio
+	login
+	registro
+	al entrar admin tiene unas opciones, cliente tiene otras
+	seguridad (no poder entrar en una activity que no le corresponda al usuario)
+	 
+2)Diseñar y programar la gestion de productos de la tienda
+	admin crear borrar editar productos, aceptar pedidos y consultar comprar realizadas por cliente
+	cliente consultar productos hacer reservas y recoger reservar. Además de ver lo que ha comprado
+	Envio de notificaciones (esto lo dejaría para casi el final)
+3)Diseñar y programar la gestion de eventos
+	admin crea eventos editar aceptar inscripciones etc
+	cliente se apunta a un evento
+Todos los puntos anteriores anteriores pueden incluir validacion de formularios, filtros, evitar datos repetidos, etc segun requisitos basicos del proyecto
+
+Todos los puntos anteriores pueden implicar modificar la plantilla de bases de datos que teneis que usar
+-------------------------------------------------------------------------------------------------------------
+Una vez terminado el proyecto:
+1)Diseñar logotipo
+2)Hacer los Wireframes
+3)Hacer las capturas para el manual
+4)Hacer el video demostracion
+5)Hacer la documentacion
+6)Imprimirla en papel y encuadernarla
+7)Juntar toda la entrega en digital: documentacion en PDF, codigos ,apk ,capturas, video demostracion ,etc
+-------------------------------------------------------------------------------------------------------------

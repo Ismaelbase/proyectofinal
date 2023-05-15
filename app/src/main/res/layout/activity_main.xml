@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/main_iv_logo"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo1" />
+
+    <ImageView
+        android:id="@+id/main_iv_textologo"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_iv_logo"
+        app:layout_constraintStart_toStartOf="@+id/main_iv_logo"
+        app:layout_constraintTop_toBottomOf="@+id/main_iv_logo"
+        app:srcCompat="@drawable/texto_logo1" />
+
+    <EditText
+        android:id="@+id/main_et_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Usuario"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_iv_textologo"
+        app:layout_constraintStart_toStartOf="@+id/main_iv_textologo"
+        app:layout_constraintTop_toBottomOf="@+id/main_iv_textologo" />
+
+    <EditText
+        android:id="@+id/main_et_contraseña"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_et_usuario"
+        app:layout_constraintStart_toStartOf="@+id/main_et_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/main_et_usuario" />
+
+    <Button
+        android:id="@+id/main_button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Log in"
+        app:layout_constraintEnd_toEndOf="@+id/main_et_contraseña"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/main_et_contraseña"
+        app:layout_constraintTop_toBottomOf="@+id/main_et_contraseña" />
+
+    <TextView
+        android:id="@+id/main_tv_registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="¿Nuevo en Second Charm?"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/main_button_login"
+        app:layout_constraintStart_toStartOf="@+id/main_button_login"
+        app:layout_constraintTop_toBottomOf="@+id/main_button_login" />
+
+    <TextView
+        android:id="@+id/main_tv_registrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Regístrate"
+        android:textColor="@color/principal_morado"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/main_tv_registro"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/main_tv_registro"
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_registro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
