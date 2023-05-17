@@ -2,4 +2,10 @@
     <string name="app_name">Tiendav1</string>
     <string name="app_id">com.example.tiendav1</string>
     <string name="sc">SecondCharm</string>
+    <string name="title_activity_principal_normal">Principal_normal</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

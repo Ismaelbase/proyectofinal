@@ -73,10 +73,12 @@ class Registro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
+        //Esconder la barra del menu
+        supportActionBar!!.hide()
+
         lista_usuarios = Utilidades.obtenerListaUsers(referencia_bd)
 
         //Acceso a galeria.
-
         avatar.setOnClickListener {
             accesoGaleria.launch("image/*")
         }
@@ -99,8 +101,7 @@ class Registro : AppCompatActivity() {
                 ) { //Se puede añadir usuario a BD y devolver al main.
 
                     val fecha = LocalDate.now()
-                    val id_usuario =
-                        referencia_bd.child("SecondCharm").child("Users").push().key!!
+                    val id_usuario = Utilidades.usuarios.push().key!!
 
                     val url_firebase = Utilidades.guardarImagen(
                         referencia_almacenamiento,
@@ -128,7 +129,9 @@ class Registro : AppCompatActivity() {
                         "Bienvenido a SecondCharm."
                     )
 
+                    Utilidades.recien_registrado = nombre.text.toString()!!
                     startActivity(Intent(applicationContext, MainActivity::class.java))
+
 
                 } else if (contrasena.text.toString() != contrasena2.text.toString()) {
                     runOnUiThread {

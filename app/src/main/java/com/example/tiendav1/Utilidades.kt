@@ -16,10 +16,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
 import kotlinx.parcelize.Parcelize
@@ -28,14 +24,18 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 import com.example.tiendav1.*
+import com.google.firebase.database.*
 import java.util.concurrent.CountDownLatch
 import kotlin.reflect.KFunction1
 
 class Utilidades {
     companion object {
 
+        // referencias
 
-        var cambiado = false
+        val usuarios = FirebaseDatabase.getInstance().getReference().child("SecondCharm").child("Users")
+
+        var recien_registrado = ""
 
         private val clave_id="id_usuario"
         private val clave_tipo="tipo_usuario"
@@ -123,25 +123,29 @@ class Utilidades {
                     admin
                 ))
 
-//        fun escribirTema(
-//            db_ref:DatabaseReference,
-//            id:String,
-//            nombre:String,
-//            descripcion:String,
-//            categoria:String,
-//            url_imagen:String,
-//            fecha:String,
-//            activo:Boolean
-//
-//        ) = db_ref.child("DyD").child("Temas").child(id).setValue(Tema(
-//            id,
-//            nombre,
-//            descripcion,
-//            categoria,
-//            url_imagen,
-//            fecha,
-//            activo
-//        ))
+        fun escribirArticulo(
+            db_ref:DatabaseReference,
+            id:String,
+            nombre:String,
+            precio:Double,
+            descripcion:String,
+            categoria:String,
+            url_foto:String,
+            fecha:String,
+            cantidad:Int,
+            puntos:Int
+
+        ) = db_ref.child("SecondCharm").child("Articulos").child(id).setValue(Articulo(
+            id,
+            nombre,
+            precio,
+            descripcion,
+            categoria,
+            url_foto,
+            fecha,
+            cantidad,
+            puntos
+        ))
 
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
             val animacion=CircularProgressDrawable(contexto)
@@ -272,28 +276,28 @@ class Utilidades {
             return lista
         }
 //
-//        fun obtenerListaTemas(db_ref: DatabaseReference):MutableList<Tema>{
-//            var lista = mutableListOf<Tema>()
-//
-//            //Consulta a la bd
-//            db_ref.child("DyD")
-//                .child("Temas")
-//                .addValueEventListener(object : ValueEventListener {
-//
-//                    override fun onDataChange(snapshot: DataSnapshot) {
-//                        lista.clear()
-//                        snapshot.children.forEach{ hijo: DataSnapshot?->
-//                            val pojo_tema = hijo?.getValue(Tema::class.java)
-//                            lista.add(pojo_tema!!)
-//                        }
-//                    }
-//
-//                    override fun onCancelled(error: DatabaseError) {
-//                        println(error.message)
-//                    }
-//                })
-//            return lista
-//        }
+        fun obtenerListaArticulos(db_ref: DatabaseReference):MutableList<Articulo>{
+            var lista = mutableListOf<Articulo>()
+
+            //Consulta a la bd
+            db_ref.child("SecondCharm")
+                .child("Articulos")
+                .addValueEventListener(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        lista.clear()
+                        snapshot.children.forEach{ hijo: DataSnapshot?->
+                            val pojo_articulo = hijo?.getValue(Articulo::class.java)
+                            lista.add(pojo_articulo!!)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        println(error.message)
+                    }
+                })
+            return lista
+        }
 //
 //        //VALIDADOR DE CORREO
 //
@@ -331,5 +335,12 @@ class Utilidades {
 
             return correcto
         }
+
+
+        val articulos = listOf<Int>(
+            R.drawable.articulo_abrigo1,
+            R.drawable.articulo_patin1,
+            R.drawable.articulo_radio1
+        )
     }
 }

@@ -46,7 +46,7 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/main_et_usuario"
         app:layout_constraintStart_toStartOf="@+id/main_et_usuario"
@@ -56,12 +56,12 @@
         android:id="@+id/main_button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Log in"
         app:layout_constraintEnd_toEndOf="@+id/main_et_contraseña"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="@+id/main_et_contraseña"
-        app:layout_constraintTop_toBottomOf="@+id/main_et_contraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_cuentaatras" />
 
     <TextView
         android:id="@+id/main_tv_registro"
@@ -86,5 +86,15 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/main_tv_registro"
         app:layout_constraintTop_toBottomOf="@+id/main_tv_registro" />
+
+    <TextView
+        android:id="@+id/main_tv_cuentaatras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="000000000"
+        app:layout_constraintEnd_toEndOf="@+id/main_et_contraseña"
+        app:layout_constraintStart_toStartOf="@+id/main_et_contraseña"
+        app:layout_constraintTop_toBottomOf="@+id/main_et_contraseña" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

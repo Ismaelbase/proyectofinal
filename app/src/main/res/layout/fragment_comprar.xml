@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Comprar">
+
+    <CheckBox
+        android:id="@+id/comprar_cb_muebles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Muebles"
+        app:layout_constraintEnd_toEndOf="@+id/comprar_searchview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/comprar_cb_ocio"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
+
+    <CheckBox
+        android:id="@+id/comprar_cb_ocio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Ocio"
+        app:layout_constraintStart_toEndOf="@+id/comprar_cb_ropa"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
+
+    <SearchView
+        android:id="@+id/comprar_searchview"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/comprar_cb_tecnologia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Tecnologia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
+
+    <CheckBox
+        android:id="@+id/comprar_cb_ropa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Ropa"
+        app:layout_constraintStart_toEndOf="@+id/comprar_cb_tecnologia"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comprar_rv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_cb_ocio" />
+</androidx.constraintlayout.widget.ConstraintLayout>

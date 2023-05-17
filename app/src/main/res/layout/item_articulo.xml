@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="60dp">
+
+    <TextView
+        android:id="@+id/articulo_puntos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Puntos"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_nombre" />
+
+    <ImageView
+        android:id="@+id/articulo_imagen"
+        android:layout_width="185dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/articulo_radio1" />
+
+    <TextView
+        android:id="@+id/articulo_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Nombre"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/articulo_imagen"
+        app:layout_constraintStart_toStartOf="@+id/articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_imagen" />
+
+    <TextView
+        android:id="@+id/articulo_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Disponibles"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_descripcion" />
+
+    <TextView
+        android:id="@+id/articulo_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Categoria"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_descripcion" />
+
+    <TextView
+        android:id="@+id/articulo_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Precio"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_nombre" />
+
+    <TextView
+        android:id="@+id/articulo_descripcion"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="top|left"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:lines="20"
+        android:minLines="2"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:text="Prueba"
+        app:layout_constraintEnd_toEndOf="@+id/articulo_imagen"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/articulo_precio" />
+</androidx.constraintlayout.widget.ConstraintLayout>

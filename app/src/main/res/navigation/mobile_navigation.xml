@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/Config">
+
+    <fragment
+        android:id="@+id/Puntos"
+        android:name="com.example.tiendav1.Puntos"
+        android:label="Puntos"/>
+    <fragment
+        android:id="@+id/Config"
+        android:name="com.example.tiendav1.Config"
+        android:label="Config"
+        tools:layout="@layout/fragment_config" />
+    <fragment
+        android:id="@+id/Comprar"
+        android:name="com.example.tiendav1.Comprar"
+        android:label="Comprar" />
+    <fragment
+        android:id="@+id/Eventos"
+        android:name="com.example.tiendav1.Eventos"
+        android:label="Eventos" />
+    <fragment
+        android:id="@+id/Chats"
+        android:name="com.example.tiendav1.Chats"
+        android:label="Chats" />
+
+</navigation>
