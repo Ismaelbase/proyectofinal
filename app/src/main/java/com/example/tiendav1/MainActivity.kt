@@ -1,21 +1,15 @@
 package com.example.tiendav1
 
-import android.app.Notification
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.*
-import androidx.annotation.MainThread
-import androidx.appcompat.app.ActionBar
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.delay
-import java.time.LocalDate
 import java.util.*
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         // -------------- MODO NOCHE --------------
-        var modo_noche: Boolean = false
         //Cargamos las Shared Preferences
         val app_id = getString(com.example.tiendav1.R.string.app_id)
         val shared_theme = "${app_id}_tema_oscuro"
         var SP = getSharedPreferences(shared_theme, 0)
+
         //Carga el modo en función de la última preferencia elegida
         modo_noche = SP.getBoolean("modo", false)
         Utilidades.cambiarTema(modo_noche)
@@ -36,9 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         if (Utilidades.obtenerIDUsuario(applicationContext) != "") { // Si el id no es vacio
             if (Utilidades.obtenerTipoUsuario(applicationContext)) { // Si es admin
-
+                startActivity(Intent(applicationContext, Admin_principal::class.java))
             } else {
-
+                startActivity(Intent(applicationContext, Principal_normal::class.java))
             }
         }
     }
@@ -130,10 +124,15 @@ class MainActivity : AppCompatActivity() {
                             val pojo_usuario = resultado.getValue(User::class.java)
 
                             if(pojo_usuario!!.admin!!){ //El usuario es administrador
+                                Utilidades.establecerTipoUsuario(applicationContext, true)
 
+                                startActivity(Intent(applicationContext, Admin_principal::class.java))
                             }else{ //El usuario es normal
                                 startActivity(Intent(applicationContext, Principal_normal::class.java))
+                                Utilidades.establecerTipoUsuario(applicationContext, false)
                             }
+
+                            Utilidades.establecerIDUsuario(applicationContext, pojo_usuario.id!!)
 
                         }else{//El usuario no existe o no es correcto
                             intentos -= 1

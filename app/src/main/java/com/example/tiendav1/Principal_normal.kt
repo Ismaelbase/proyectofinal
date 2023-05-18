@@ -1,5 +1,6 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,18 +10,68 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.tiendav1.databinding.ActivityPrincipalNormalBinding
+import com.google.firebase.database.*
 
 class Principal_normal : AppCompatActivity() {
+
+    override fun onResume() {
+        super.onResume()
+
+        if(Utilidades.obtenerIDUsuario(applicationContext) == ""){
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+        }
+
+        if(Utilidades.obtenerIDUsuario(applicationContext) != ""){
+
+            if(Utilidades.obtenerTipoUsuario(applicationContext)){
+                startActivity(Intent(applicationContext,MainActivity::class.java))
+            }else{
+                //Comprobar si los temas vna bien sin esto.
+            }
+        }
+
+    }
+
+
+
+    lateinit var pojo_user:User
 
     private lateinit var binding: ActivityPrincipalNormalBinding
 
     private lateinit var navController:NavController
     private lateinit var navView:BottomNavigationView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportActionBar!!.hide()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Configuracion de FRAGMENTOS
 
         binding = ActivityPrincipalNormalBinding.inflate(layoutInflater)
         setContentView(binding.root)

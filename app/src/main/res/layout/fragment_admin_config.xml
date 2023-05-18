@@ -4,39 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Config">
+    tools:context=".Admin_config">
 
     <Button
-        android:id="@+id/config_b_aplicarcambios"
+        android:id="@+id/admin_config_b_aplicarcambios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Aplicar\ncambios"
-        app:layout_constraintStart_toStartOf="@+id/config_b_cambiarcontrasena"
-        app:layout_constraintTop_toBottomOf="@+id/config_b_cambiarcontrasena" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_b_cambiarcontrasena"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_b_cambiarcontrasena" />
 
     <Button
-        android:id="@+id/config_b_logout"
+        android:id="@+id/admin_config_b_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Logout"
-        app:layout_constraintEnd_toEndOf="@+id/config_b_borrarcuenta"
-        app:layout_constraintTop_toBottomOf="@+id/config_b_borrarcuenta" />
+        app:layout_constraintEnd_toEndOf="@+id/admin_config_b_borrarcuenta"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_b_borrarcuenta" />
 
     <TextView
-        android:id="@+id/config_tv_avatar"
+        android:id="@+id/admin_config_tv_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Cambiar Avatar"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/config_sw_noche"
-        app:layout_constraintStart_toStartOf="@+id/config_sw_noche"
-        app:layout_constraintTop_toBottomOf="@+id/config_sw_noche" />
+        app:layout_constraintEnd_toEndOf="@+id/admin_config_sw_noche"
+        app:layout_constraintStart_toStartOf="@+id/admin_config_sw_noche"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_sw_noche" />
 
     <TextView
-        android:id="@+id/config_tv_bienvenida"
+        android:id="@+id/admin_config_tv_bienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/config_iv_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_iv_logo" />
 
     <ImageView
-        android:id="@+id/config_iv_logo"
+        android:id="@+id/admin_config_iv_logo"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginBottom="350dp"
@@ -61,93 +61,92 @@
         app:layout_constraintVertical_bias="0.056" />
 
     <TextView
-        android:id="@+id/config_tv_cambiarnombre"
+        android:id="@+id/admin_config_tv_cambiarnombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Cambiar nombre"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/config_iv_logo"
-        app:layout_constraintTop_toBottomOf="@+id/config_tv_bienvenida" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_iv_logo"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_tv_bienvenida" />
 
     <TextView
-        android:id="@+id/config_tv_cambiarmail"
+        android:id="@+id/admin_config_tv_cambiarmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Cambiar mail"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/config_iv_logo"
-        app:layout_constraintTop_toBottomOf="@+id/config_et_cambiarnombre" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_iv_logo"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_et_cambiarnombre" />
 
     <EditText
-        android:id="@+id/config_et_cambiarnombre"
+        android:id="@+id/admin_config_et_cambiarnombre"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Name"
-        app:layout_constraintStart_toStartOf="@+id/config_tv_cambiarnombre"
-        app:layout_constraintTop_toBottomOf="@+id/config_tv_cambiarnombre" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_tv_cambiarnombre"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_tv_cambiarnombre" />
 
     <EditText
-        android:id="@+id/config_et_cambiarmail"
+        android:id="@+id/admin_config_et_cambiarmail"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Mail"
-        app:layout_constraintStart_toStartOf="@+id/config_tv_cambiarmail"
-        app:layout_constraintTop_toBottomOf="@+id/config_tv_cambiarmail" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_tv_cambiarmail"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_tv_cambiarmail" />
 
     <ImageView
-        android:id="@+id/config_iv_noche"
+        android:id="@+id/admin_config_iv_noche"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="60dp"
         android:src="@drawable/modo_noche_verde"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/config_tv_bienvenida" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_tv_bienvenida" />
 
     <Switch
-        android:id="@+id/config_sw_noche"
+        android:id="@+id/admin_config_sw_noche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:text="Modo \nNoche"
-        app:layout_constraintEnd_toEndOf="@+id/config_iv_noche"
-        app:layout_constraintStart_toStartOf="@+id/config_iv_noche"
-        app:layout_constraintTop_toBottomOf="@+id/config_iv_noche" />
+        app:layout_constraintEnd_toEndOf="@+id/admin_config_iv_noche"
+        app:layout_constraintStart_toStartOf="@+id/admin_config_iv_noche"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_iv_noche" />
 
     <ImageView
-        android:id="@+id/config_iv_avatar"
+        android:id="@+id/admin_config_iv_avatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/user_avatar"
-        app:layout_constraintEnd_toEndOf="@+id/config_tv_avatar"
-        app:layout_constraintStart_toStartOf="@+id/config_tv_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/config_tv_avatar" />
+        app:layout_constraintEnd_toEndOf="@+id/admin_config_tv_avatar"
+        app:layout_constraintStart_toStartOf="@+id/admin_config_tv_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_tv_avatar" />
 
     <Button
-        android:id="@+id/config_b_cambiarcontrasena"
+        android:id="@+id/admin_config_b_cambiarcontrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Cambiar\ncontraseña"
-        app:layout_constraintStart_toStartOf="@+id/config_et_cambiarmail"
-        app:layout_constraintTop_toBottomOf="@+id/config_et_cambiarmail" />
+        app:layout_constraintStart_toStartOf="@+id/admin_config_et_cambiarmail"
+        app:layout_constraintTop_toBottomOf="@+id/admin_config_et_cambiarmail" />
 
     <Button
-        android:id="@+id/config_b_borrarcuenta"
+        android:id="@+id/admin_config_b_borrarcuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Borrar\ncuenta"
-        app:layout_constraintBottom_toBottomOf="@+id/config_b_cambiarcontrasena"
-        app:layout_constraintEnd_toEndOf="@+id/config_iv_avatar"
-        app:layout_constraintStart_toStartOf="@+id/config_iv_avatar"
-        app:layout_constraintTop_toTopOf="@+id/config_b_cambiarcontrasena" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/admin_config_b_cambiarcontrasena"
+        app:layout_constraintEnd_toEndOf="@+id/admin_config_iv_avatar"
+        app:layout_constraintStart_toStartOf="@+id/admin_config_iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/admin_config_b_cambiarcontrasena" />
 </androidx.constraintlayout.widget.ConstraintLayout>

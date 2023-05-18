@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/Admin_config">
+
+    <fragment
+        android:id="@+id/Admin_config"
+        android:name="com.example.tiendav1.Admin_config"
+        android:label="Admin_config"
+        tools:layout="@layout/fragment_admin_config" />
+
+    <fragment
+        android:id="@+id/Admin_comprar"
+        android:name="com.example.tiendav1.Admin_comprar"
+        android:label="Admin_comprar"
+        tools:layout="@layout/fragment_admin_comprar" />
+
+    <fragment
+        android:id="@+id/Admin_eventos"
+        android:name="com.example.tiendav1.Admin_eventos"
+        android:label="Admin_eventos"
+        tools:layout="@layout/fragment_admin_eventos" />
+    <fragment
+        android:id="@+id/Admin_puntos"
+        android:name="com.example.tiendav1.Admin_puntos"
+        android:label="Admin_puntos"
+        tools:layout="@layout/fragment_admin_puntos" />
+    <fragment
+        android:id="@+id/Admin_chats"
+        android:name="com.example.tiendav1.Admin_chats"
+        android:label="Admin_chats"
+        tools:layout="@layout/fragment_admin_chats" />
+</navigation>

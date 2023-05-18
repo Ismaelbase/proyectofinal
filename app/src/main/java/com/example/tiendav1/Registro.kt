@@ -1,8 +1,6 @@
 package com.example.tiendav1
 
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
-import android.net.LocalServerSocket
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +15,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*

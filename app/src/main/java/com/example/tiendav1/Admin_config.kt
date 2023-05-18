@@ -9,19 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.example.tiendav1.databinding.FragmentAdminConfigBinding
 import com.example.tiendav1.databinding.FragmentConfigBinding
 import com.google.firebase.database.*
-import com.google.firebase.database.R
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class Config : Fragment() {
-    private var _binding: FragmentConfigBinding? = null
+class Admin_config : Fragment() {
+    private var _binding: FragmentAdminConfigBinding? = null
     private val binding get() = _binding!!
-    private lateinit var pn: Principal_normal
+    private lateinit var ap: Admin_principal
     private lateinit var pojo_user: User
 
     private lateinit var cambiar_nombre: EditText
@@ -33,6 +34,7 @@ class Config : Fragment() {
     private lateinit var aplicar_cambios: Button
     private lateinit var logout: Button
     private lateinit var imagen_noche: ImageView
+    private lateinit var bienvenida: TextView
 
     var modo_noche: Boolean = false
     private var url_avatar: Uri? = null
@@ -45,13 +47,17 @@ class Config : Fragment() {
         FirebaseStorage.getInstance().getReference()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentConfigBinding.inflate(inflater, container, false)
-        pn = activity as Principal_normal
+        _binding = FragmentAdminConfigBinding.inflate(inflater, container, false)
+        ap = activity as Admin_principal
         //AQUI NADA
         return binding.root
 
@@ -63,18 +69,19 @@ class Config : Fragment() {
 
 
         //Aqui van los binding de este fragmento:
-        cambiar_nombre = binding.configEtCambiarnombre
-        cambiar_mail = binding.configEtCambiarmail
-        switch_noche = binding.configSwNoche
-        cambiar_avatar = binding.configIvAvatar
-        cambiar_contrasena = binding.configBCambiarcontrasena
-        borrar_cuenta = binding.configBBorrarcuenta
-        aplicar_cambios = binding.configBAplicarcambios
-        logout = binding.configBLogout
-        imagen_noche = binding.configIvNoche
+        cambiar_nombre = binding.adminConfigEtCambiarnombre
+        cambiar_mail = binding.adminConfigEtCambiarmail
+        switch_noche = binding.adminConfigSwNoche
+        cambiar_avatar = binding.adminConfigIvAvatar
+        cambiar_contrasena = binding.adminConfigBCambiarcontrasena
+        borrar_cuenta = binding.adminConfigBBorrarcuenta
+        aplicar_cambios = binding.adminConfigBAplicarcambios
+        logout = binding.adminConfigBLogout
+        imagen_noche = binding.adminConfigIvNoche
+        bienvenida = binding.adminConfigTvBienvenida
 
 
-        val id_usuario = Utilidades.obtenerIDUsuario(pn.applicationContext)
+        val id_usuario = Utilidades.obtenerIDUsuario(ap.applicationContext)
 
         referencia_bd.child("SecondCharm")
             .child("Users")
@@ -82,12 +89,12 @@ class Config : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_user = snapshot.getValue(User::class.java)!!
-                    binding.configTvBienvenida.text = "Bienvenido ${pojo_user.usuario}"
+                    binding.adminConfigTvBienvenida.text = "Bienvenido ${pojo_user.usuario}"
                     cambiar_nombre.setText(pojo_user.usuario)
                     cambiar_mail.setText(pojo_user.correo)
 
-                    Glide.with(pn.applicationContext).load(pojo_user.url_avatar)
-                        .apply(Utilidades.opcionesGlideAvatar(pn.applicationContext))
+                    Glide.with(ap.applicationContext).load(pojo_user.url_avatar)
+                        .apply(Utilidades.opcionesGlideAvatar(ap.applicationContext))
                         .transition(Utilidades.transicion)
                         .into(cambiar_avatar)
 
@@ -102,7 +109,7 @@ class Config : Fragment() {
         //Cargamos las Shared Preferences
         val app_id = getString(com.example.tiendav1.R.string.app_id)
         val shared_theme = "${app_id}_tema_oscuro"
-        var SP = pn.getSharedPreferences(shared_theme, 0)
+        var SP = ap.getSharedPreferences(shared_theme, 0)
 
         modo_noche = SP.getBoolean("modo", false)
         switch_noche.isChecked = modo_noche
@@ -115,7 +122,7 @@ class Config : Fragment() {
                 apply()
             }
             Utilidades.cambiarTema(modo_noche)
-            pn.recreate()
+            ap.recreate()
         }
 
         //Cambiar avatar
@@ -129,7 +136,7 @@ class Config : Fragment() {
         var correcto = false
         aplicar_cambios.setOnClickListener {
 
-            pn.runOnUiThread {
+            ap.runOnUiThread {
                 correcto = validarUsuario(cambiar_nombre) &&
                         validarCorreo(cambiar_mail)
             }
@@ -168,7 +175,7 @@ class Config : Fragment() {
 
                 }
 
-                Toast.makeText(pn.application, "Cambios realizados con éxito", Toast.LENGTH_SHORT)
+                Toast.makeText(ap.application, "Cambios realizados con éxito", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -176,10 +183,10 @@ class Config : Fragment() {
 
         //Aqui se configura el boton de logout
         logout.setOnClickListener {
-            Utilidades.establecerIDUsuario(pn.applicationContext, "")
-            Utilidades.establecerTipoUsuario(pn.applicationContext, false)
+            Utilidades.establecerIDUsuario(ap.applicationContext, "")
+            Utilidades.establecerTipoUsuario(ap.applicationContext, false)
 
-            startActivity(Intent(pn.applicationContext, MainActivity::class.java))
+            startActivity(Intent(ap.applicationContext, MainActivity::class.java))
         }
 
 

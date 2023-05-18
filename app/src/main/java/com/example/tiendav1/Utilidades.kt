@@ -1,44 +1,34 @@
 package com.example.tiendav1
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Environment
-import android.os.Parcelable
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
-import kotlinx.parcelize.Parcelize
-import java.io.File
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
-import com.example.tiendav1.*
 import com.google.firebase.database.*
 import java.util.concurrent.CountDownLatch
-import kotlin.reflect.KFunction1
 
 class Utilidades {
     companion object {
 
         // referencias
 
-        val usuarios = FirebaseDatabase.getInstance().getReference().child("SecondCharm").child("Users")
+        val usuarios = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Users")
 
         var recien_registrado = ""
 
-        private val clave_id="id_usuario"
-        private val clave_tipo="tipo_usuario"
+        private val clave_id = "id_usuario"
+        private val clave_tipo = "tipo_usuario"
 
         fun cambiarTema(on:Boolean){
             if(on){
@@ -158,13 +148,21 @@ class Utilidades {
         val transicion = DrawableTransitionOptions.withCrossFade(500)
 //        val transicion = BitmapTransitionOptions.withCrossFade(500)
 
-        fun opcionesGlide(context: Context):RequestOptions {
-            val options = RequestOptions()
+        fun opcionesGlide(context: Context): RequestOptions {
+
+            return RequestOptions()
                 .placeholder(animacion_carga(context))
                 .fallback(R.drawable.fallback)
                 .error(R.drawable.error)
+        }
 
-            return options
+        fun opcionesGlideAvatar(context: Context): RequestOptions {
+
+            return RequestOptions()
+                .placeholder(animacion_carga(context))
+                .fallback(R.drawable.fallback)
+                .error(R.drawable.error)
+                .apply(circleCropTransform())
         }
 
         //suspend hace referencia a un metodo que se ejecutará de manera sincronizada con el main en el que se ejecute.
@@ -238,7 +236,7 @@ class Utilidades {
         }
 
         //Esto lanza el toast en una hebra a parte, para poder encajarlo en en globalscope(dispatcher.io) sin que falle
-        fun tostadaCorrutina(activity: AppCompatActivity,contexto: Context,texto:String){
+        fun tostadaCorrutina(activity: AppCompatActivity, contexto: Context, texto:String){
             activity.runOnUiThread{
                 Toast.makeText(
                     contexto,

@@ -41,10 +41,6 @@ class Comprar : Fragment() {
     private lateinit var cb_muebles:CheckBox
     private lateinit var recyclerView: RecyclerView
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +66,11 @@ class Comprar : Fragment() {
         cb_ocio = binding.comprarCbOcio
         cb_muebles = binding.comprarCbMuebles
         recyclerView = binding.comprarRv
+
+        cb_tecno.isChecked = true
+        cb_ropa.isChecked = true
+        cb_ocio.isChecked = true
+        cb_muebles.isChecked = true
 
         val lista_checkbox:List<CheckBox> = listOf(
             cb_tecno,
@@ -126,7 +127,7 @@ class Comprar : Fragment() {
                 filtros_seleccionados[posicion] = cb.isChecked
                 adaptador.filter.filter(busqueda.query)
             }
-            adaptador.notifyDataSetChanged()
+
         }
 
     }

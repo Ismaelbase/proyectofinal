@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/Puntos"
         android:name="com.example.tiendav1.Puntos"
-        android:label="Puntos"/>
+        android:label="Puntos"
+        tools:layout="@layout/fragment_puntos"/>
     <fragment
         android:id="@+id/Config"
         android:name="com.example.tiendav1.Config"
@@ -17,14 +18,17 @@
     <fragment
         android:id="@+id/Comprar"
         android:name="com.example.tiendav1.Comprar"
-        android:label="Comprar" />
+        android:label="Comprar"
+        tools:layout="@layout/fragment_comprar"/>
     <fragment
         android:id="@+id/Eventos"
         android:name="com.example.tiendav1.Eventos"
-        android:label="Eventos" />
+        android:label="Eventos"
+        tools:layout="@layout/fragment_eventos"/>
     <fragment
         android:id="@+id/Chats"
         android:name="com.example.tiendav1.Chats"
-        android:label="Chats" />
+        android:label="Chats"
+        tools:layout="@layout/fragment_chats"/>
 
 </navigation>
