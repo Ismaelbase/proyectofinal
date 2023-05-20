@@ -89,7 +89,7 @@ class Admin_config : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_user = snapshot.getValue(User::class.java)!!
-                    binding.adminConfigTvBienvenida.text = "Bienvenido ${pojo_user.usuario}"
+                    binding.adminConfigTvBienvenida.text = "Bienvenido Admin ${pojo_user.usuario}"
                     cambiar_nombre.setText(pojo_user.usuario)
                     cambiar_mail.setText(pojo_user.correo)
 
@@ -187,6 +187,16 @@ class Admin_config : Fragment() {
             Utilidades.establecerTipoUsuario(ap.applicationContext, false)
 
             startActivity(Intent(ap.applicationContext, MainActivity::class.java))
+        }
+
+        //Para cambiar la contraseña
+        cambiar_contrasena.setOnClickListener {
+            startActivity(Intent(ap.applicationContext, Cambiar_contrasena::class.java))
+        }
+
+        //Para borrar la cuenta
+        borrar_cuenta.setOnClickListener {
+            startActivity(Intent(ap.applicationContext, Borrar_cuenta::class.java))
         }
 
 

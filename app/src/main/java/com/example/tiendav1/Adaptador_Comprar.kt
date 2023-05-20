@@ -56,6 +56,11 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
         holder.descripcion.text = item_actual.descripcion
 
 
+        holder.carrito.setOnClickListener {
+            //todo activity de comprar/reservar articulo
+        }
+
+
 
 
     }
@@ -106,6 +111,7 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
         val stock: TextView = itemView.findViewById(R.id.articulo_stock)
         val puntos: TextView = itemView.findViewById(R.id.articulo_puntos)
         val categoria: TextView = itemView.findViewById(R.id.articulo_categoria)
+        val carrito: ImageView = itemView.findViewById(R.id.articulo_carrito)
 
     }
 

@@ -8,6 +8,8 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/puntos.xml" value="0.247" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/Item_Articulo.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_principal.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_borrar_cuenta.xml" value="0.33" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_cambiar_contrasena.xml" value="0.22" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_principal_admin.xml" value="0.25" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_principal_normal.xml" value="0.25" />
@@ -27,7 +29,7 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_principal.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_puntos.xml" value="0.296195652173913" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/frament_puntos.xml" value="0.296195652173913" />
-        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_articulo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_articulo.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_carousel.xml" value="0.2734375" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19469026548672566" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/menu/bottom_nav_menu_admin.xml" value="0.21822916666666667" />

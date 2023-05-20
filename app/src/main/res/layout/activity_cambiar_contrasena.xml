@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cambiar_contrasena">
+
+    <EditText
+        android:id="@+id/contrasena_normal_nueva2_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:password="true"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_nueva2"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_nueva2"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_nueva2" />
+
+    <TextView
+        android:id="@+id/contrasena_normal_nueva2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Repite nueva contraseña"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_nueva_input"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_nueva_input"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_nueva_input" />
+
+    <EditText
+        android:id="@+id/contrasena_normal_nueva_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:password="true"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_nueva"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_nueva"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_nueva" />
+
+    <TextView
+        android:id="@+id/contrasena_normal_nueva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nueva contraseña"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_actual_input"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_actual_input"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_actual_input" />
+
+    <EditText
+        android:id="@+id/contrasena_normal_actual_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:password="true"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_actual"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_actual"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_actual" />
+
+    <TextView
+        android:id="@+id/contrasena_normal_actual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Contraseña actual"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/contrasena_normal_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator"
+        tools:srcCompat="@drawable/volver_sc" />
+
+    <Button
+        android:id="@+id/contrasena_normal_boton_aplicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Cambiar \ncontraseña"
+        app:layout_constraintEnd_toEndOf="@+id/contrasena_normal_nueva2_input"
+        app:layout_constraintStart_toStartOf="@+id/contrasena_normal_nueva2_input"
+        app:layout_constraintTop_toBottomOf="@+id/contrasena_normal_nueva2_input" />
+</androidx.constraintlayout.widget.ConstraintLayout>

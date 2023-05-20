@@ -41,7 +41,7 @@
         android:id="@+id/articulo_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:text="Disponibles"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/articulo_descripcion"
@@ -51,7 +51,7 @@
         android:id="@+id/articulo_categoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="15dp"
         android:text="Categoria"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/articulo_descripcion"
@@ -83,4 +83,14 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/articulo_imagen"
         app:layout_constraintTop_toBottomOf="@+id/articulo_precio" />
+
+    <ImageView
+        android:id="@+id/articulo_carrito"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/articulo_categoria"
+        app:layout_constraintEnd_toStartOf="@+id/articulo_categoria"
+        app:layout_constraintStart_toEndOf="@+id/articulo_stock"
+        app:layout_constraintTop_toTopOf="@+id/articulo_categoria"
+        app:srcCompat="@drawable/carrito_compra" />
 </androidx.constraintlayout.widget.ConstraintLayout>

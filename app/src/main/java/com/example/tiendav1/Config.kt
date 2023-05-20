@@ -181,6 +181,15 @@ class Config : Fragment() {
 
             startActivity(Intent(pn.applicationContext, MainActivity::class.java))
         }
+        //Para cambiar la contraseña
+        cambiar_contrasena.setOnClickListener {
+            startActivity(Intent(pn.applicationContext, Cambiar_contrasena::class.java))
+        }
+
+        //Para borrar la cuenta
+        borrar_cuenta.setOnClickListener {
+            startActivity(Intent(pn.applicationContext, Borrar_cuenta::class.java))
+        }
 
 
     }
