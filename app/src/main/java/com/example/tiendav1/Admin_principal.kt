@@ -1,5 +1,6 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,29 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.tiendav1.databinding.ActivityAdminPrincipalBinding
 
 class Admin_principal : AppCompatActivity() {
+
+    override fun onResume() {
+        super.onResume()
+
+        if (Utilidades.admin_editar){
+            navController.navigate(R.id.Admin_comprar)
+            navView.selectedItemId = R.id.Admin_comprar
+            Utilidades.comprar = false
+        }
+
+        if(Utilidades.obtenerIDUsuario(applicationContext) == ""){
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+        }
+
+        if(Utilidades.obtenerIDUsuario(applicationContext) != ""){
+
+            if(!Utilidades.obtenerTipoUsuario(applicationContext)){
+                startActivity(Intent(applicationContext,MainActivity::class.java))
+            }else{
+            }
+        }
+
+    }
 
     private lateinit var binding: ActivityAdminPrincipalBinding
     private lateinit var navController: NavController

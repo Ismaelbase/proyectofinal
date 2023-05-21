@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_editar_articulo">
+
+    <TextView
+        android:id="@+id/editar_articulo_descripciontv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Descripción"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_spinner" />
+
+    <TextView
+        android:id="@+id/editar_articulo_nombretv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editar_articulo_nombre"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_nombre" />
+
+    <ImageView
+        android:id="@+id/editar_articulo_imagen"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/articulo_radio1" />
+
+    <ImageView
+        android:id="@+id/editar_articulo_imagen2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_imagen"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_imagen"
+        app:srcCompat="@drawable/editar_imagen_sc1" />
+
+    <EditText
+        android:id="@+id/editar_articulo_nombre"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Nombre"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_imagen2" />
+
+    <TextView
+        android:id="@+id/editar_articulo_stocktv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stock"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editar_articulo_stock"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_stock" />
+
+    <EditText
+        android:id="@+id/editar_articulo_stock"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@android:drawable/editbox_background_normal"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_nombre"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_precio"
+        app:layout_constraintTop_toTopOf="@+id/editar_articulo_nombre" />
+
+    <EditText
+        android:id="@+id/editar_articulo_precio"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:ems="10"
+        android:background="@android:drawable/editbox_background_normal"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_spinner"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintStart_toEndOf="@+id/editar_articulo_spinner"
+        app:layout_constraintTop_toTopOf="@+id/editar_articulo_spinner" />
+
+    <TextView
+        android:id="@+id/editar_articulo_preciotv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editar_articulo_precio"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_precio" />
+
+    <Spinner
+        android:id="@+id/editar_articulo_spinner"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_nombre" />
+
+    <EditText
+        android:id="@+id/editar_articulo_descripcion"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:gravity="top|left"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:lines="20"
+        android:minHeight="48dp"
+        android:minLines="2"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:text="Ninguna"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_imagen"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripciontv"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editar_articulo_aplicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Aplicar\nCambios"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
+
+    <ImageView
+        android:id="@+id/editar_articulo_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_aplicar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editar_articulo_aplicar"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/volver_sc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

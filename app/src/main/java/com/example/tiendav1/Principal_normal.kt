@@ -17,6 +17,12 @@ class Principal_normal : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        if (Utilidades.comprar){
+            navController.navigate(R.id.Comprar)
+            navView.selectedItemId = R.id.Comprar
+            Utilidades.comprar = false
+        }
+
         if(Utilidades.obtenerIDUsuario(applicationContext) == ""){
             startActivity(Intent(applicationContext,MainActivity::class.java))
         }
@@ -26,7 +32,7 @@ class Principal_normal : AppCompatActivity() {
             if(Utilidades.obtenerTipoUsuario(applicationContext)){
                 startActivity(Intent(applicationContext,MainActivity::class.java))
             }else{
-                //Comprobar si los temas vna bien sin esto.
+                //Comprobar si los temas van bien sin esto.
             }
         }
 

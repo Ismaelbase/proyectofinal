@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Comprar_articulo">
+
+    <TextView
+        android:id="@+id/comprar_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/comprar_stock"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toTopOf="@+id/comprar_precio" />
+
+    <ImageView
+        android:id="@+id/comprar_imagen"
+        android:layout_width="209dp"
+        android:layout_height="152dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/generico" />
+
+    <TextView
+        android:id="@+id/editar_articulo_descripcion"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="top|left"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:lines="20"
+        android:minLines="2"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:text="Prueba"
+        app:layout_constraintEnd_toEndOf="@+id/comprar_imagen"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/comprar_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_nombre"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/comprar_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nombre"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/comprar_imagen"
+        app:layout_constraintStart_toStartOf="@+id/comprar_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_imagen" />
+
+    <TextView
+        android:id="@+id/comprar_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Precio €"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
+
+    <TextView
+        android:id="@+id/comprar_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Stock"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/comprar_precio"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_precio" />
+
+    <Button
+        android:id="@+id/comprar_reserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Reservar"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_stock" />
+
+    <ImageView
+        android:id="@+id/comprar_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />
+</androidx.constraintlayout.widget.ConstraintLayout>

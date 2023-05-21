@@ -9,6 +9,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tiendav1.databinding.FragmentComprarBinding
@@ -101,7 +102,7 @@ class Comprar : Fragment() {
             })
 
         recyclerView.adapter = adaptador
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = GridLayoutManager(context,2)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter?.notifyDataSetChanged()
 

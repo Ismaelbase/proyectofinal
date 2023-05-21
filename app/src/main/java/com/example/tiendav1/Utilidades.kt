@@ -18,12 +18,26 @@ import java.util.concurrent.CountDownLatch
 class Utilidades {
     companion object {
 
-        // referencias
+        //Volver de actividades:
+        var comprar = false
+        var admin_editar = false
 
+
+        //Referencias a bd rapidas
         val usuarios = FirebaseDatabase.getInstance()
             .getReference()
             .child("SecondCharm")
             .child("Users")
+
+        val articulos = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Articulos")
+
+        val reservas = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Reservas")
 
         var recien_registrado = ""
 
@@ -122,8 +136,7 @@ class Utilidades {
             categoria:String,
             url_foto:String,
             fecha:String,
-            cantidad:Int,
-            puntos:Int
+            cantidad:Int
 
         ) = db_ref.child("SecondCharm").child("Articulos").child(id).setValue(Articulo(
             id,
@@ -134,7 +147,20 @@ class Utilidades {
             url_foto,
             fecha,
             cantidad,
-            puntos
+        ))
+
+        fun escribirReserva(
+            db_ref:DatabaseReference,
+            id:String,
+            id_usuario:String,
+            id_articulo:String,
+            estado:Int
+
+        ) = db_ref.child("SecondCharm").child("Reservas").child(id).setValue(Reserva(
+            id,
+            id_usuario,
+            id_articulo,
+            estado
         ))
 
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
@@ -222,6 +248,72 @@ class Utilidades {
 
                         }
                         semaforo.countDown()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
+
+            semaforo.await()
+
+            return existe
+        }
+
+        suspend fun existeArticulo(db_ref:DatabaseReference,nombre:String):Boolean{
+            var existe:Boolean=false
+
+            val semaforo = CountDownLatch(1)
+
+            db_ref.child("SecondCharm")
+                .child("Articulos")
+                .orderByChild("nombre")
+                .equalTo(nombre)
+                .addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.hasChildren()){
+                            existe=true
+                        }else{
+
+                        }
+                        semaforo.countDown()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
+
+            semaforo.await()
+
+            return existe
+        }
+
+
+        //Esto comprueba que el articulo no ha sido reservado ya por el usuario, solo se puede reservar una vez, cuando
+        // el articulo es recogido o cancelado, se puede volver a reservar
+        suspend fun existeReserva(db_ref:DatabaseReference,id_articulo:String,id_usuario: String):Boolean{
+            var existe:Boolean=false
+
+            val semaforo = CountDownLatch(1)
+
+            db_ref.child("SecondCharm")
+                .child("Reservas")
+                .addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.hasChildren()) {
+                            for (reserva in snapshot.children) {
+                                if (reserva.child("id_articulo").value.toString() == id_articulo &&
+                                    reserva.child("id_usuario").value.toString() == id_usuario &&
+                                    reserva.child("estado").value.toString().toInt() == 0 || reserva.child("estado").value.toString().toInt() == 1
+                                ) {
+                                    existe = true
+                                }
+                            }
+                            semaforo.countDown()
+                        }
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -335,7 +427,7 @@ class Utilidades {
         }
 
 
-        val articulos = listOf<Int>(
+        val imagen_articulos = listOf<Int>(
             R.drawable.articulo_abrigo1,
             R.drawable.articulo_patin1,
             R.drawable.articulo_radio1

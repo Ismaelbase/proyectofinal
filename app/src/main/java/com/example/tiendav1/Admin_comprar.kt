@@ -9,13 +9,16 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tiendav1.databinding.FragmentAdminComprarBinding
+import com.example.tiendav1.databinding.FragmentAdminConfigBinding
 import com.example.tiendav1.databinding.FragmentComprarBinding
 import com.google.firebase.database.*
 
 class Admin_comprar : Fragment() {
-    private var _binding: FragmentComprarBinding? = null
+    private var _binding: FragmentAdminComprarBinding? = null
 
     private val binding get() = _binding!!
     private lateinit var principal_admin:Admin_principal
@@ -33,7 +36,7 @@ class Admin_comprar : Fragment() {
         true,
         true
     )
-    private lateinit var adaptador:Adaptador_Comprar
+    private lateinit var adaptador:Adaptador_Comprar_Admin
     private lateinit var busqueda:SearchView
     private lateinit var cb_tecno:CheckBox
     private lateinit var cb_ropa:CheckBox
@@ -41,18 +44,13 @@ class Admin_comprar : Fragment() {
     private lateinit var cb_muebles:CheckBox
     private lateinit var recyclerView: RecyclerView
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
-        _binding = FragmentComprarBinding.inflate(inflater, container, false)
+        _binding = FragmentAdminComprarBinding.inflate(inflater, container, false)
         principal_admin = activity as Admin_principal
 
         //AQUI NADA
@@ -63,6 +61,78 @@ class Admin_comprar : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //EQUIVALENTE AL ONCREATE DE UNA ACTIVITY
+
+        busqueda = binding.adminInventarioSearchview
+        cb_tecno = binding.adminInventarioTecno
+        cb_ropa = binding.adminInventarioRopa
+        cb_ocio = binding.adminInventarioOcio
+        cb_muebles = binding.adminInventarioMuebles
+        recyclerView = binding.adminInventarioRv
+
+        cb_tecno.isChecked = true
+        cb_ropa.isChecked = true
+        cb_ocio.isChecked = true
+        cb_muebles.isChecked = true
+
+        val lista_checkbox:List<CheckBox> = listOf(
+            cb_tecno,
+            cb_ropa,
+            cb_ocio,
+            cb_muebles
+        )
+
+        adaptador = Adaptador_Comprar_Admin(lista_articulos,filtros_seleccionados)
+
+        referencia_bd.child("SecondCharm").child("Articulos")
+            .addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    lista_articulos.clear()
+                    snapshot.children.forEach{
+                        val pojo_articulo = it.getValue(Articulo::class.java)
+
+                        lista_articulos.add(pojo_articulo!!)
+
+                    }
+                    adaptador.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context,"Error al acceder a los temas", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
+        recyclerView.adapter = adaptador
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter?.notifyDataSetChanged()
+
+
+        busqueda.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(texto: String?): Boolean {
+                adaptador.filter.filter(texto)
+                return false
+            }
+
+        })
+
+        //CheckBoxs
+
+        lista_checkbox.forEach {
+            it.setOnClickListener {
+                val cb = it as CheckBox
+                val posicion = lista_checkbox.indexOf(cb)
+
+                filtros_seleccionados[posicion] = cb.isChecked
+                adaptador.filter.filter(busqueda.query)
+            }
+
+        }
+
 
 
     }

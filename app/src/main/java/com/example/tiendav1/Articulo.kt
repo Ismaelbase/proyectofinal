@@ -12,11 +12,10 @@ data class Articulo(
     var categoria:String? = null,
     var url_foto:String? = null,
     var fecha:String? = null,
-    var cantidad:Int? = null,
-    var puntos:Int? = null,
+    var cantidad:Int? = null
 
 ): Parcelable{
     companion object{
-        val categoria = listOf("Tecnología", "Ropa", "Ocio", "Muebles")
+        val categorias = listOf("Tecnología", "Ropa", "Deporte", "Muebles")
     }
 }

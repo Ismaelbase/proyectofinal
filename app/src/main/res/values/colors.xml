@@ -10,4 +10,8 @@
     <color name="principal_verde">#a1bf39</color>
     <color name="principal_morado">#723988</color>
     <color name="rojo_error">#f23030</color>
+    <color name="gris">#e0e0e0</color>
+    <color name="gris_oscuro">#9e9e9e</color>
+    <color name="naranja_suave">#ffc48c</color>
+    <color name="naranja_fuerte">#ff8a65</color>
 </resources>
