@@ -21,6 +21,7 @@ class Utilidades {
         //Volver de actividades:
         var comprar = false
         var admin_editar = false
+        var admin_anadir = false
 
 
         //Referencias a bd rapidas
@@ -136,7 +137,8 @@ class Utilidades {
             categoria:String,
             url_foto:String,
             fecha:String,
-            cantidad:Int
+            stock:Int,
+            disponible:Boolean
 
         ) = db_ref.child("SecondCharm").child("Articulos").child(id).setValue(Articulo(
             id,
@@ -146,7 +148,8 @@ class Utilidades {
             categoria,
             url_foto,
             fecha,
-            cantidad,
+            stock,
+            disponible
         ))
 
         fun escribirReserva(

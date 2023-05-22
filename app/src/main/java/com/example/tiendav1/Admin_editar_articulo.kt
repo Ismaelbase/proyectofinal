@@ -58,6 +58,9 @@ class Admin_editar_articulo : AppCompatActivity() {
     val boton_aplicar: Button by lazy {
         findViewById(R.id.editar_articulo_aplicar)
     }
+    val disponible:Switch by lazy {
+        findViewById(R.id.editar_articulo_disponible)
+    }
 
     private lateinit var pojo_articulo: Articulo
     private var url_avatar: Uri? = null
@@ -65,6 +68,8 @@ class Admin_editar_articulo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_editar_articulo)
+
+        supportActionBar?.hide()
 
         val adaptador_spinner = ArrayAdapter(
             applicationContext,
@@ -81,7 +86,9 @@ class Admin_editar_articulo : AppCompatActivity() {
                     nombre.setText(pojo_articulo.nombre)
                     precio.setText(pojo_articulo.precio.toString())
                     descripcion.setText(pojo_articulo.descripcion)
-                    stock.setText(pojo_articulo.cantidad.toString())
+                    stock.setText(pojo_articulo.stock.toString())
+
+                    disponible.isChecked = pojo_articulo.disponible!!
 
                     val elegido = Articulo.categorias.indexOf(pojo_articulo.categoria)
                     spinner_categoria.setSelection(elegido)
@@ -141,7 +148,8 @@ class Admin_editar_articulo : AppCompatActivity() {
                         nueva_categoria,
                         url_firebase!!,
                         pojo_articulo.fecha!!,
-                        nuevo_stock)
+                        nuevo_stock,
+                        disponible.isChecked)
 
                         Utilidades.tostadaCorrutina(
                             this@Admin_editar_articulo,
@@ -159,7 +167,6 @@ class Admin_editar_articulo : AppCompatActivity() {
             boton_volver.setOnClickListener {
                 val intent = Intent(applicationContext, Admin_principal::class.java)
                 Utilidades.admin_editar = true
-
                 startActivity(intent)
             }
 

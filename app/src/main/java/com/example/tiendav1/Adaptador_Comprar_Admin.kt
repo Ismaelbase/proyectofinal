@@ -49,8 +49,8 @@ class Adaptador_Comprar_Admin(private val lista_articulos: MutableList<Articulo>
 //            holder.itemView.setBackgroundColor(getColor(contexto, R.color.principal_verde))
 //        }
 
-        if(item_actual.cantidad == 0) {
-            holder.itemView.setBackgroundColor(getColor(contexto, R.color.naranja_suave))
+        if(item_actual.stock == 0) {
+            holder.itemView.setBackgroundResource(R.drawable.borde_recycler2)
         }
 
         Glide.with(contexto)
@@ -60,7 +60,7 @@ class Adaptador_Comprar_Admin(private val lista_articulos: MutableList<Articulo>
 
         holder.nombre.text = item_actual.nombre
         holder.categoria.text = item_actual.categoria
-        holder.stock.text = item_actual.cantidad.toString()
+        holder.stock.text = item_actual.stock.toString()
         holder.precio.text = item_actual.precio.toString()+"€"
 //        holder.descripcion.text = item_actual.descripcion
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_anadir_articulo">
+
+    <EditText
+        android:id="@+id/anadir_articulo_precio"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:gravity="center_horizontal|fill_vertical"
+        android:hint="9.99€"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/anadir_articulo_nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/anadir_articulo_nombre" />
+
+    <EditText
+        android:id="@+id/anadir_articulo_nombre"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_imagen" />
+
+    <EditText
+        android:id="@+id/anadir_articulo_stock"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:gravity="center_horizontal|fill_vertical"
+        android:hint="10"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/anadir_articulo_precio"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_precio" />
+
+    <ImageView
+        android:id="@+id/anadir_articulo_imagen"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/anadir_imagen_symbol_sc" />
+
+    <EditText
+        android:id="@+id/anadir_articulo_descripcion"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:gravity="top|left"
+        android:hint="Descripcion"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:lines="20"
+        android:minHeight="48dp"
+        android:minLines="2"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        app:layout_constraintEnd_toEndOf="@+id/anadir_articulo_imagen"
+        app:layout_constraintStart_toStartOf="@+id/anadir_articulo_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_spinner"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/anadir_articulo_spinner"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/anadir_articulo_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_nombre" />
+
+    <Button
+        android:id="@+id/anadir_articulo_boton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Añadir\nArtículo"
+        app:layout_constraintEnd_toEndOf="@+id/anadir_articulo_descripcion"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/anadir_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_disponible" />
+
+    <ImageView
+        android:id="@+id/anadir_articulo_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_boton"
+        app:srcCompat="@drawable/volver_sc" />
+
+    <Switch
+        android:id="@+id/anadir_articulo_disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Disponible"
+        app:layout_constraintEnd_toEndOf="@+id/anadir_articulo_descripcion"
+        app:layout_constraintStart_toStartOf="@+id/anadir_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/anadir_articulo_descripcion" />
+</androidx.constraintlayout.widget.ConstraintLayout>

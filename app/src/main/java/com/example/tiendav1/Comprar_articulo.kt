@@ -62,7 +62,7 @@ class Comprar_articulo : AppCompatActivity() {
                     nombre.setText(pojo_articulo.nombre)
                     descripcion.setText(pojo_articulo.descripcion)
                     precio.setText(pojo_articulo.precio.toString())
-                    stock.setText(pojo_articulo.cantidad.toString())
+                    stock.setText(pojo_articulo.stock.toString())
                     categoria.setText(pojo_articulo.categoria)
 
                     Glide.with(applicationContext)
@@ -89,12 +89,12 @@ class Comprar_articulo : AppCompatActivity() {
         }
 
         reservar.setOnClickListener {
-            if(pojo_articulo.cantidad!! > 0){
+            if(pojo_articulo.stock!! > 0){
                 referencia_bd.child("SecondCharm")
                     .child("Articulos")
                     .child(id_articulo)
-                    .child("cantidad")
-                    .setValue(pojo_articulo.cantidad!! - 1)
+                    .child("stock")
+                    .setValue(pojo_articulo.stock!! - 1)
 
                 reservar.isEnabled = false
 

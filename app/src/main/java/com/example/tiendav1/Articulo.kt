@@ -12,7 +12,8 @@ data class Articulo(
     var categoria:String? = null,
     var url_foto:String? = null,
     var fecha:String? = null,
-    var cantidad:Int? = null
+    var stock:Int? = null,
+    var disponible:Boolean? = null
 
 ): Parcelable{
     companion object{

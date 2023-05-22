@@ -19,7 +19,12 @@ class Admin_principal : AppCompatActivity() {
         if (Utilidades.admin_editar){
             navController.navigate(R.id.Admin_comprar)
             navView.selectedItemId = R.id.Admin_comprar
-            Utilidades.comprar = false
+            Utilidades.admin_editar = false
+        }
+        if (Utilidades.admin_anadir){
+            navController.navigate(R.id.Admin_comprar)
+            navView.selectedItemId = R.id.Admin_comprar
+            Utilidades.admin_anadir = false
         }
 
         if(Utilidades.obtenerIDUsuario(applicationContext) == ""){

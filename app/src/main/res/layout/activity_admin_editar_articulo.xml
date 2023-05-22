@@ -29,7 +29,7 @@
         android:id="@+id/editar_articulo_imagen"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -130,21 +130,30 @@
         android:id="@+id/editar_articulo_aplicar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Aplicar\nCambios"
         app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
-        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_disponible" />
 
     <ImageView
         android:id="@+id/editar_articulo_volver"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_aplicar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editar_articulo_aplicar"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_aplicar"
         app:srcCompat="@drawable/volver_sc" />
+
+    <Switch
+        android:id="@+id/editar_articulo_disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Disponible"
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

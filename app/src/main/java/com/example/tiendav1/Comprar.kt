@@ -34,6 +34,7 @@ class Comprar : Fragment() {
         true,
         true
     )
+
     private lateinit var adaptador:Adaptador_Comprar
     private lateinit var busqueda:SearchView
     private lateinit var cb_tecno:CheckBox
@@ -88,7 +89,7 @@ class Comprar : Fragment() {
                     lista_articulos.clear()
                     snapshot.children.forEach{
                         val pojo_articulo = it.getValue(Articulo::class.java)
-                        if (pojo_articulo!!.cantidad != 0){
+                        if (pojo_articulo!!.stock != 0 && pojo_articulo.disponible!!){
                             lista_articulos.add(pojo_articulo)
                         }
                     }

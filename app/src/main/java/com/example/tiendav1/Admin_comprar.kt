@@ -1,14 +1,12 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +41,7 @@ class Admin_comprar : Fragment() {
     private lateinit var cb_ocio:CheckBox
     private lateinit var cb_muebles:CheckBox
     private lateinit var recyclerView: RecyclerView
+    private lateinit var anadir_articulo:ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +67,7 @@ class Admin_comprar : Fragment() {
         cb_ocio = binding.adminInventarioOcio
         cb_muebles = binding.adminInventarioMuebles
         recyclerView = binding.adminInventarioRv
+        anadir_articulo = binding.adminInventarioAnadir
 
         cb_tecno.isChecked = true
         cb_ropa.isChecked = true
@@ -89,9 +89,7 @@ class Admin_comprar : Fragment() {
                     lista_articulos.clear()
                     snapshot.children.forEach{
                         val pojo_articulo = it.getValue(Articulo::class.java)
-
                         lista_articulos.add(pojo_articulo!!)
-
                     }
                     adaptador.notifyDataSetChanged()
                 }
@@ -119,6 +117,11 @@ class Admin_comprar : Fragment() {
             }
 
         })
+
+        //Boton añadir articulo
+        anadir_articulo.setOnClickListener {
+            startActivity(Intent(principal_admin.applicationContext, Admin_anadir_articulo::class.java))
+        }
 
         //CheckBoxs
 
