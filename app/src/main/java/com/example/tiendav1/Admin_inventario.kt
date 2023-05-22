@@ -10,13 +10,11 @@ import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tiendav1.databinding.FragmentAdminComprarBinding
-import com.example.tiendav1.databinding.FragmentAdminConfigBinding
-import com.example.tiendav1.databinding.FragmentComprarBinding
+import com.example.tiendav1.databinding.FragmentAdminInventarioBinding
 import com.google.firebase.database.*
 
-class Admin_comprar : Fragment() {
-    private var _binding: FragmentAdminComprarBinding? = null
+class Admin_inventario : Fragment() {
+    private var _binding: FragmentAdminInventarioBinding? = null
 
     private val binding get() = _binding!!
     private lateinit var principal_admin:Admin_principal
@@ -49,7 +47,7 @@ class Admin_comprar : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        _binding = FragmentAdminComprarBinding.inflate(inflater, container, false)
+        _binding = FragmentAdminInventarioBinding.inflate(inflater, container, false)
         principal_admin = activity as Admin_principal
 
         //AQUI NADA

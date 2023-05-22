@@ -6,20 +6,19 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Configuración" />
     <item
-        android:id="@+id/Admin_comprar"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Comprar" />
+        android:id="@+id/Admin_inventario"
+        android:icon="@drawable/inventario"
+        android:title="Inventario" />
+    <item
+        android:id="@+id/Admin_pedidos"
+        android:icon="@drawable/ic_baseline_send_24"
+        android:title="Pedidos" />
     <item
         android:id="@+id/Admin_eventos"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/eventos"
         android:title="Eventos" />
-    <item
-        android:id="@+id/Admin_puntos"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="Puntos" />
     <item
         android:id="@+id/Admin_chats"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="Chats" />
-
 </menu>

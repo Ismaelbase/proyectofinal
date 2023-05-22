@@ -58,7 +58,7 @@ class Admin_anadir_articulo : AppCompatActivity() {
         findViewById(R.id.anadir_articulo_volver)
     }
     val disponible:Switch by lazy {
-        findViewById(R.id.anadir_articulo_descripcion)
+        findViewById(R.id.anadir_articulo_disponible)
     }
 
     private var url_avatar: Uri? = null

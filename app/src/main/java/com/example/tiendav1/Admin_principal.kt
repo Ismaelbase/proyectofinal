@@ -6,6 +6,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -17,13 +18,13 @@ class Admin_principal : AppCompatActivity() {
         super.onResume()
 
         if (Utilidades.admin_editar){
-            navController.navigate(R.id.Admin_comprar)
-            navView.selectedItemId = R.id.Admin_comprar
+            navController.navigate(R.id.Admin_inventario)
+            navView.selectedItemId = R.id.Admin_inventario
             Utilidades.admin_editar = false
         }
         if (Utilidades.admin_anadir){
-            navController.navigate(R.id.Admin_comprar)
-            navView.selectedItemId = R.id.Admin_comprar
+            navController.navigate(R.id.Admin_inventario)
+            navView.selectedItemId = R.id.Admin_inventario
             Utilidades.admin_anadir = false
         }
 
@@ -61,9 +62,9 @@ class Admin_principal : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.Admin_config,
-                R.id.Admin_comprar,
+                R.id.Admin_inventario,
+                R.id.Admin_pedidos,
                 R.id.Admin_eventos,
-                R.id.Admin_puntos,
                 R.id.Admin_chats
             )
         )
@@ -71,12 +72,13 @@ class Admin_principal : AppCompatActivity() {
         navView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.Admin_config->navController.navigate(R.id.Admin_config)
-                R.id.Admin_comprar->navController.navigate(R.id.Admin_comprar)
+                R.id.Admin_inventario->navController.navigate(R.id.Admin_inventario)
+                R.id.Admin_pedidos->navController.navigate(R.id.Admin_pedidos)
                 R.id.Admin_eventos->navController.navigate(R.id.Admin_eventos)
-                R.id.Admin_puntos->navController.navigate(R.id.Admin_puntos)
                 R.id.Admin_chats->navController.navigate(R.id.Admin_chats)
             }
             true
         }
     }
+
 }

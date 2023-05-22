@@ -6,10 +6,12 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_recycler1.xml" value="0.18" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_recycler2.xml" value="0.1795" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.264" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/ic_baseline_supervised_user_circle_24.xml" value="0.1795" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2635" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/inventario.xml" value="0.1795" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/puntos.xml" value="0.247" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/Item_Articulo.xml" value="0.33" />
-        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_anadir_articulo.xml" value="0.5" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_anadir_articulo.xml" value="0.25" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_editar_articulo.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_principal.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_borrar_cuenta.xml" value="0.33" />
@@ -27,7 +29,9 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_comprar.xml" value="0.25" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_config.xml" value="0.2890625" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_eventos.xml" value="0.2890625" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_pedidos.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_puntos.xml" value="0.2890625" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_admin_usuarios.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_chats.xml" value="0.22" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_comprar.xml" value="0.296195652173913" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/fragment_config.xml" value="0.33" />

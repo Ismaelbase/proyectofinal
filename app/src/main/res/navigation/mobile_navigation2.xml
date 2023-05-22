@@ -12,21 +12,21 @@
         tools:layout="@layout/fragment_admin_config" />
 
     <fragment
-        android:id="@+id/Admin_comprar"
-        android:name="com.example.tiendav1.Admin_comprar"
-        android:label="Admin_comprar"
-        tools:layout="@layout/fragment_admin_comprar" />
+        android:id="@+id/Admin_inventario"
+        android:name="com.example.tiendav1.Admin_inventario"
+        android:label="Admin_inventario"
+        tools:layout="@layout/fragment_admin_inventario" />
 
+    <fragment
+        android:id="@+id/Admin_pedidos"
+        android:name="com.example.tiendav1.Admin_pedidos"
+        android:label="Admin_pedidos"
+        tools:layout="@layout/fragment_admin_pedidos" />
     <fragment
         android:id="@+id/Admin_eventos"
         android:name="com.example.tiendav1.Admin_eventos"
         android:label="Admin_eventos"
         tools:layout="@layout/fragment_admin_eventos" />
-    <fragment
-        android:id="@+id/Admin_puntos"
-        android:name="com.example.tiendav1.Admin_puntos"
-        android:label="Admin_puntos"
-        tools:layout="@layout/fragment_admin_puntos" />
     <fragment
         android:id="@+id/Admin_chats"
         android:name="com.example.tiendav1.Admin_chats"
