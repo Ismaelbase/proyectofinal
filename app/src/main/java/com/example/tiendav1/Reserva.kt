@@ -12,10 +12,11 @@ data class Reserva(
     var nombre_usuario:String? = null,
     var nombre_articulo:String? = null,
     var url_articulo:String? = null,
-    var fecha:String? = null
+    var fecha:String? = null,
+    var precio:Double? = null,
     ): Parcelable{
     companion object{
         val estado = listOf(0,1,2,3,4)
-        val estado_texto = listOf("Realizado","Aceptado","Rechazado","Listo para recoger","Recogido")
+        val estado_texto = listOf("Pendiente","Aceptado","Rechazado","Completo","Listo para recoger")
     }
 }

@@ -23,6 +23,12 @@ class Principal_normal : AppCompatActivity() {
             Utilidades.comprar = false
         }
 
+        if (Utilidades.normal_historial){
+            navController.navigate(R.id.Comprar)
+            navView.selectedItemId = R.id.Comprar
+            Utilidades.normal_historial = false
+        }
+
         if(Utilidades.obtenerIDUsuario(applicationContext) == ""){
             startActivity(Intent(applicationContext,MainActivity::class.java))
         }

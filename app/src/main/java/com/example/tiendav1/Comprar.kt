@@ -1,14 +1,12 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +40,7 @@ class Comprar : Fragment() {
     private lateinit var cb_ocio:CheckBox
     private lateinit var cb_muebles:CheckBox
     private lateinit var recyclerView: RecyclerView
+    private lateinit var historial:ImageView
 
 
     override fun onCreateView(
@@ -68,6 +67,7 @@ class Comprar : Fragment() {
         cb_ocio = binding.comprarCbOcio
         cb_muebles = binding.comprarCbMuebles
         recyclerView = binding.comprarRv
+        historial = binding.comprarHistorial
 
         cb_tecno.isChecked = true
         cb_ropa.isChecked = true
@@ -130,6 +130,10 @@ class Comprar : Fragment() {
                 adaptador.filter.filter(busqueda.query)
             }
 
+        }
+
+        historial.setOnClickListener {
+            startActivity(Intent(context, Normal_historial_compras::class.java))
         }
 
     }

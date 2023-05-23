@@ -7,6 +7,31 @@
     tools:context=".Admin_gestion_pedido">
 
     <ImageView
+        android:id="@+id/gestion_pedido_listo_para_recoger_color"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_label_stock"
+        app:srcCompat="@drawable/completado" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_listo_para_recoger_txt"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        android:text="Listo para recoger"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/gestion_pedido_listo_para_recoger_color"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_listo_para_recoger_color"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_listo_para_recoger_color"
+        app:layout_constraintTop_toTopOf="@+id/gestion_pedido_listo_para_recoger_color" />
+
+    <ImageView
         android:id="@+id/gestion_pedido_aceptar1"
         android:layout_width="100dp"
         android:layout_height="40dp"
@@ -15,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gestion_pedido_rechazar1"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/aceptar" />
+        app:srcCompat="@drawable/completado" />
 
     <TextView
         android:id="@+id/gestion_pedido_stock"

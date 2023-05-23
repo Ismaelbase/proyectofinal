@@ -31,8 +31,8 @@ class Admin_pedidos : Fragment() {
 
     private lateinit var busqueda: SearchView
     private lateinit var cb_rechazado:CheckBox
-    private lateinit var cb_aceptado:CheckBox
     private lateinit var cb_pendiente:CheckBox
+    private lateinit var cb_completado:CheckBox
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var adaptador:Adaptador_pedidos
@@ -63,20 +63,23 @@ class Admin_pedidos : Fragment() {
         //Los bindings
 
         busqueda = binding.pedidosSearchview
+
         cb_rechazado = binding.pedidosCbRechazados
-        cb_aceptado = binding.pedidosCbAceptados
         cb_pendiente = binding.pedidosCbPendientes
+        cb_completado = binding.pedidosCbCompletos
+
         recyclerView = binding.pedidosRecycler
 
+
         cb_rechazado.isChecked = true
-        cb_aceptado.isChecked = true
         cb_pendiente.isChecked = true
+        cb_completado.isChecked = true
 
 
         val lista_checkbox:List<CheckBox> = listOf(
-            cb_rechazado,
-            cb_aceptado,
-            cb_pendiente
+            cb_pendiente,
+            cb_completado,
+            cb_rechazado
         )
 
         adaptador = Adaptador_pedidos(lista_pedidos,filtros_seleccionados)
@@ -88,9 +91,7 @@ class Admin_pedidos : Fragment() {
                         val pojo_pedido = it.getValue(Reserva::class.java)
                         lista_pedidos.add(pojo_pedido!!)
                     }
-                    lista_pedidos.sortByDescending{
-                        it.estado == "Realizado"
-                    }
+
                     adaptador.notifyDataSetChanged()
                 }
 

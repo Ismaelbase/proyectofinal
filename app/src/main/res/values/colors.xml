@@ -14,7 +14,9 @@
     <color name="gris_oscuro">#9e9e9e</color>
     <color name="naranja_suave">#ffc48c</color>
     <color name="naranja_fuerte">#ff8a65</color>
-    <color name="aceptar">#bbe28f</color>
+    <color name="completado">#bbe28f</color>
     <color name="rechazar">#fc6863</color>
     <color name="pendiente">#ffc48c</color>
+    <color name="preparando">#f9d423</color>
+    <color name="recogida_lista">#3fc1c9</color>
 </resources>

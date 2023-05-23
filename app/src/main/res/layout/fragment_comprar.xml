@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="Muebles"
         app:layout_constraintEnd_toEndOf="@+id/comprar_searchview"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,15 +23,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="Deporte"
         app:layout_constraintStart_toEndOf="@+id/comprar_cb_ropa"
         app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
 
     <SearchView
         android:id="@+id/comprar_searchview"
-        android:layout_width="fill_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
         android:text="Tecnologia"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
@@ -48,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="Ropa"
         app:layout_constraintStart_toEndOf="@+id/comprar_cb_tecnologia"
         app:layout_constraintTop_toBottomOf="@+id/comprar_searchview" />
@@ -61,4 +64,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comprar_cb_ocio" />
+
+    <ImageView
+        android:id="@+id/comprar_historial"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/historial_compras_sc4"
+        app:layout_constraintStart_toEndOf="@+id/comprar_searchview"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

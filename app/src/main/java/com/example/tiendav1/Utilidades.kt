@@ -20,6 +20,7 @@ class Utilidades {
 
         //Volver de actividades:
         var comprar = false
+        var normal_historial = false
         var admin_editar = false
         var admin_anadir = false
         var admin_gestion_pedido = false
@@ -162,7 +163,8 @@ class Utilidades {
             nombre_usuario:String,
             nombre_articulo:String,
             url_articulo:String,
-            fecha:String
+            fecha:String,
+            precio:Double
 
         ) = db_ref.child("SecondCharm").child("Reservas").child(id).setValue(Reserva(
             id,
@@ -172,7 +174,8 @@ class Utilidades {
             nombre_usuario,
             nombre_articulo,
             url_articulo,
-            fecha
+            fecha,
+            precio
         ))
 
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
@@ -418,6 +421,29 @@ class Utilidades {
                         println(error.message)
                     }
                 })
+            return lista
+        }
+
+        fun obtenerListaHistorial(id_usuario:String):MutableList<Reserva>{
+            var lista = mutableListOf<Reserva>()
+
+            //Consulta a la bd
+            reservas.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    lista.clear()
+                    snapshot.children.forEach{ hijo: DataSnapshot?->
+                        val pojo_reserva = hijo?.getValue(Reserva::class.java)
+
+                        if (pojo_reserva!!.id_usuario == id_usuario) {
+                            lista.add(pojo_reserva)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
             return lista
         }
 //

@@ -17,8 +17,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.w3c.dom.Text
 
-//todo se puede pasar un booleano extra a los adaptadores que indique el estado actual del modo noche
-// para así adaptar los iconos
 class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var filtros_check: List<Boolean>) :
     RecyclerView.Adapter<Adaptador_Comprar.UserViewHolder>(), Filterable {
 
@@ -80,6 +78,15 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
                 } else {
                     lista_filtrada = (lista_articulos.filter {
                         it.nombre.toString().lowercase().contains(busqueda)
+                    }) as MutableList<Articulo>
+                }
+
+                //Filtro precio maximo
+                if (busqueda.isEmpty()) {
+                    lista_filtrada = lista_articulos
+                } else if (busqueda.toIntOrNull() != null || busqueda.toDoubleOrNull() != null) {
+                    lista_filtrada = (lista_articulos.filter {
+                        it.precio!!.toDouble() <= busqueda.toDouble()
                     }) as MutableList<Articulo>
                 }
 

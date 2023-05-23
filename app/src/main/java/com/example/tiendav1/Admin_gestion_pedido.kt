@@ -3,6 +3,7 @@ package com.example.tiendav1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -47,6 +48,12 @@ class Admin_gestion_pedido : AppCompatActivity() {
     val aceptar_texto: TextView by lazy {
         findViewById(R.id.gestion_pedido_aceptar2)
     }
+    val listo_texto: TextView by lazy {
+        findViewById(R.id.gestion_pedido_listo_para_recoger_txt)
+    }
+    val listo_color: ImageView by lazy {
+        findViewById(R.id.gestion_pedido_listo_para_recoger_color)
+    }
     val boton_volver:ImageView by lazy {
         findViewById(R.id.gestion_pedido_boton_volver)
     }
@@ -67,18 +74,95 @@ class Admin_gestion_pedido : AppCompatActivity() {
         fecha.text = pojo_pedido.fecha
         estado_texto.text = pojo_pedido.estado
 
-        if(pojo_pedido.estado == "Realizado") {
+        if(pojo_pedido.estado == "Pendiente") {
             estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
             estado_texto.text = "Pendiente"
         }else if(pojo_pedido.estado == "Aceptado") {
-            estado_color.setImageDrawable(getDrawable(R.drawable.aceptar))
-            estado_texto.text = "Aceptado"
+            estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
+            estado_texto.text = "Pendiente"
+
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
+
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
+
+            listo_color.visibility = View.VISIBLE
+            listo_texto.visibility = View.VISIBLE
+
+
+            listo_color.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+            listo_texto.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+
+            listo_color.setOnLongClickListener {
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                estado_color.setImageDrawable(getDrawable(R.drawable.completado))
+                estado_texto.text = "Completado"
+
+                true
+            }
+            listo_texto.setOnLongClickListener {
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                estado_color.setImageDrawable(getDrawable(R.drawable.completado))
+                estado_texto.text = "Completado"
+                true
+            }
+
+            aceptar_texto.setOnClickListener(null)
+            aceptar_color.setOnClickListener(null)
+            rechazar_texto.setOnClickListener(null)
+            rechazar_color.setOnClickListener(null)
+
         }else if(pojo_pedido.estado == "Rechazado") {
             estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
             estado_texto.text = "Rechazado"
+
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
+
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
+
+            aceptar_texto.setOnClickListener(null)
+            aceptar_color.setOnClickListener(null)
+            rechazar_texto.setOnClickListener(null)
+            rechazar_color.setOnClickListener(null)
+
+
+        }else if (pojo_pedido.estado == "Listo para recoger"){
+            estado_color.setImageDrawable(getDrawable(R.drawable.completado))
+            estado_texto.text = "Completado"
+
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
+
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
+
+            aceptar_texto.setOnClickListener(null)
+            aceptar_color.setOnClickListener(null)
+            rechazar_texto.setOnClickListener(null)
+            rechazar_color.setOnClickListener(null)
         }else{
             estado_color.setColorFilter(R.color.gris)
             estado_texto.text = "Completado"
+
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
+
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
+
+            aceptar_texto.setOnClickListener(null)
+            aceptar_color.setOnClickListener(null)
+            rechazar_texto.setOnClickListener(null)
+            rechazar_color.setOnClickListener(null)
         }
 
         Utilidades.usuarios.child(id_usuario!!)
@@ -175,14 +259,48 @@ class Admin_gestion_pedido : AppCompatActivity() {
 
         aceptar_color.setOnLongClickListener {
 
-            rechazar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
-            rechazar_texto.setTextColor(getColor(R.color.black))
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
 
-            aceptar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
-            aceptar_texto.setTextColor(getColor(R.color.black))
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
 
-            estado_texto.text = "Aceptado"
-            estado_color.setImageDrawable(getDrawable(R.drawable.aceptar))
+            listo_color.visibility = View.VISIBLE
+            listo_texto.visibility = View.VISIBLE
+
+
+            listo_color.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+            listo_texto.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+
+            listo_color.setOnLongClickListener {
+
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+
+                listo_color.visibility = View.INVISIBLE
+                listo_texto.visibility = View.INVISIBLE
+                listo_color.setOnClickListener { null }
+                listo_texto.setOnClickListener { null }
+
+                true
+            }
+            listo_texto.setOnLongClickListener {
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+
+                listo_color.visibility = View.INVISIBLE
+                listo_texto.visibility = View.INVISIBLE
+                listo_color.setOnClickListener { null }
+                listo_texto.setOnClickListener { null }
+                true
+            }
+
+            estado_texto.text = "Pendiente"
+            estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
 
             aceptar_texto.setOnClickListener(null)
             aceptar_color.setOnClickListener(null)
@@ -197,14 +315,42 @@ class Admin_gestion_pedido : AppCompatActivity() {
         }
         aceptar_texto.setOnLongClickListener {
 
-            rechazar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
-            rechazar_texto.setTextColor(getColor(R.color.black))
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
 
-            aceptar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
-            aceptar_texto.setTextColor(getColor(R.color.black))
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
 
-            estado_texto.text = "Aceptado"
-            estado_color.setImageDrawable(getDrawable(R.drawable.aceptar))
+            listo_color.visibility = View.VISIBLE
+            listo_texto.visibility = View.VISIBLE
+
+
+            listo_color.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+            listo_texto.setOnClickListener {
+                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+            }
+
+            listo_color.setOnLongClickListener {
+
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                estado_color.setImageDrawable(getDrawable(R.drawable.completado))
+                estado_texto.text = "Completado"
+
+                true
+            }
+            listo_texto.setOnLongClickListener {
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                estado_color.setImageDrawable(getDrawable(R.drawable.completado))
+                estado_texto.text = "Completado"
+                true
+            }
+
+            estado_texto.text = "Pendiente"
+            estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
 
             aceptar_texto.setOnClickListener(null)
             aceptar_color.setOnClickListener(null)

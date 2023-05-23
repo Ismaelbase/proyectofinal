@@ -51,17 +51,14 @@ class Adaptador_pedidos(
         holder.usuario.text = item_actual.nombre_usuario
         holder.fecha.text = item_actual.fecha
 
-        if (item_actual.estado == "Realizado") {
+        if (item_actual.estado == "Pendiente" || item_actual.estado == "Aceptado") {
             holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.naranja_suave))
             holder.estado_texto.text = "Pendiente"
-        } else if (item_actual.estado == "Aceptado") {
-            holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.aceptar))
-            holder.estado_texto.text = "Aceptado"
         } else if (item_actual.estado == "Rechazado") {
             holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.rechazar))
             holder.estado_texto.text = "Rechazado"
-        } else {
-            holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.gris))
+        } else if (item_actual.estado == "Listo para recoger"){
+            holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.completado))
             holder.estado_texto.text = "Completado"
         }
 
@@ -70,17 +67,16 @@ class Adaptador_pedidos(
         }
 
         holder.estado_color.setOnClickListener {
-            val actividad = Intent(contexto,Admin_gestion_pedido::class.java)
+            val actividad = Intent(contexto, Admin_gestion_pedido::class.java)
             actividad.putExtra("PEDIDO", item_actual)
             contexto.startActivity(actividad)
         }
 
         holder.estado_texto.setOnClickListener {
-            val actividad = Intent(contexto,Admin_gestion_pedido::class.java)
+            val actividad = Intent(contexto, Admin_gestion_pedido::class.java)
             actividad.putExtra("PEDIDO", item_actual)
             contexto.startActivity(actividad)
         }
-
 
 
     }
@@ -114,8 +110,22 @@ class Adaptador_pedidos(
 
                 //Filtro de checkboxes
                 lista_filtrada = lista_filtrada.filter {
-                    var posicion = Reserva.estado_texto.indexOf(it.estado)
-                    filtros_check.get(posicion)
+                    var posicion: Int = 0
+
+                    if (it.estado == "Listo para recoger") {
+                        posicion = 1
+                    }else if (it.estado == "Aceptado"){
+                        posicion = 0
+                    } else if(it.estado == "Rechazado"){
+                        posicion = 2
+                    }else if(it.estado == "Pendiente") {
+                        posicion = 0
+                    }else if(it.estado == "Completo") {
+                        posicion = 1
+                    }
+
+                    filtros_check[posicion]
+
                 } as MutableList<Reserva>
 
                 val resultados_filtro = FilterResults()
@@ -138,7 +148,7 @@ class Adaptador_pedidos(
         val fecha: TextView = itemView.findViewById(R.id.item_pedido_fecha)
         val estado_color: ImageView = itemView.findViewById(R.id.item_pedido_estado_color)
         val estado_texto: TextView = itemView.findViewById(R.id.item_pedido_estado_texto)
-        val pedido : ConstraintLayout = itemView.findViewById(R.id.item_pedido_pedido)
+        val pedido: ConstraintLayout = itemView.findViewById(R.id.item_pedido_pedido)
 
     }
 

@@ -161,15 +161,12 @@ class Admin_editar_articulo : AppCompatActivity() {
                 }
             }
 
+        }
 
-
-
-            boton_volver.setOnClickListener {
-                val intent = Intent(applicationContext, Admin_principal::class.java)
-                Utilidades.admin_editar = true
-                startActivity(intent)
-            }
-
+        boton_volver.setOnClickListener {
+            val intent = Intent(applicationContext, Admin_principal::class.java)
+            Utilidades.admin_editar = true
+            startActivity(intent)
         }
 
     }

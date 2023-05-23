@@ -119,11 +119,12 @@ class Comprar_articulo : AppCompatActivity() {
                     id_reserva,
                     Utilidades.obtenerIDUsuario(applicationContext),
                     pojo_articulo.id!!,
-                    "Realizado",
+                    "Pendiente",
                     pojo_usuario.usuario!!,
                     pojo_articulo.nombre!!,
                     pojo_articulo.url_foto!!,
-                    fecha
+                    fecha,
+                    pojo_articulo.precio!!
                 )
 
 

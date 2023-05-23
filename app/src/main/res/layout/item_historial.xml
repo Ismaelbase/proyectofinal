@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_pedido_pedido"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/borde_recycler1"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/item_historial_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_historial_imagen"
+        app:layout_constraintStart_toStartOf="@+id/item_historial_precio" />
+
+    <TextView
+        android:id="@+id/item_historial_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_historial_imagen"
+        app:layout_constraintStart_toStartOf="@+id/item_historial_nombre"
+        app:layout_constraintTop_toTopOf="@+id/item_historial_imagen" />
+
+    <ImageView
+        android:id="@+id/item_historial_imagen"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/articulo_radio1" />
+
+    <ImageView
+        android:id="@+id/item_historial_estado_color"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_historial_fecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_historial_nombre"
+        app:srcCompat="@drawable/rechazar" />
+
+    <TextView
+        android:id="@+id/item_historial_estado_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rechazado"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/item_historial_estado_color"
+        app:layout_constraintEnd_toEndOf="@+id/item_historial_estado_color"
+        app:layout_constraintStart_toStartOf="@+id/item_historial_estado_color"
+        app:layout_constraintTop_toTopOf="@+id/item_historial_estado_color" />
+
+    <TextView
+        android:id="@+id/item_historial_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/item_historial_imagen"
+        app:layout_constraintTop_toTopOf="@+id/item_historial_imagen" />
+</androidx.constraintlayout.widget.ConstraintLayout>

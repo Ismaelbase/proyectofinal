@@ -104,7 +104,7 @@
         android:id="@+id/editar_articulo_spinner"
         android:layout_width="180dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
         app:layout_constraintTop_toBottomOf="@+id/editar_articulo_nombre" />
 
@@ -137,23 +137,25 @@
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
         app:layout_constraintTop_toBottomOf="@+id/editar_articulo_disponible" />
 
-    <ImageView
-        android:id="@+id/editar_articulo_volver"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_aplicar"
-        app:srcCompat="@drawable/volver_sc" />
-
     <Switch
         android:id="@+id/editar_articulo_disponible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:minHeight="48dp"
         android:text="Disponible"
         app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
         app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
+
+    <ImageView
+        android:id="@+id/editar_articulo_volver"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_aplicar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editar_articulo_aplicar"
+        app:srcCompat="@drawable/volver_sc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
