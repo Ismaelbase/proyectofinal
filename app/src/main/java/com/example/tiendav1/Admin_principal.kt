@@ -27,6 +27,11 @@ class Admin_principal : AppCompatActivity() {
             navView.selectedItemId = R.id.Admin_inventario
             Utilidades.admin_anadir = false
         }
+        if (Utilidades.admin_gestion_pedido){
+            navController.navigate(R.id.Admin_pedidos)
+            navView.selectedItemId = R.id.Admin_pedidos
+            Utilidades.admin_gestion_pedido = false
+        }
 
         if(Utilidades.obtenerIDUsuario(applicationContext) == ""){
             startActivity(Intent(applicationContext,MainActivity::class.java))

@@ -11,6 +11,7 @@ import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class Comprar_articulo : AppCompatActivity() {
 
@@ -44,6 +45,7 @@ class Comprar_articulo : AppCompatActivity() {
 
 
     private lateinit var pojo_articulo: Articulo
+    private lateinit var pojo_usuario: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +78,16 @@ class Comprar_articulo : AppCompatActivity() {
                 }
             })
 
+        val id_usuario = Utilidades.obtenerIDUsuario(applicationContext)
+
+        Utilidades.usuarios.child(id_usuario)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    pojo_usuario = snapshot.getValue(User::class.java)!!
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
         //Esto comprueba que el articulo no ha sido reservado ya por el usuario, solo se puede reservar una vez, cuando
         // el articulo es recogido o cancelado, se puede volver a reservar
@@ -89,6 +101,8 @@ class Comprar_articulo : AppCompatActivity() {
         }
 
         reservar.setOnClickListener {
+            val fecha = LocalDate.now().toString()
+
             if(pojo_articulo.stock!! > 0){
                 referencia_bd.child("SecondCharm")
                     .child("Articulos")
@@ -105,7 +119,11 @@ class Comprar_articulo : AppCompatActivity() {
                     id_reserva,
                     Utilidades.obtenerIDUsuario(applicationContext),
                     pojo_articulo.id!!,
-                    0
+                    "Realizado",
+                    pojo_usuario.usuario!!,
+                    pojo_articulo.nombre!!,
+                    pojo_articulo.url_foto!!,
+                    fecha
                 )
 
 

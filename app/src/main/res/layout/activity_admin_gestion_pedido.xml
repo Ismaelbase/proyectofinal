@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_gestion_pedido">
+
+    <ImageView
+        android:id="@+id/gestion_pedido_aceptar1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="65dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gestion_pedido_rechazar1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gestion_pedido_rechazar1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/aceptar" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_nombre_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_fecha" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_label_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Stock"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_label_nombre_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_label_fecha" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="12-12-12"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_nombre_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_nombre_usuario" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_label_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Fecha"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_label_nombre_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_label_nombre_usuario" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_nombre_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="Pepe"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_estado_color" />
+
+    <ImageView
+        android:id="@+id/gestion_pedido_imagen"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/articulo_radio1" />
+
+    <ImageView
+        android:id="@+id/gestion_pedido_estado_color"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_imagen"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_nombre_articulo"
+        app:srcCompat="@drawable/rechazar" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_estado_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pendiente"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gestion_pedido_estado_color"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_estado_color"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_estado_color"
+        app:layout_constraintTop_toTopOf="@+id/gestion_pedido_estado_color" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_label_nombre_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Usuario"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_estado_color" />
+
+    <ImageView
+        android:id="@+id/gestion_pedido_rechazar1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/gestion_pedido_aceptar1"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_label_stock"
+        app:srcCompat="@drawable/rechazar" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_aceptar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gestion_pedido_aceptar1"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_aceptar1"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_aceptar1"
+        app:layout_constraintTop_toTopOf="@+id/gestion_pedido_aceptar1" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_rechazar2"
+        android:layout_width="74dp"
+        android:layout_height="25dp"
+        android:text="Rechazar"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gestion_pedido_rechazar1"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_rechazar1"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_rechazar1"
+        app:layout_constraintTop_toTopOf="@+id/gestion_pedido_rechazar1" />
+
+    <ImageView
+        android:id="@+id/gestion_pedido_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_rechazar1"
+        app:srcCompat="@drawable/volver_sc" />
+
+    <TextView
+        android:id="@+id/gestion_pedido_nombre_articulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Radio Vintage"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/gestion_pedido_imagen"
+        app:layout_constraintStart_toStartOf="@+id/gestion_pedido_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/gestion_pedido_imagen" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@ class Utilidades {
         var comprar = false
         var admin_editar = false
         var admin_anadir = false
+        var admin_gestion_pedido = false
 
 
         //Referencias a bd rapidas
@@ -157,13 +158,21 @@ class Utilidades {
             id:String,
             id_usuario:String,
             id_articulo:String,
-            estado:Int
+            estado:String,
+            nombre_usuario:String,
+            nombre_articulo:String,
+            url_articulo:String,
+            fecha:String
 
         ) = db_ref.child("SecondCharm").child("Reservas").child(id).setValue(Reserva(
             id,
             id_usuario,
             id_articulo,
-            estado
+            estado,
+            nombre_usuario,
+            nombre_articulo,
+            url_articulo,
+            fecha
         ))
 
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
@@ -310,7 +319,7 @@ class Utilidades {
                             for (reserva in snapshot.children) {
                                 if (reserva.child("id_articulo").value.toString() == id_articulo &&
                                     reserva.child("id_usuario").value.toString() == id_usuario &&
-                                    reserva.child("estado").value.toString().toInt() == 0 || reserva.child("estado").value.toString().toInt() == 1
+                                    reserva.child("estado").value.toString() == "Realizado"
                                 ) {
                                     existe = true
                                 }
@@ -382,6 +391,26 @@ class Utilidades {
                         snapshot.children.forEach{ hijo: DataSnapshot?->
                             val pojo_articulo = hijo?.getValue(Articulo::class.java)
                             lista.add(pojo_articulo!!)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        println(error.message)
+                    }
+                })
+            return lista
+        }
+
+        fun obtenerListaPedidos():MutableList<Reserva>{
+            var lista = mutableListOf<Reserva>()
+
+            //Consulta a la bd
+            reservas.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        lista.clear()
+                        snapshot.children.forEach{ hijo: DataSnapshot?->
+                            val pojo_reserva = hijo?.getValue(Reserva::class.java)
+                            lista.add(pojo_reserva!!)
                         }
                     }
 

@@ -134,8 +134,6 @@ class Admin_inventario : Fragment() {
 
         }
 
-
-
     }
 
 }
