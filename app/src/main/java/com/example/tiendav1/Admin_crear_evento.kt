@@ -1,13 +1,11 @@
 package com.example.tiendav1
 
+import android.app.DatePickerDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.util.Util
 import com.google.firebase.database.DatabaseReference
@@ -46,6 +44,12 @@ class Admin_crear_evento : AppCompatActivity() {
     val boton_crear: Button by lazy {
         findViewById(R.id.crear_evento_boton_crear)
     }
+    val datepicker: ImageView by lazy {
+        findViewById(R.id.crear_evento_datepicker)
+    }
+    val fecha_texto: TextView by lazy {
+        findViewById(R.id.crear_evento_fecha_texto)
+    }
 
     private var url_avatar: Uri? = null
 
@@ -59,6 +63,39 @@ class Admin_crear_evento : AppCompatActivity() {
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
         }
+
+        //Cogemos la fecha de hoy en formato europeo
+        val fecha_hoy = LocalDate.now()
+        val dia = fecha_hoy.dayOfMonth
+        val mes = fecha_hoy.monthValue
+        val anyo = fecha_hoy.year
+        fecha_texto.text = "$dia/$mes/$anyo"
+
+        //Abrimos un datepicker limitado a hoy o fechas futuras para evitar errores
+        datepicker.setOnClickListener {
+            val calendario = Calendar.getInstance()
+            val dia = calendario.get(Calendar.DAY_OF_MONTH)
+            val mes = calendario.get(Calendar.MONTH)
+            val anyo = calendario.get(Calendar.YEAR)
+
+            val dpd = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
+                },
+                anyo,
+                mes,
+                dia
+            )
+            dpd.datePicker.minDate = System.currentTimeMillis() - 1000
+            dpd.show()
+        }
+
+
+
+        //mostramos la fecha elegida
+
+
 
         boton_crear.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
@@ -96,9 +133,9 @@ class Admin_crear_evento : AppCompatActivity() {
                             applicationContext,
                             "Debes añadir una imagen"
                         )
-                    } else {
+                        //Comprobamos que la fecha elegida es hoy o el futuro
 
-                        val fecha = LocalDate.now().toString()
+                    }else{
                         val id_evento = Utilidades.eventos.push().key!!
                         GlobalScope.launch(Dispatchers.IO) {
 
@@ -113,7 +150,7 @@ class Admin_crear_evento : AppCompatActivity() {
                                 referencia_bd,
                                 id_evento,
                                 nombre.text.toString().trim(),
-                                fecha,
+                                fecha_texto.text.toString().trim(),
                                 precio.text.toString().toDouble(),
                                 aforo.text.toString().toInt(),
                                 url_firebase
@@ -127,7 +164,7 @@ class Admin_crear_evento : AppCompatActivity() {
                             finish()
                         }
                     }
-                }else {
+                } else {
                     Utilidades.tostadaCorrutina(
                         this@Admin_crear_evento,
                         applicationContext,

@@ -42,6 +42,7 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
             .into(holder.imagen)
 
         holder.nombre.text = item_actual.nombre
+        holder.fecha.text = item_actual.fecha
 
         holder.engranaje.setOnClickListener {
             //todo te lleva a la actividad de editar evento
@@ -96,6 +97,7 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
 
         val imagen: ImageView = itemView.findViewById(R.id.item_admin_evento_imagen)
         val nombre: TextView = itemView.findViewById(R.id.item_admin_evento_nombre)
+        val fecha: TextView = itemView.findViewById(R.id.item_admin_evento_fecha)
         val engranaje: ImageView = itemView.findViewById(R.id.item_admin_evento_config)
         val chat: ImageView = itemView.findViewById(R.id.item_admin_evento_chat)
 

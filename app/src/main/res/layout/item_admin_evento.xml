@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:paddingBottom="10dp"
     android:layout_marginTop="5dp"
+    android:layout_marginHorizontal="10dp"
     android:background="@drawable/borde_recycler1"
     android:layout_height="wrap_content">
 
@@ -22,9 +23,9 @@
         android:id="@+id/item_admin_evento_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:text="Reunion en tu casa"
-        app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
+        app:layout_constraintBottom_toTopOf="@+id/item_admin_evento_fecha"
         app:layout_constraintStart_toEndOf="@+id/item_admin_evento_imagen"
         app:layout_constraintTop_toTopOf="@+id/item_admin_evento_imagen" />
 
@@ -46,4 +47,13 @@
         app:layout_constraintEnd_toEndOf="@+id/item_admin_evento_config"
         app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_nombre"
         app:srcCompat="@drawable/icono_chat_sc4" />
+
+    <TextView
+        android:id="@+id/item_admin_evento_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/05/2023"
+        app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
+        app:layout_constraintStart_toStartOf="@+id/item_admin_evento_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_nombre" />
 </androidx.constraintlayout.widget.ConstraintLayout>

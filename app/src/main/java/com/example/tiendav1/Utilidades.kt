@@ -10,9 +10,12 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.RequestOptions.circleCropTransform
+import com.google.firebase.database.*
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
-import com.google.firebase.database.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.concurrent.CountDownLatch
 
 class Utilidades {

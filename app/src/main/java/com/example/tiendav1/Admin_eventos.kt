@@ -17,7 +17,10 @@ import com.google.firebase.database.*
 //Revisar eventos
 class Admin_eventos : Fragment() {
 
-    //todo meter on resume notify data set changed
+    override fun onResume() {
+        super.onResume()
+        adaptador.notifyDataSetChanged()
+    }
 
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().reference
