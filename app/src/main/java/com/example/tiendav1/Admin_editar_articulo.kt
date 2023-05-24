@@ -93,17 +93,13 @@ class Admin_editar_articulo : AppCompatActivity() {
                     val elegido = Articulo.categorias.indexOf(pojo_articulo.categoria)
                     spinner_categoria.setSelection(elegido)
 
-
                     Glide.with(applicationContext)
                         .load(pojo_articulo.url_foto)
                         .into(imagen)
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
             })
 
         imagen.setOnClickListener {

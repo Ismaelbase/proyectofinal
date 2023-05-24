@@ -45,10 +45,14 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
         holder.fecha.text = item_actual.fecha
 
         holder.engranaje.setOnClickListener {
-            //todo te lleva a la actividad de editar evento
+            contexto.startActivity(Intent(contexto,Admin_editar_evento::class.java).putExtra("ID", item_actual.id)            )
         }
+
         holder.chat.setOnClickListener {
             //todo te lleva a la actividad de chat de ese evento
+        }
+        holder.peticiones.setOnClickListener {
+            //todo te lleva a la actividad que gestiona las peticiones de inscripcion del evento
         }
 
     }
@@ -99,6 +103,7 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
         val nombre: TextView = itemView.findViewById(R.id.item_admin_evento_nombre)
         val fecha: TextView = itemView.findViewById(R.id.item_admin_evento_fecha)
         val engranaje: ImageView = itemView.findViewById(R.id.item_admin_evento_config)
+        val peticiones: ImageView = itemView.findViewById(R.id.item_admin_evento_peticiones)
         val chat: ImageView = itemView.findViewById(R.id.item_admin_evento_chat)
 
 

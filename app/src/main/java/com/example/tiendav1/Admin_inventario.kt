@@ -14,6 +14,12 @@ import com.example.tiendav1.databinding.FragmentAdminInventarioBinding
 import com.google.firebase.database.*
 
 class Admin_inventario : Fragment() {
+
+    override fun onResume() {
+        super.onResume()
+        adaptador.notifyDataSetChanged()
+    }
+
     private var _binding: FragmentAdminInventarioBinding? = null
 
     private val binding get() = _binding!!

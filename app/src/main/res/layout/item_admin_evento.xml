@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/item_admin_evento_imagen"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,6 @@
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
         app:layout_constraintEnd_toEndOf="@+id/item_admin_evento_config"
-        app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_nombre"
         app:srcCompat="@drawable/icono_chat_sc4" />
 
     <TextView
@@ -56,4 +55,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
         app:layout_constraintStart_toStartOf="@+id/item_admin_evento_nombre"
         app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_nombre" />
+
+    <ImageView
+        android:id="@+id/item_admin_evento_peticiones"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/item_admin_evento_chat"
+        app:layout_constraintEnd_toEndOf="@+id/item_admin_evento_config"
+        app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_config"
+        app:srcCompat="@drawable/peticiones_sc2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

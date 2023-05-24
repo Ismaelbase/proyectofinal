@@ -6,4 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".Admin_editar_evento">
 
+    <ImageView
+        android:id="@+id/editar_eventoimagen"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/evento_generico2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_eventoimagen"
+        app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
+        app:srcCompat="@drawable/editar_imagen_sc2" />
+
+    <EditText
+        android:id="@+id/editar_evento_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Editar nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
+        app:layout_constraintStart_toStartOf="@+id/editar_eventoimagen"
+        app:layout_constraintTop_toBottomOf="@+id/editar_eventoimagen" />
+
+    <EditText
+        android:id="@+id/editar_evento_precio"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_evento_aforo"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_nombre"
+        app:layout_constraintTop_toTopOf="@+id/editar_evento_aforo" />
+
+    <EditText
+        android:id="@+id/editar_evento_aforo"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Aforo"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/editar_evento_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_nombre" />
+
+    <ImageView
+        android:id="@+id/editar_evento_datepicker"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:foregroundGravity="center_vertical|clip_horizontal|center_horizontal"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_precio"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_precio"
+        app:srcCompat="@drawable/editar_fecha_sc1" />
+
+    <TextView
+        android:id="@+id/editar_evento_fecha_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/02/2023"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editar_evento_datepicker"
+        app:layout_constraintEnd_toEndOf="@+id/editar_evento_aforo"
+        app:layout_constraintTop_toTopOf="@+id/editar_evento_datepicker" />
+
+    <Button
+        android:id="@+id/editar_evento_aplicar_cambios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Aplicar\nCambios"
+        app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
+        app:layout_constraintStart_toStartOf="@+id/editar_eventoimagen"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_datepicker" />
+
+    <ImageView
+        android:id="@+id/editar_evento_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_aplicar_cambios"
+        app:srcCompat="@drawable/volver_sc" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
