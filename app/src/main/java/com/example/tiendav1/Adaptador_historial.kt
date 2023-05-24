@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var switch: Boolean) :
+class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var switch: List<Boolean>) :
     RecyclerView.Adapter<Adaptador_historial.UserViewHolder>(), Filterable {
 
     private lateinit var contexto: Context
@@ -44,6 +44,10 @@ class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var
         holder.nombre.text = item_actual.nombre_articulo
         holder.fecha.text = item_actual.fecha
         holder.precio.text = item_actual.precio.toString()+"€"
+
+        holder.itemView.setOnClickListener {
+            contexto.startActivity(Intent(contexto, Normal_detalles_reserva::class.java).putExtra("ID", item_actual.id))
+        }
 
         if(item_actual.estado == "Pendiente"){
             holder.color_estado.setImageDrawable(contexto.getDrawable(R.drawable.pendiente))
@@ -92,10 +96,10 @@ class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var
 
                 //Filtro de switch
                 lista_filtrada = lista_filtrada.filter {
-                    if (switch) {
+                    if (switch[0]) {
                         it.estado == "Pendiente" || it.estado == "Aceptado" || it.estado == "Listo para recoger"
                     } else {
-                        it.estado == "Rechazado" || it.estado == "Completo"
+                        it.estado == "Rechazado" || it.estado == "Completo" || it.estado == "Pendiente" || it.estado == "Aceptado" || it.estado == "Listo para recoger"
                     }
 
                 } as MutableList<Reserva>

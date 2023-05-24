@@ -60,6 +60,9 @@ class Adaptador_pedidos(
         } else if (item_actual.estado == "Listo para recoger"){
             holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.completado))
             holder.estado_texto.text = "Completado"
+        }else if (item_actual.estado == "Completo"){
+            holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.completado))
+            holder.estado_texto.text = "Completado"
         }
 
         holder.usuario.setOnClickListener {
@@ -90,14 +93,15 @@ class Adaptador_pedidos(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val busqueda = constraint.toString().lowercase()
 
-                //Filtro por nombre de usuario
-                if (busqueda.isEmpty()) {
-                    lista_filtrada = lista_pedidos
-                } else {
-                    lista_filtrada = (lista_pedidos.filter {
-                        it.nombre_usuario.toString().lowercase().contains(busqueda)
-                    }) as MutableList<Reserva>
-                }
+
+//                //Filtro por nombre de usuario
+//                if (busqueda.isEmpty()) {
+//                    lista_filtrada = lista_pedidos
+//                } else {
+//                    lista_filtrada = (lista_pedidos.filter {
+//                        it.nombre_usuario.toString().lowercase().contains(busqueda)
+//                    }) as MutableList<Reserva>
+//                }
 
                 //Filtro por nombre de articulo
                 if (busqueda.isEmpty()) {

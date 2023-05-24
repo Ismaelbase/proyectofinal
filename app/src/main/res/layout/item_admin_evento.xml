@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingBottom="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/borde_recycler1"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_admin_evento_imagen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/evento_generico2" />
+
+    <TextView
+        android:id="@+id/item_admin_evento_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Reunion en tu casa"
+        app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
+        app:layout_constraintStart_toEndOf="@+id/item_admin_evento_imagen"
+        app:layout_constraintTop_toTopOf="@+id/item_admin_evento_imagen" />
+
+    <ImageView
+        android:id="@+id/item_admin_evento_config"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/item_admin_evento_nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_admin_evento_imagen"
+        app:srcCompat="@drawable/engranaje_sc2" />
+
+    <ImageView
+        android:id="@+id/item_admin_evento_chat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_admin_evento_imagen"
+        app:layout_constraintEnd_toEndOf="@+id/item_admin_evento_config"
+        app:layout_constraintTop_toBottomOf="@+id/item_admin_evento_nombre"
+        app:srcCompat="@drawable/icono_chat_sc4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

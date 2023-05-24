@@ -65,6 +65,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_gestion_pedido)
+        supportActionBar?.hide()
 
         val pojo_pedido:Reserva = intent!!.getParcelableExtra("PEDIDO")!!
 
@@ -150,7 +151,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
             rechazar_texto.setOnClickListener(null)
             rechazar_color.setOnClickListener(null)
         }else{
-            estado_color.setColorFilter(R.color.gris)
+            estado_color.setImageDrawable(getDrawable(R.drawable.completado))
             estado_texto.text = "Completado"
 
             rechazar_color.visibility = View.INVISIBLE

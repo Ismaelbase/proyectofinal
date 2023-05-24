@@ -13,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 
 class Normal_historial_compras : AppCompatActivity() {
+
+    override fun onResume() {
+        super.onResume()
+        adaptador.notifyDataSetChanged()
+    }
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().getReference()
     }
@@ -65,16 +70,16 @@ class Normal_historial_compras : AppCompatActivity() {
 
             })
 
-
+        var lista_switch = List<Boolean>(1){false}.toMutableList()
 
         switch_pendientes.setOnCheckedChangeListener { compoundButton, b ->
             //actualizas la lista con el switch
-
+            lista_switch[0] = b
             adaptador.filter.filter(busqueda.query)
 
         }
 
-        adaptador = Adaptador_historial(lista_reserva,switch_pendientes.isChecked)
+        adaptador = Adaptador_historial(lista_reserva,lista_switch)
         recycler.adapter = adaptador
         recycler.layoutManager = LinearLayoutManager(applicationContext)
         recycler.setHasFixedSize(true)
@@ -94,9 +99,7 @@ class Normal_historial_compras : AppCompatActivity() {
         })
 
         boton_volver.setOnClickListener {
-            val intent = Intent(applicationContext, Principal_normal::class.java)
-            Utilidades.normal_historial = true
-            startActivity(intent)
+            finish()
         }
 
 

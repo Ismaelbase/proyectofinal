@@ -6,24 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Normal_historial_compras">
 
-    <ImageView
-        android:id="@+id/historial_boton_volver"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/volver_sc" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/historial_boton_volver"
+        android:paddingTop="0dp"
+        android:paddingBottom="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -49,7 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="9dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             app:layout_constraintStart_toEndOf="@+id/historial_searchview"
             app:layout_constraintTop_toTopOf="@+id/historial_searchview" />
 
@@ -57,10 +47,20 @@
             android:id="@+id/historial_searchview"
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/historial_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

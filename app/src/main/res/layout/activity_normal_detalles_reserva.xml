@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Normal_detalles_reserva">
+
+    <TextView
+        android:id="@+id/detalles_estado1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Estado"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/detalles_fecha1"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_fecha1" />
+
+    <TextView
+        android:id="@+id/detalles_precio1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Precio:"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/detalles_nombre1"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_nombre1" />
+
+    <TextView
+        android:id="@+id/detalles_fecha1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Fecha"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/detalles_precio1"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_precio1" />
+
+    <TextView
+        android:id="@+id/detalles_nombre2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Radio"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_imagen" />
+
+    <TextView
+        android:id="@+id/detalles_precio2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="10€"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_nombre2"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_nombre2" />
+
+    <TextView
+        android:id="@+id/detalles_fecha2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="12/05/2023"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_precio2"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_precio2" />
+
+    <ImageView
+        android:id="@+id/detalles_imagen"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/articulo_radio1" />
+
+    <TextView
+        android:id="@+id/detalles_nombre1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Articulo"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_imagen" />
+
+    <ImageView
+        android:id="@+id/detalles_estado_color"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_fecha2"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_fecha2"
+        app:srcCompat="@drawable/completado" />
+
+    <TextView
+        android:id="@+id/detalles_estado_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptado"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/detalles_estado_color"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_estado_color"
+        app:layout_constraintStart_toStartOf="@+id/detalles_estado_color"
+        app:layout_constraintTop_toTopOf="@+id/detalles_estado_color" />
+
+    <Button
+        android:id="@+id/detalles_cancelar_reserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Cancelar\nreserva"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_imagen"
+        app:layout_constraintStart_toStartOf="@+id/detalles_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_estado1" />
+
+    <Button
+        android:id="@+id/detalles_recoger_pedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Recoger\nPedido"
+        app:layout_constraintEnd_toEndOf="@+id/detalles_imagen"
+        app:layout_constraintStart_toStartOf="@+id/detalles_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_estado1" />
+
+    <ImageView
+        android:id="@+id/detalles_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalles_cancelar_reserva"
+        app:srcCompat="@drawable/volver_sc" />
+</androidx.constraintlayout.widget.ConstraintLayout>

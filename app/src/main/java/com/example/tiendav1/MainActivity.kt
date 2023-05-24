@@ -132,6 +132,7 @@ class MainActivity : AppCompatActivity() {
                             }else{ //El usuario es normal
                                 startActivity(Intent(applicationContext, Principal_normal::class.java))
                                 Utilidades.establecerTipoUsuario(applicationContext, false)
+
                             }
 
                             Utilidades.establecerIDUsuario(applicationContext, pojo_usuario.id!!)

@@ -65,24 +65,6 @@ class Principal_normal : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Configuracion de FRAGMENTOS
 
         binding = ActivityPrincipalNormalBinding.inflate(layoutInflater)

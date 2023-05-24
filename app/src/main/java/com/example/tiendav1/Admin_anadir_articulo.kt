@@ -86,7 +86,6 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         boton_anadir.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
-
                 if (validarTodo()) {
                     if (!Utilidades.existeArticulo(referencia_bd, nombre.text.toString())) {
                         if (url_avatar != null) {

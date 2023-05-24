@@ -156,6 +156,7 @@ class Admin_editar_articulo : AppCompatActivity() {
                             applicationContext,
                             "Articulo editado correctamente"
                         )
+                        finish()
 
                     }
                 }

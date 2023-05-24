@@ -16,6 +16,11 @@ import com.google.firebase.database.*
 //Revisar pedidos
 class Admin_pedidos : Fragment() {
 
+    override fun onResume() {
+        super.onResume()
+        adaptador.notifyDataSetChanged()
+    }
+
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().reference
     }

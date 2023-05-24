@@ -42,6 +42,11 @@ class Utilidades {
             .child("SecondCharm")
             .child("Reservas")
 
+        val eventos = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Eventos")
+
         var recien_registrado = ""
 
         private val clave_id = "id_usuario"
@@ -178,6 +183,24 @@ class Utilidades {
             precio
         ))
 
+        fun escribirEvento(
+            db_ref:DatabaseReference,
+            id:String,
+            nombre:String,
+            fecha:String,
+            precio:Double,
+            aforo:Int,
+            url_foto:String
+
+        ) = db_ref.child("SecondCharm").child("Eventos").child(id).setValue(Evento(
+            id,
+            nombre,
+            fecha,
+            precio,
+            aforo,
+            url_foto
+        ))
+
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
             val animacion=CircularProgressDrawable(contexto)
             animacion.strokeWidth=5f
@@ -306,23 +329,45 @@ class Utilidades {
             return existe
         }
 
+        suspend fun existeevento(db_ref:DatabaseReference,nombre:String):Boolean{
+            var existe:Boolean=false
+
+            val semaforo = CountDownLatch(1)
+
+            eventos.orderByChild("nombre")
+                .equalTo(nombre)
+                .addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.hasChildren()){
+                            existe=true
+                        }else{
+                        }
+                        semaforo.countDown()
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+            semaforo.await()
+            return existe
+        }
+
 
         //Esto comprueba que el articulo no ha sido reservado ya por el usuario, solo se puede reservar una vez, cuando
-        // el articulo es recogido o cancelado, se puede volver a reservar
+        // el articulo esta 'completo' o 'cancelado', se puede volver a reservar
         suspend fun existeReserva(db_ref:DatabaseReference,id_articulo:String,id_usuario: String):Boolean{
             var existe:Boolean=false
 
             val semaforo = CountDownLatch(1)
 
-            db_ref.child("SecondCharm")
-                .child("Reservas")
-                .addListenerForSingleValueEvent(object:ValueEventListener{
+            reservas.addListenerForSingleValueEvent(object:ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.hasChildren()) {
                             for (reserva in snapshot.children) {
                                 if (reserva.child("id_articulo").value.toString() == id_articulo &&
-                                    reserva.child("id_usuario").value.toString() == id_usuario &&
-                                    reserva.child("estado").value.toString() == "Realizado"
+                                    reserva.child("id_usuario").value.toString() == id_usuario && (
+                                    reserva.child("estado").value.toString() == "Pendiente" ||
+                                    reserva.child("estado").value.toString() == "Listo para recoger" ||
+                                    reserva.child("estado").value.toString() == "Aceptado")
                                 ) {
                                     existe = true
                                 }
@@ -421,6 +466,26 @@ class Utilidades {
                         println(error.message)
                     }
                 })
+            return lista
+        }
+
+        fun obtenerListaEventos():MutableList<Evento>{
+            var lista = mutableListOf<Evento>()
+
+            //Consulta a la bd
+            eventos.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    lista.clear()
+                    snapshot.children.forEach{ hijo: DataSnapshot?->
+                        val pojo_evento = hijo?.getValue(Evento::class.java)
+                        lista.add(pojo_evento!!)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
             return lista
         }
 
