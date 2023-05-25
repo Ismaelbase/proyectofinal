@@ -54,9 +54,7 @@ class Comprar_articulo : AppCompatActivity() {
 
         val id_articulo = intent.getStringExtra("ID").toString()
 
-        referencia_bd.child("SecondCharm")
-            .child("Articulos")
-            .child(id_articulo)
+        Utilidades.articulos.child(id_articulo)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_articulo = snapshot.getValue(Articulo::class.java)!!
@@ -92,7 +90,7 @@ class Comprar_articulo : AppCompatActivity() {
         //Esto comprueba que el articulo no ha sido reservado ya por el usuario, solo se puede reservar una vez, cuando
         // el articulo es recogido o cancelado, se puede volver a reservar
         GlobalScope.launch (Dispatchers.IO){
-            if(Utilidades.existeReserva(referencia_bd,id_articulo,Utilidades.obtenerIDUsuario(applicationContext))) {
+            if(Utilidades.existeReserva(id_articulo,Utilidades.obtenerIDUsuario(applicationContext))) {
                 runOnUiThread{
                     reservar.isEnabled = false
                     reservar.text = "Reservado"
@@ -104,9 +102,7 @@ class Comprar_articulo : AppCompatActivity() {
             val fecha = LocalDate.now().toString()
 
             if(pojo_articulo.stock!! > 0){
-                referencia_bd.child("SecondCharm")
-                    .child("Articulos")
-                    .child(id_articulo)
+                Utilidades.articulos.child(id_articulo)
                     .child("stock")
                     .setValue(pojo_articulo.stock!! - 1)
 
@@ -115,7 +111,6 @@ class Comprar_articulo : AppCompatActivity() {
                 val id_reserva = Utilidades.reservas.push().key!!
 
                 Utilidades.escribirReserva(
-                    referencia_bd,
                     id_reserva,
                     Utilidades.obtenerIDUsuario(applicationContext),
                     pojo_articulo.id!!,

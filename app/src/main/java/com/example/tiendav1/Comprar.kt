@@ -24,7 +24,7 @@ class Comprar : Fragment() {
         FirebaseDatabase.getInstance().reference
     }
     val lista_articulos:MutableList<Articulo> by lazy {
-        Utilidades.obtenerListaArticulos(referencia_bd)
+        Utilidades.obtenerListaArticulos()
     }
     var filtros_seleccionados = mutableListOf(
         true,
@@ -83,8 +83,7 @@ class Comprar : Fragment() {
 
         adaptador = Adaptador_Comprar(lista_articulos,filtros_seleccionados)
 
-        referencia_bd.child("SecondCharm").child("Articulos")
-            .addValueEventListener(object :ValueEventListener{
+        Utilidades.articulos.addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     lista_articulos.clear()
                     snapshot.children.forEach{
@@ -95,11 +94,9 @@ class Comprar : Fragment() {
                     }
                     adaptador.notifyDataSetChanged()
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(context,"Error al acceder a los temas", Toast.LENGTH_SHORT).show()
                 }
-
             })
 
         recyclerView.adapter = adaptador
@@ -111,12 +108,10 @@ class Comprar : Fragment() {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
-
             override fun onQueryTextChange(texto: String?): Boolean {
                 adaptador.filter.filter(texto)
                 return false
             }
-
         })
 
         //CheckBoxs

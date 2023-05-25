@@ -1,13 +1,11 @@
 package com.example.tiendav1
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Switch
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -31,7 +29,7 @@ class Normal_historial_compras : AppCompatActivity() {
         findViewById(R.id.historial_rv)
     }
     val boton_volver: ImageView by lazy {
-        findViewById(R.id.historial_boton_volver)
+        findViewById(R.id.admin_gestion_inscripciones_boton_volver)
     }
 
 

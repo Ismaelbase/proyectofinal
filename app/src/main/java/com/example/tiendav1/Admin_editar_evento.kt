@@ -109,19 +109,20 @@ class Admin_editar_evento : AppCompatActivity() {
 
                 //Comprobamos si hay cambios en los campos
 
-            if( nombre.text.toString() == pojo_articulo.nombre &&
-                precio.text.toString().toDouble() == pojo_articulo.precio &&
-                aforo.text.toString().toInt() == pojo_articulo.aforo &&
-                fecha_texto.text.toString() == pojo_articulo.fecha &&
-                url_foto == null){
+                if (nombre.text.toString() == pojo_articulo.nombre &&
+                    precio.text.toString().toDouble() == pojo_articulo.precio &&
+                    aforo.text.toString().toInt() == pojo_articulo.aforo &&
+                    fecha_texto.text.toString() == pojo_articulo.fecha &&
+                    url_foto == null
+                ) {
 
-                Utilidades.tostadaCorrutina(
-                    this@Admin_editar_evento,
-                    applicationContext,
-                    "No se han realizado cambios"
-                )
+                    Utilidades.tostadaCorrutina(
+                        this@Admin_editar_evento,
+                        applicationContext,
+                        "No se han realizado cambios"
+                    )
 
-            }else if (nombre.text.toString().isEmpty() || precio.text.toString()
+                } else if (nombre.text.toString().isEmpty() || precio.text.toString()
                         .isEmpty() || aforo.text.toString().isEmpty()
                 ) {
                     Utilidades.tostadaCorrutina(
@@ -131,31 +132,29 @@ class Admin_editar_evento : AppCompatActivity() {
                     )
 
                 } else if (precio.text.toString().toDouble() < 0) {
-                    Utilidades.tostadaCorrutina(
-                        this@Admin_editar_evento,
-                        applicationContext,
-                        "El precio no puede ser negativo"
-                    )
+                    runOnUiThread {
+                        precio.error = "El precio no puede ser negativo"
+                    }
                 } else if (aforo.text.toString().toInt() < 0) {
-                    Utilidades.tostadaCorrutina(
-                        this@Admin_editar_evento, applicationContext,
-                        "El aforo no puede ser negativo"
-                    )
+                    runOnUiThread {
+                        aforo.error = "El aforo no puede ser negativo"
+                    }
 
-                } else if (Utilidades.existeevento(
-                        referencia_bd,
-                        nombre.text.toString()
-                    ) && nombre.text.toString() !=
+                } else if (Utilidades.existeevento(nombre.text.toString(),fecha_texto.text.toString().trim()) && nombre.text.toString() !=
                     pojo_articulo.nombre
                 ) {
+                    runOnUiThread {
+                        nombre.error = "Ya existe un evento con ese nombre en la fecha indicada"
+                    }
+                } else if (aforo.text.toString().toInt() < pojo_articulo.apuntados!!.toInt()) {
 
-                    Utilidades.tostadaCorrutina(
-                        this@Admin_editar_evento, applicationContext,
-                        "Ya existe un evento con ese nombre"
-                    )
+                    runOnUiThread {
+                        aforo.error = "El aforo no puede ser menor que el número de apuntados actual:\n - ${pojo_articulo.apuntados} apuntados"
+                    }
+
                 } else {
 
-                    val url_firebase :String?
+                    val url_firebase: String?
 
                     if (url_foto == null) {
                         url_firebase = pojo_articulo.url_foto
@@ -174,7 +173,8 @@ class Admin_editar_evento : AppCompatActivity() {
                         fecha_texto.text.toString(),
                         precio.text.toString().toDouble(),
                         aforo.text.toString().toInt(),
-                        url_firebase.toString()
+                        url_firebase.toString(),
+                        pojo_articulo.apuntados!!.toInt()
                     )
 
                     Utilidades.tostadaCorrutina(
@@ -188,17 +188,18 @@ class Admin_editar_evento : AppCompatActivity() {
 
         }
 
-        boton_volver.setOnClickListener{
+        boton_volver.setOnClickListener {
             finish()
         }
     }
 
-    private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
-        if (uri != null) {
-            url_foto = uri
-            imagen.setImageURI(url_foto)
+    private val accesoGaleria =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                url_foto = uri
+                imagen.setImageURI(url_foto)
+            }
         }
-    }
 
 
 }

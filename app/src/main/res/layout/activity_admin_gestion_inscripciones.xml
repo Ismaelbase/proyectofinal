@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_gestion_inscripciones">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp"
+        android:paddingBottom="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+            android:id="@+id/admin_gestion_inscripciones_cb_rechazados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aceptados"
+            app:layout_constraintBottom_toBottomOf="@+id/admin_gestion_inscripciones_cb_pendientes"
+            app:layout_constraintEnd_toEndOf="@+id/admin_gestion_inscripciones_searchview"
+            app:layout_constraintStart_toStartOf="@+id/admin_gestion_inscripciones_searchview"
+            app:layout_constraintTop_toTopOf="@+id/admin_gestion_inscripciones_cb_pendientes" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_gestion_inscripciones_recycler"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="120dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admin_gestion_inscripciones_cb_rechazados" />
+
+        <SearchView
+            android:id="@+id/admin_gestion_inscripciones_searchview"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/admin_gestion_inscripciones_cb_aceptados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendientes"
+            app:layout_constraintBottom_toBottomOf="@+id/admin_gestion_inscripciones_cb_rechazados"
+            app:layout_constraintEnd_toEndOf="@+id/admin_gestion_inscripciones_searchview"
+            app:layout_constraintTop_toTopOf="@+id/admin_gestion_inscripciones_cb_rechazados" />
+
+        <CheckBox
+            android:id="@+id/admin_gestion_inscripciones_cb_pendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rechazados"
+            app:layout_constraintStart_toStartOf="@+id/admin_gestion_inscripciones_searchview"
+            app:layout_constraintTop_toBottomOf="@+id/admin_gestion_inscripciones_searchview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/admin_gestion_inscripciones_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

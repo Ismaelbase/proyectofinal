@@ -54,7 +54,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/historial_boton_volver"
+        android:id="@+id/admin_gestion_inscripciones_boton_volver"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"

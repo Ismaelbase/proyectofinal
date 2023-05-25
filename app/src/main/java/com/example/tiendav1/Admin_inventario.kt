@@ -30,7 +30,7 @@ class Admin_inventario : Fragment() {
         FirebaseDatabase.getInstance().reference
     }
     val lista_articulos:MutableList<Articulo> by lazy {
-        Utilidades.obtenerListaArticulos(referencia_bd)
+        Utilidades.obtenerListaArticulos()
     }
     var filtros_seleccionados = mutableListOf(
         true,

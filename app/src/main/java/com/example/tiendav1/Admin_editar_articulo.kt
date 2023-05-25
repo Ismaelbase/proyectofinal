@@ -110,7 +110,7 @@ class Admin_editar_articulo : AppCompatActivity() {
         boton_aplicar.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 if (validarTodo()) {
-                    if (Utilidades.existeArticulo(referencia_bd, nombre.text.toString()) &&
+                    if (Utilidades.existeArticulo(nombre.text.toString()) &&
                         pojo_articulo.nombre.toString().trim() != nombre.text.toString().trim()) {
                         Utilidades.tostadaCorrutina(
                             this@Admin_editar_articulo,

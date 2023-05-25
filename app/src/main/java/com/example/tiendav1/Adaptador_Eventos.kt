@@ -2,19 +2,22 @@ package com.example.tiendav1
 
 import android.content.Context
 import android.content.Intent
+import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import org.w3c.dom.Text
 
-class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
-    RecyclerView.Adapter<Adaptador_eventos_admin.UserViewHolder>(), Filterable {
+class Adaptador_Eventos(private val lista_eventos: MutableList<Evento>) :
+    RecyclerView.Adapter<Adaptador_Eventos.UserViewHolder>(), Filterable {
 
     private lateinit var contexto: Context
     private var lista_filtrada = lista_eventos
@@ -23,7 +26,8 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
     private lateinit var referencia_almacenamiento: StorageReference
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val vista_item = LayoutInflater.from(parent.context).inflate(R.layout.item_admin_evento, parent, false)
+
+        val vista_item = LayoutInflater.from(parent.context).inflate(R.layout.item_evento, parent, false)
         contexto = parent.context
 
         referencia_bd = FirebaseDatabase.getInstance().getReference()
@@ -41,27 +45,27 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
             .transition(Utilidades.transicion)
             .into(holder.imagen)
 
-        holder.nombre.text = item_actual.nombre
-        holder.fecha.text = item_actual.fecha
+        holder.nombre.text = item_actual.nombre.toString()
 
-        if(item_actual.apuntados == 0){
-            holder.capacidad.text = "Evento vacio."
-        }else if (item_actual.apuntados!!.toInt() == item_actual.aforo!!.toInt()){
-            holder.capacidad.text = "Evento completo."
+        holder.evento.setOnClickListener {
+            contexto.startActivity(Intent(contexto, Normal_inscripcion_evento::class.java)
+                .putExtra("ID", item_actual.id))
+        }
+
+        if (item_actual.aforo == item_actual.apuntados) {
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.error))
+        }else if(item_actual.apuntados!! == 0){
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.cero_monigotes))
+        } else if (item_actual.aforo!!.toDouble() / item_actual.apuntados!!.toDouble() > 4) {
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.un_monigote))
+        } else if (item_actual.aforo!!.toDouble() / item_actual.apuntados!!.toDouble() > 3) {
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.dos_monigotes))
+        } else if(item_actual.aforo!!.toDouble() / item_actual.apuntados!!.toDouble() > 1.5) {
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.dos_monigotes))
+        }else if(item_actual.aforo!!.toDouble() / item_actual.apuntados!!.toDouble() > 1) {
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.tres_monigotes))
         }else{
-            holder.capacidad.text = "${item_actual.apuntados}/${item_actual.aforo} apuntados"
-        }
-
-
-        holder.engranaje.setOnClickListener {
-            contexto.startActivity(Intent(contexto,Admin_editar_evento::class.java).putExtra("ID", item_actual.id))
-        }
-
-        holder.chat.setOnClickListener {
-            //todo te lleva a la actividad de chat de ese evento
-        }
-        holder.peticiones.setOnClickListener {
-            contexto.startActivity(Intent(contexto,Admin_gestion_inscripciones::class.java).putExtra("ID", item_actual))
+            holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.error))
         }
 
     }
@@ -84,12 +88,12 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
                     }) as MutableList<Evento>
                 }
 
-                //Filtro aforo maximo
+                //Filtro precio maximo
                 if (busqueda.isEmpty()) {
                     lista_filtrada = lista_eventos
-                } else if (busqueda.toIntOrNull() != null) {
+                } else if (busqueda.toIntOrNull() != null || busqueda.toDoubleOrNull() != null) {
                     lista_filtrada = (lista_eventos.filter {
-                        it.aforo!!.toInt() <= busqueda.toInt()
+                        it.precio!!.toDouble() <= busqueda.toDouble()
                     }) as MutableList<Evento>
                 }
 
@@ -108,15 +112,12 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val imagen: ImageView = itemView.findViewById(R.id.item_admin_evento_imagen)
-        val nombre: TextView = itemView.findViewById(R.id.item_admin_evento_nombre)
-        val fecha: TextView = itemView.findViewById(R.id.item_admin_evento_fecha)
-        val capacidad: TextView = itemView.findViewById(R.id.item_admin_evento_aforo)
-        val engranaje: ImageView = itemView.findViewById(R.id.item_admin_evento_config)
-        val peticiones: ImageView = itemView.findViewById(R.id.item_admin_evento_peticiones)
-        val chat: ImageView = itemView.findViewById(R.id.item_admin_evento_chat)
-
+        val imagen: ImageView = itemView.findViewById(R.id.item_evento_imagen)
+        val nombre: TextView = itemView.findViewById(R.id.item_evento_nombre)
+        val evento: RelativeLayout = itemView.findViewById(R.id.item_evento_evento)
+        val capacidad: ImageView = itemView.findViewById(R.id.item_evento_capacidad)
 
     }
+
 
 }

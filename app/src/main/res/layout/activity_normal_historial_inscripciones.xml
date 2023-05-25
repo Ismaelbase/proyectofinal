@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Normal_historial_inscripciones">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="0dp"
+        android:paddingBottom="50dp"
+        tools:context=".Normal_historial_inscripciones"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <CheckBox
+            android:id="@+id/historial_inscripciones_cb_aceptadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="Pendientes"
+            app:layout_constraintBottom_toBottomOf="@+id/historial_inscripciones_cb_rechazadas"
+            app:layout_constraintEnd_toEndOf="@+id/historial_inscripciones_searchview"
+            app:layout_constraintTop_toTopOf="@+id/historial_inscripciones_cb_rechazadas" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historial_inscripciones_recycler"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:foregroundGravity="center|center_horizontal"
+            android:paddingBottom="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/historial_inscripciones_cb_rechazadas" />
+
+        <CheckBox
+            android:id="@+id/historial_inscripciones_cb_pendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Rechazadas"
+            app:layout_constraintStart_toStartOf="@+id/historial_inscripciones_searchview"
+            app:layout_constraintTop_toBottomOf="@+id/historial_inscripciones_searchview" />
+
+        <SearchView
+            android:id="@+id/historial_inscripciones_searchview"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/historial_inscripciones_cb_rechazadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aceptadas"
+            app:layout_constraintBottom_toBottomOf="@+id/historial_inscripciones_cb_pendientes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/historial_inscripciones_searchview"
+            app:layout_constraintTop_toTopOf="@+id/historial_inscripciones_cb_pendientes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/historial_inscripciones_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

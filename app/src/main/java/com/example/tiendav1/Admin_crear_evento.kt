@@ -101,12 +101,10 @@ class Admin_crear_evento : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.IO) {
                 if (nombre.text.isNotEmpty() && precio.text.isNotEmpty() && aforo.text.isNotEmpty()) {
 
-                    if (Utilidades.existeevento(referencia_bd, nombre.text.toString().trim())) {
-                        Utilidades.tostadaCorrutina(
-                            this@Admin_crear_evento,
-                            applicationContext,
-                            "Ya existe un evento con ese nombre"
-                        )
+                    if (Utilidades.existeevento(nombre.text.toString().trim(),fecha_texto.text.toString().trim())) {
+                        runOnUiThread {
+                            nombre.error = "Ya existe un evento con ese nombre en la fecha indicada"
+                        }
                     } else if (precio.text.toString().toInt() < 0) {
                         Utilidades.tostadaCorrutina(
                             this@Admin_crear_evento,
@@ -123,11 +121,14 @@ class Admin_crear_evento : AppCompatActivity() {
 
                         imagen.setImageResource(R.drawable.anadir_imagen_symbol_error)
 
-                        Timer().schedule(object : TimerTask() {
-                            override fun run() {
-                                imagen.setImageResource(R.drawable.anadir_imagen_symbol_sc)
-                            }
-                        }, 3000)
+                        runOnUiThread {
+                            Timer().schedule(object : TimerTask() {
+                                override fun run() {
+                                    imagen.setImageResource(R.drawable.anadir_imagen_symbol_sc)
+                                }
+                            }, 3000)
+                        }
+
                         Utilidades.tostadaCorrutina(
                             this@Admin_crear_evento,
                             applicationContext,
@@ -153,7 +154,8 @@ class Admin_crear_evento : AppCompatActivity() {
                                 fecha_texto.text.toString().trim(),
                                 precio.text.toString().toDouble(),
                                 aforo.text.toString().toInt(),
-                                url_firebase
+                                url_firebase,
+                                0
                             )
 
                             Utilidades.tostadaCorrutina(

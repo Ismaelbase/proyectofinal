@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/item_evento_evento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- ImageVIew to display our Course Image -->
+        <ImageView
+            android:id="@+id/item_evento_imagen"
+            android:layout_width="342dp"
+            android:layout_height="162dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/evento_generico2" />
+
+        <!-- Text View to display Course Name -->
+
+        <!-- Text VIew to display Course Rating -->
+        <!-- Image used in present in drawable folder -->
+
+        <TextView
+            android:id="@+id/item_evento_nombre"
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_evento_imagen"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:text="Ejemplo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/item_evento_capacidad"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/item_evento_nombre"
+            android:layout_alignEnd="@+id/item_evento_imagen"
+            android:layout_alignBottom="@+id/item_evento_nombre"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="-14dp"
+            app:srcCompat="@drawable/medio_vacio_sc2" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

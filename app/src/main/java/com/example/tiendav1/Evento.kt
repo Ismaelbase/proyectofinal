@@ -11,4 +11,5 @@ data class Evento(
     var precio:Double? = null,
     var aforo:Int? = null,
     var url_foto:String? = null,
+    var apuntados:Int? = null,
 ): Parcelable

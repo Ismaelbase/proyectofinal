@@ -49,6 +49,10 @@ class Utilidades {
             .getReference()
             .child("SecondCharm")
             .child("Eventos")
+        val inscripcion = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Inscripciones_eventos")
 
         var recien_registrado = ""
 
@@ -163,7 +167,6 @@ class Utilidades {
         ))
 
         fun escribirReserva(
-            db_ref:DatabaseReference,
             id:String,
             id_usuario:String,
             id_articulo:String,
@@ -174,7 +177,7 @@ class Utilidades {
             fecha:String,
             precio:Double
 
-        ) = db_ref.child("SecondCharm").child("Reservas").child(id).setValue(Reserva(
+        ) = reservas.child(id).setValue(Reserva(
             id,
             id_usuario,
             id_articulo,
@@ -193,7 +196,8 @@ class Utilidades {
             fecha:String,
             precio:Double,
             aforo:Int,
-            url_foto:String
+            url_foto:String,
+            apuntados:Int
 
         ) = db_ref.child("SecondCharm").child("Eventos").child(id).setValue(Evento(
             id,
@@ -201,7 +205,34 @@ class Utilidades {
             fecha,
             precio,
             aforo,
-            url_foto
+            url_foto,
+            apuntados
+        ))
+
+        fun escribirInscripcion(
+            id:String,
+            id_usuario:String,
+            id_evento:String,
+            estado:String,
+            nombre_usuario:String,
+            nombre_evento:String,
+            url_evento:String,
+            url_usuario:String,
+            fecha:String,
+            precio: Double
+
+        ) = inscripcion.child(id).setValue(Inscripcion(
+            id,
+            id_usuario,
+            id_evento,
+            estado,
+            nombre_usuario,
+            nombre_evento,
+            url_evento,
+            url_usuario,
+            fecha,
+            precio
+
         ))
 
         fun animacion_carga(contexto: Context): CircularProgressDrawable {
@@ -272,14 +303,12 @@ class Utilidades {
             return existe
         }
 
-        suspend fun existeTema(db_ref:DatabaseReference,nombre:String):Boolean{
+        suspend fun existeArticulo(nombre:String):Boolean{
             var existe:Boolean=false
 
             val semaforo = CountDownLatch(1)
 
-            db_ref.child("SecondCharm")
-                .child("Temas")
-                .orderByChild("nombre")
+            articulos.orderByChild("nombre")
                 .equalTo(nombre)
                 .addListenerForSingleValueEvent(object:ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -302,47 +331,21 @@ class Utilidades {
             return existe
         }
 
-        suspend fun existeArticulo(db_ref:DatabaseReference,nombre:String):Boolean{
+        suspend fun existeevento(nombre:String,fecha:String):Boolean{
             var existe:Boolean=false
 
             val semaforo = CountDownLatch(1)
-
-            db_ref.child("SecondCharm")
-                .child("Articulos")
-                .orderByChild("nombre")
-                .equalTo(nombre)
-                .addListenerForSingleValueEvent(object:ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if(snapshot.hasChildren()){
-                            existe=true
-                        }else{
-
-                        }
-                        semaforo.countDown()
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-
-                })
-
-            semaforo.await()
-
-            return existe
-        }
-
-        suspend fun existeevento(db_ref:DatabaseReference,nombre:String):Boolean{
-            var existe:Boolean=false
-
-            val semaforo = CountDownLatch(1)
+            var pojo_evento = Evento()
 
             eventos.orderByChild("nombre")
                 .equalTo(nombre)
                 .addListenerForSingleValueEvent(object:ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if(snapshot.hasChildren()){
-                            existe=true
+                            pojo_evento=snapshot.children.first().getValue(Evento::class.java)!!
+                            if(pojo_evento.fecha==fecha){
+                                existe=true
+                            }
                         }else{
                         }
                         semaforo.countDown()
@@ -357,7 +360,7 @@ class Utilidades {
 
         //Esto comprueba que el articulo no ha sido reservado ya por el usuario, solo se puede reservar una vez, cuando
         // el articulo esta 'completo' o 'cancelado', se puede volver a reservar
-        suspend fun existeReserva(db_ref:DatabaseReference,id_articulo:String,id_usuario: String):Boolean{
+        suspend fun existeReserva(id_articulo:String,id_usuario: String):Boolean{
             var existe:Boolean=false
 
             val semaforo = CountDownLatch(1)
@@ -384,6 +387,34 @@ class Utilidades {
                     }
 
                 })
+
+            semaforo.await()
+
+            return existe
+        }
+
+        suspend fun existeInscripcion(id_evento:String,id_usuario: String):Boolean{
+            var existe:Boolean=false
+
+            val semaforo = CountDownLatch(1)
+
+            inscripcion.addListenerForSingleValueEvent(object:ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChildren()) {
+                        for (inscripcion in snapshot.children) {
+                            if (
+                                inscripcion.child("id_evento").value.toString() == id_evento &&
+                                inscripcion.child("id_usuario").value.toString() == id_usuario
+                            ) {
+                                existe = true
+                            }
+                        }
+                        semaforo.countDown()
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
             semaforo.await()
 
@@ -429,14 +460,11 @@ class Utilidades {
             return lista
         }
 //
-        fun obtenerListaArticulos(db_ref: DatabaseReference):MutableList<Articulo>{
+        fun obtenerListaArticulos():MutableList<Articulo>{
             var lista = mutableListOf<Articulo>()
 
             //Consulta a la bd
-            db_ref.child("SecondCharm")
-                .child("Articulos")
-                .addValueEventListener(object : ValueEventListener {
-
+            articulos.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         lista.clear()
                         snapshot.children.forEach{ hijo: DataSnapshot?->
@@ -512,6 +540,24 @@ class Utilidades {
                     println(error.message)
                 }
             })
+            return lista
+        }
+
+        fun obtenerListaInscripciones():MutableList<Inscripcion>{
+            var lista= mutableListOf<Inscripcion>()
+
+            inscripcion.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        lista.clear()
+                        snapshot.children.forEach{ hijo: DataSnapshot?->
+                            val pojo_inscripcion = hijo?.getValue(Inscripcion::class.java)
+                                lista.add(pojo_inscripcion!!)
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        println(error.message)
+                    }
+                })
             return lista
         }
 //
