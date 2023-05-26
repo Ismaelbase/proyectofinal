@@ -51,6 +51,10 @@ class Adaptador_Eventos(private val lista_eventos: MutableList<Evento>) :
             contexto.startActivity(Intent(contexto, Normal_inscripcion_evento::class.java)
                 .putExtra("ID", item_actual.id))
         }
+        holder.chat.setOnClickListener {
+            contexto.startActivity(Intent(contexto, Chat_eventos::class.java)
+                .putExtra("ID", item_actual.id))
+        }
 
         if (item_actual.aforo == item_actual.apuntados) {
             holder.capacidad.setImageDrawable(getDrawable(contexto, R.drawable.error))
@@ -116,6 +120,7 @@ class Adaptador_Eventos(private val lista_eventos: MutableList<Evento>) :
         val nombre: TextView = itemView.findViewById(R.id.item_evento_nombre)
         val evento: RelativeLayout = itemView.findViewById(R.id.item_evento_evento)
         val capacidad: ImageView = itemView.findViewById(R.id.item_evento_capacidad)
+        val chat:ImageView = itemView.findViewById(R.id.item_evento_chat)
 
     }
 

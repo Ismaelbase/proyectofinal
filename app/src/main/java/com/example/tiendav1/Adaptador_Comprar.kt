@@ -2,6 +2,7 @@ package com.example.tiendav1
 
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,10 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
 
         holder.carrito.setOnClickListener {
             contexto.startActivity(Intent(contexto, Comprar_articulo::class.java).putExtra("ID", item_actual.id))
+        }
+
+        holder.chat.setOnClickListener {
+            contexto.startActivity(Intent(contexto, Chat_productos::class.java).putExtra("ID_ARTICULO", item_actual.id))
         }
 
 
@@ -114,11 +119,8 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
         val imagen: ImageView = itemView.findViewById(R.id.item_comprar_imagen)
         val nombre: TextView = itemView.findViewById(R.id.item_comprar_nombre)
         val precio: TextView = itemView.findViewById(R.id.item_comprar_precio)
-//        val descripcion: TextView = itemView.findViewById(R.id.articulo_descripcion)
-//        val stock: TextView = itemView.findViewById(R.id.articulo_stock)
-//        val puntos: TextView = itemView.findViewById(R.id.articulo_puntos)
-//        val categoria: TextView = itemView.findViewById(R.id.articulo_categoria)
         val carrito: ImageView = itemView.findViewById(R.id.item_comprar_carrito)
+        val chat: ImageView = itemView.findViewById(R.id.item_comprar_chat)
 
     }
 

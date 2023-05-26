@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tiendav1.databinding.FragmentComprarBinding
 import com.example.tiendav1.databinding.FragmentEventosBinding
 import com.google.firebase.database.*
+import java.time.LocalDate
 
 class Eventos : Fragment() {
 
@@ -64,12 +65,16 @@ class Eventos : Fragment() {
 
         adaptador = Adaptador_Eventos(lista_eventos)
 
+        var fecha_actual = LocalDate.now()
+
         Utilidades.eventos.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 lista_eventos.clear()
                 snapshot.children.forEach{
                     val pojo_evento = it.getValue(Evento::class.java)
-                    if (pojo_evento!!.apuntados!!.toInt() < pojo_evento.aforo!!.toInt()){
+                    if (pojo_evento!!.apuntados!!.toInt() < pojo_evento.aforo!!.toInt() &&
+                        Utilidades.fechaFutura(pojo_evento.fecha!!) &&
+                        pojo_evento.activo!!){
                         lista_eventos.add(pojo_evento)
                     }
                 }

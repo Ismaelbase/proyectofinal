@@ -63,12 +63,21 @@
         android:id="@+id/item_comprar_carrito"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/carrito_sc2" />
+
+    <ImageView
+        android:id="@+id/item_comprar_chat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_comprar_carrito"
+        app:layout_constraintEnd_toEndOf="@+id/item_comprar_precio"
+        app:layout_constraintTop_toTopOf="@+id/item_comprar_carrito"
+        app:srcCompat="@drawable/icono_chat_sc2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="1dp"
+    android:layout_width="350dp"
+    android:layout_height="270dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="10dp"
@@ -35,10 +34,12 @@
 
         <TextView
             android:id="@+id/item_evento_nombre"
-            android:layout_width="229dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_evento_imagen"
-            android:layout_marginTop="4dp"
+            android:layout_alignEnd="@+id/item_evento_imagen"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
             android:layout_marginBottom="15dp"
             android:gravity="center_horizontal"
             android:text="Ejemplo"
@@ -49,13 +50,23 @@
             android:id="@+id/item_evento_capacidad"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignStart="@+id/item_evento_imagen"
             android:layout_alignTop="@+id/item_evento_nombre"
-            android:layout_alignEnd="@+id/item_evento_imagen"
             android:layout_alignBottom="@+id/item_evento_nombre"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="-10dp"
-            android:layout_marginEnd="50dp"
             android:layout_marginBottom="-14dp"
             app:srcCompat="@drawable/medio_vacio_sc2" />
+
+        <ImageView
+            android:id="@+id/item_evento_chat"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/item_evento_imagen"
+            android:layout_alignEnd="@+id/item_evento_imagen"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/icono_chat_sc2" />
 
     </RelativeLayout>
 

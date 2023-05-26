@@ -85,8 +85,9 @@
         android:layout_marginTop="15dp"
         android:text="Aplicar\nCambios"
         app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
+        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="@+id/editar_eventoimagen"
-        app:layout_constraintTop_toBottomOf="@+id/editar_evento_datepicker" />
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_activo" />
 
     <ImageView
         android:id="@+id/editar_evento_boton_volver"
@@ -97,5 +98,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editar_evento_aplicar_cambios"
         app:srcCompat="@drawable/volver_sc" />
+
+    <Switch
+        android:id="@+id/editar_evento_activo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Activo"
+        app:layout_constraintEnd_toEndOf="@+id/editar_evento_fecha_texto"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_datepicker"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_fecha_texto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

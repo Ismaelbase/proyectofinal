@@ -49,6 +49,9 @@ class Admin_editar_evento : AppCompatActivity() {
     val boton_aplicar: Button by lazy {
         findViewById(R.id.editar_evento_aplicar_cambios)
     }
+    val activo:Switch by lazy {
+        findViewById(R.id.editar_evento_activo)
+    }
 
     private lateinit var pojo_articulo: Evento
     private var url_foto: Uri? = null
@@ -70,6 +73,7 @@ class Admin_editar_evento : AppCompatActivity() {
                     precio.setText(pojo_articulo.precio.toString())
                     aforo.setText(pojo_articulo.aforo.toString())
                     fecha_texto.setText(pojo_articulo.fecha)
+                    activo.isChecked = pojo_articulo.activo!!
 
                     Glide.with(applicationContext)
                         .load(pojo_articulo.url_foto)
@@ -113,7 +117,8 @@ class Admin_editar_evento : AppCompatActivity() {
                     precio.text.toString().toDouble() == pojo_articulo.precio &&
                     aforo.text.toString().toInt() == pojo_articulo.aforo &&
                     fecha_texto.text.toString() == pojo_articulo.fecha &&
-                    url_foto == null
+                    url_foto == null &&
+                    activo.isChecked == pojo_articulo.activo!!
                 ) {
 
                     Utilidades.tostadaCorrutina(
@@ -174,7 +179,8 @@ class Admin_editar_evento : AppCompatActivity() {
                         precio.text.toString().toDouble(),
                         aforo.text.toString().toInt(),
                         url_firebase.toString(),
-                        pojo_articulo.apuntados!!.toInt()
+                        pojo_articulo.apuntados!!.toInt(),
+                        activo.isChecked
                     )
 
                     Utilidades.tostadaCorrutina(

@@ -46,7 +46,7 @@ class Adaptador_historial_inscripciones(private val lista_inscripciones: Mutable
         holder.fecha.text = item_actual.fecha
 
         holder.layout.setOnClickListener {
-
+//            contexto.startActivity(Intent(contexto, Normal_detalle_inscripcion::class.java).putExtra("Evento", item_actual))
         }
 
         if(item_actual.estado == "Pendiente") {

@@ -93,8 +93,18 @@
         android:text="Fechiya"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/crear_evento_datepicker"
-        app:layout_constraintEnd_toEndOf="@+id/crear_evento_aforo"
-        app:layout_constraintStart_toEndOf="@+id/crear_evento_datepicker"
+        app:layout_constraintEnd_toStartOf="@+id/crear_evento_aforo"
+        app:layout_constraintStart_toEndOf="@+id/crear_evento_precio"
         app:layout_constraintTop_toTopOf="@+id/crear_evento_datepicker" />
+
+    <Switch
+        android:id="@+id/crear_evento_activo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Activo"
+        app:layout_constraintBottom_toBottomOf="@+id/crear_evento_fecha_texto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/crear_evento_fecha_texto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

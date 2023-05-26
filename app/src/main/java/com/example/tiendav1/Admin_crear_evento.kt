@@ -50,6 +50,9 @@ class Admin_crear_evento : AppCompatActivity() {
     val fecha_texto: TextView by lazy {
         findViewById(R.id.crear_evento_fecha_texto)
     }
+    val activo:Switch by lazy {
+        findViewById(R.id.crear_evento_activo)
+    }
 
     private var url_avatar: Uri? = null
 
@@ -69,7 +72,12 @@ class Admin_crear_evento : AppCompatActivity() {
         val dia = fecha_hoy.dayOfMonth
         val mes = fecha_hoy.monthValue
         val anyo = fecha_hoy.year
-        fecha_texto.text = "$dia/$mes/$anyo"
+
+        if (mes < 10) {
+            fecha_texto.text = "$dia/0$mes/$anyo"
+        } else {
+            fecha_texto.text = "$dia/$mes/$anyo"
+        }
 
         //Abrimos un datepicker limitado a hoy o fechas futuras para evitar errores
         datepicker.setOnClickListener {
@@ -81,7 +89,11 @@ class Admin_crear_evento : AppCompatActivity() {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
+                    if (mes<10){
+                        fecha_texto.text = "$dayOfMonth/0${month + 1}/$year"
+                    }else {
+                        fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
+                    }
                 },
                 anyo,
                 mes,
@@ -91,11 +103,7 @@ class Admin_crear_evento : AppCompatActivity() {
             dpd.show()
         }
 
-
-
-        //mostramos la fecha elegida
-
-
+        activo.isChecked = true
 
         boton_crear.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
@@ -155,7 +163,8 @@ class Admin_crear_evento : AppCompatActivity() {
                                 precio.text.toString().toDouble(),
                                 aforo.text.toString().toInt(),
                                 url_firebase,
-                                0
+                                0,
+                                activo.isChecked
                             )
 
                             Utilidades.tostadaCorrutina(

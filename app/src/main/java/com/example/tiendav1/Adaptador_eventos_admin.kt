@@ -58,8 +58,10 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
         }
 
         holder.chat.setOnClickListener {
-            //todo te lleva a la actividad de chat de ese evento
+            contexto.startActivity(Intent(contexto, Chat_eventos::class.java).putExtra("ID", item_actual.id))
         }
+
+
         holder.peticiones.setOnClickListener {
             contexto.startActivity(Intent(contexto,Admin_gestion_inscripciones::class.java).putExtra("ID", item_actual))
         }

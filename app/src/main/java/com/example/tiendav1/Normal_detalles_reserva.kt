@@ -133,11 +133,6 @@ class Normal_detalles_reserva : AppCompatActivity() {
             finish()
         }
 
-
-
-
-
-
         boton_volver.setOnClickListener {
             finish()
         }

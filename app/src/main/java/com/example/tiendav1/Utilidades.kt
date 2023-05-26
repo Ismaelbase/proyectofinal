@@ -54,10 +54,37 @@ class Utilidades {
             .child("SecondCharm")
             .child("Inscripciones_eventos")
 
+        val chat_productos = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Chat_productos")
+
+        val chat_eventos = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Chat_eventos")
+
         var recien_registrado = ""
 
         private val clave_id = "id_usuario"
         private val clave_tipo = "tipo_usuario"
+
+//        fun formatearFecha(fecha:String):String{
+//            val fecha_evento = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+//            return fecha_evento.format(DateTimeFormatter.ofPattern("dd/MMMM/yyyy"))
+//        }
+//
+//        fun fechaHoy():String{
+//            val fecha_actual = LocalDate.now()
+//            return fecha_actual.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+//        }
+
+        fun fechaFutura(fecha:String):Boolean{
+            val fecha_actual = LocalDate.now()
+            val fecha_evento = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            val dias = ChronoUnit.DAYS.between(fecha_actual,fecha_evento)
+            return dias >= 0
+        }
 
         fun cambiarTema(on:Boolean){
             if(on){
@@ -197,7 +224,8 @@ class Utilidades {
             precio:Double,
             aforo:Int,
             url_foto:String,
-            apuntados:Int
+            apuntados:Int,
+            activo:Boolean
 
         ) = db_ref.child("SecondCharm").child("Eventos").child(id).setValue(Evento(
             id,
@@ -206,7 +234,8 @@ class Utilidades {
             precio,
             aforo,
             url_foto,
-            apuntados
+            apuntados,
+            activo
         ))
 
         fun escribirInscripcion(

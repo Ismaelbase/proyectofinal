@@ -78,11 +78,10 @@
     <ImageView
         android:id="@+id/item_inventario_boton_editar"
         android:layout_width="40dp"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_inventario_stock"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_inventario_stock"
+        app:layout_constraintTop_toTopOf="@+id/item_inventario_precio"
         app:srcCompat="@drawable/engranaje_sc5" />
 
     <ImageView
@@ -97,4 +96,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/generico" />
+
+    <ImageView
+        android:id="@+id/item_inventario_boton_chat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_inventario_categoria"
+        app:layout_constraintEnd_toEndOf="@+id/item_inventario_boton_editar"
+        app:layout_constraintStart_toStartOf="@+id/item_inventario_boton_editar"
+        app:srcCompat="@drawable/icono_chat_sc2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
