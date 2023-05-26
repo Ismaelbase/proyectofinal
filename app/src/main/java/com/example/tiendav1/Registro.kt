@@ -94,7 +94,7 @@ class Registro : AppCompatActivity() {
         boton_registrarse.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 if (validarTodo() &&
-                    !Utilidades.existeUser(referencia_bd, nombre.text.toString().trim()) &&
+                    !Utilidades.existeUser(nombre.text.toString().trim()) &&
                     url_avatar != null
                 ) { //Se puede añadir usuario a BD y devolver al main.
 
@@ -143,7 +143,7 @@ class Registro : AppCompatActivity() {
                             avatar.setImageResource(R.drawable.anadir_imagen_symbol_sc)
                         }
                     }, 3000)
-                }else if (Utilidades.existeUser(referencia_bd,nombre.text.toString().trim())){
+                }else if (Utilidades.existeUser(nombre.text.toString().trim())){
                     nombre.setTextColor(resources.getColor(R.color.rojo_error))
 
                     Utilidades.tostadaCorrutina(

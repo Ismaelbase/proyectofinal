@@ -15,6 +15,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.R
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -76,9 +77,7 @@ class Config : Fragment() {
 
         val id_usuario = Utilidades.obtenerIDUsuario(pn.applicationContext)
 
-        referencia_bd.child("SecondCharm")
-            .child("Users")
-            .child(id_usuario)
+        Utilidades.usuarios.child(id_usuario)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_user = snapshot.getValue(User::class.java)!!
@@ -128,69 +127,79 @@ class Config : Fragment() {
 
         var correcto = false
         aplicar_cambios.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                pn.runOnUiThread {
+                    correcto = validarUsuario(cambiar_nombre) &&
+                            validarCorreo(cambiar_mail)
+                }
+                if (correcto && !Utilidades.existeUser(cambiar_nombre.text.toString().trim())) {
+                    val nuevo_nombre = cambiar_nombre.text.toString().trim()
+                    val nuevo_mail = cambiar_mail.text.toString().trim()
 
-            pn.runOnUiThread {
-                correcto = validarUsuario(cambiar_nombre) &&
-                        validarCorreo(cambiar_mail)
-            }
+                    GlobalScope.launch {
+                        val url_firebase: String?
 
-            if (correcto) {
-                val nuevo_nombre = cambiar_nombre.text.toString().trim()
-                val nuevo_mail = cambiar_mail.text.toString().trim()
+                        if (url_avatar == null) {
+                            url_firebase = pojo_user.url_avatar
+                        } else {
 
-                GlobalScope.launch {
-                    val url_firebase: String?
+                            url_firebase = Utilidades.guardarImagen(
+                                referencia_almacenamiento,
+                                pojo_user.id.toString(),
+                                url_avatar!!
+                            )
+                        }
 
-                    if (url_avatar == null) {
-                        url_firebase = pojo_user.url_avatar
-                    } else {
-
-                        url_firebase = Utilidades.guardarImagen(
-                            referencia_almacenamiento,
+                        Utilidades.escribirUser(
+                            referencia_bd,
                             pojo_user.id.toString(),
-                            url_avatar!!
+                            nuevo_nombre,
+                            pojo_user.contraseña.toString(),
+                            nuevo_mail,
+                            pojo_user.puntos,
+                            url_firebase.toString(),
+                            pojo_user.fecha.toString(),
+                            pojo_user.alta!!,
+                            pojo_user.conectado!!,
+                            pojo_user.admin!!
                         )
+
                     }
 
-                    Utilidades.escribirUser(
-                        referencia_bd,
-                        pojo_user.id.toString(),
-                        nuevo_nombre,
-                        pojo_user.contraseña.toString(),
-                        nuevo_mail,
-                        pojo_user.puntos,
-                        url_firebase.toString(),
-                        pojo_user.fecha.toString(),
-                        pojo_user.alta!!,
-                        pojo_user.conectado!!,
-                        pojo_user.admin!!
+                    Toast.makeText(
+                        pn.application,
+                        "Cambios realizados con éxito",
+                        Toast.LENGTH_SHORT
                     )
+                        .show()
+                }else{
+                    pn.runOnUiThread {
+                        Toast.makeText(
+                            pn.application,"El nombre de usuario ya existe",
+                            Toast.LENGTH_SHORT).show()
+                    }
 
                 }
-
-                Toast.makeText(pn.application, "Cambios realizados con éxito", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
 
 
-        //Aqui se configura el boton de logout
-        logout.setOnClickListener {
-            Utilidades.establecerIDUsuario(pn.applicationContext, "")
-            Utilidades.establecerTipoUsuario(pn.applicationContext, false)
+            //Aqui se configura el boton de logout
+            logout.setOnClickListener {
+                Utilidades.establecerIDUsuario(pn.applicationContext, "")
+                Utilidades.establecerTipoUsuario(pn.applicationContext, false)
 
-            startActivity(Intent(pn.applicationContext, MainActivity::class.java))
-        }
-        //Para cambiar la contraseña
-        cambiar_contrasena.setOnClickListener {
-            startActivity(Intent(pn.applicationContext, Cambiar_contrasena::class.java))
-        }
+                startActivity(Intent(pn.applicationContext, MainActivity::class.java))
+            }
+            //Para cambiar la contraseña
+            cambiar_contrasena.setOnClickListener {
+                startActivity(Intent(pn.applicationContext, Cambiar_contrasena::class.java))
+            }
 
-        //Para borrar la cuenta
-        borrar_cuenta.setOnClickListener {
-            startActivity(Intent(pn.applicationContext, Borrar_cuenta::class.java))
-        }
-
+            //Para borrar la cuenta
+            borrar_cuenta.setOnClickListener {
+                startActivity(Intent(pn.applicationContext, Borrar_cuenta::class.java))
+            }
 
     }
 

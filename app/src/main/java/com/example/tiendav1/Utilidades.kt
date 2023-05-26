@@ -308,14 +308,12 @@ class Utilidades {
             return url_imagen_firebase.toString()
         }
 
-        suspend fun existeUser(db_ref:DatabaseReference,nombre:String):Boolean{
+        suspend fun existeUser(nombre:String):Boolean{
             var existe:Boolean=false
 
             val semaforo = CountDownLatch(1)
 
-            db_ref.child("SecondCharm")
-                .child("Users")
-                .orderByChild("usuario")
+            usuarios.orderByChild("usuario")
                 .equalTo(nombre)
                 .addListenerForSingleValueEvent(object:ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -325,11 +323,8 @@ class Utilidades {
                         }
                         semaforo.countDown()
                     }
-
                     override fun onCancelled(error: DatabaseError) {
-
                     }
-
                 })
 
             semaforo.await()
