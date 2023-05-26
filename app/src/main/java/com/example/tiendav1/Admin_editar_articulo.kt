@@ -76,7 +76,7 @@ class Admin_editar_articulo : AppCompatActivity() {
             R.layout.custom_spinner,
             Articulo.categorias
         )
-        adaptador_spinner.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        adaptador_spinner.setDropDownViewResource(R.layout.custom_spinner)
         spinner_categoria.adapter = adaptador_spinner
 
         Utilidades.articulos.child(id_articulo)

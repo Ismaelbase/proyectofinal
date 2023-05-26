@@ -20,4 +20,15 @@
     <style name="Theme.Tiendav12.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Tiendav12.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/borde_recycler1</item>
+        <item name="android:popupBackground">@color/principal_morado</item>
+        <item name="android:dropDownSelector">@color/principal_verde</item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:dropDownVerticalOffset">10dp</item>
+        <item name="android:dropDownHorizontalOffset">10dp</item>
+        <item name="android:dropDownHeight">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

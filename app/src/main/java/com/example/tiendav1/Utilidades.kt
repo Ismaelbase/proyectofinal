@@ -64,6 +64,11 @@ class Utilidades {
             .child("SecondCharm")
             .child("Chat_eventos")
 
+        val chat_foro = FirebaseDatabase.getInstance()
+            .getReference()
+            .child("SecondCharm")
+            .child("Chat_foro")
+
         var recien_registrado = ""
 
         private val clave_id = "id_usuario"

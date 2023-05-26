@@ -4,17 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?android:attr/actionBarSize"
     tools:context=".Chats">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="185dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="124dp"
-        android:text="Soy el chattttt"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/normal_chat_publico_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp"
+        android:paddingBottom="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <Button
+        android:id="@+id/normal_chat_publico_enviar"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        android:layout_weight="1"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
+        app:icon="@drawable/enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/normal_chat_publico_texto"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/normal_chat_publico_enviar"
+        app:layout_constraintEnd_toStartOf="@+id/normal_chat_publico_enviar"
+        app:layout_constraintTop_toTopOf="@+id/normal_chat_publico_enviar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

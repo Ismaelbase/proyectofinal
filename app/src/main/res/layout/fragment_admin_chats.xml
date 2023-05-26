@@ -6,18 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".Admin_chats">
 
-    <TextView
-        android:id="@+id/Admin_chats"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_publico_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Soy admin Chats"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="0dp"
+        android:paddingBottom="180dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat_publico_lista_usuarios" />
+
+    <ImageView
+        android:id="@+id/chat_publico_lista_usuarios"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/todos_usuarios_sc6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <Button
+        android:id="@+id/chat_publico_enviar"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        android:layout_weight="1"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
+        app:icon="@drawable/enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/chat_publico_texto"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_publico_enviar"
+        app:layout_constraintEnd_toStartOf="@+id/chat_publico_enviar"
+        app:layout_constraintTop_toTopOf="@+id/chat_publico_enviar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/foro_publico_banner"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_publico_lista_usuarios"
+        app:layout_constraintEnd_toStartOf="@+id/chat_publico_lista_usuarios"
+        app:layout_constraintTop_toTopOf="@+id/chat_publico_lista_usuarios" />
+
+    <ImageView
+        android:id="@+id/normal_foro_publico_barra2"
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/barra_morada_sc1"
+        app:layout_constraintBottom_toTopOf="@+id/chat_publico_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/normal_foro_publico_barra1"
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/barra_morada_sc1"
+        app:layout_constraintBottom_toTopOf="@+id/chat_publico_texto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

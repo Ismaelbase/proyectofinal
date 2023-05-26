@@ -46,6 +46,8 @@ class Normal_inscripcion_evento : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_normal_inscripcion_evento)
 
+        supportActionBar?.hide()
+
 
         val id_evento = intent.getStringExtra("ID").toString()
         val id_usuario = Utilidades.obtenerIDUsuario(applicationContext)

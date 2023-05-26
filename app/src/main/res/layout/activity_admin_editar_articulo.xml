@@ -98,6 +98,7 @@
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_precio" />
 
     <Spinner
+        style="@style/SpinnerTheme"
         android:id="@+id/editar_articulo_spinner"
         android:layout_width="180dp"
         android:layout_height="48dp"

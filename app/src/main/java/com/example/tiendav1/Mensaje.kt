@@ -10,5 +10,4 @@ data class Mensaje(var id:String?=null,
                    var fecha_hora:String?=null,
                    var id_receptor:String?=null,
                    var imagen_emisor:String?=null,
-                   var id_articulo:String?=null,
-                   var admin:Boolean?=null): Parcelable
+                   var id_articulo:String?=null): Parcelable

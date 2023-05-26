@@ -52,7 +52,6 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
             holder.capacidad.text = "${item_actual.apuntados}/${item_actual.aforo} apuntados"
         }
 
-
         holder.engranaje.setOnClickListener {
             contexto.startActivity(Intent(contexto,Admin_editar_evento::class.java).putExtra("ID", item_actual.id))
         }
@@ -60,7 +59,6 @@ class Adaptador_eventos_admin(private val lista_eventos: MutableList<Evento>) :
         holder.chat.setOnClickListener {
             contexto.startActivity(Intent(contexto, Chat_eventos::class.java).putExtra("ID", item_actual.id))
         }
-
 
         holder.peticiones.setOnClickListener {
             contexto.startActivity(Intent(contexto,Admin_gestion_inscripciones::class.java).putExtra("ID", item_actual))

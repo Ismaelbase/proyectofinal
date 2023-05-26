@@ -24,7 +24,7 @@ class Admin_pedidos : Fragment() {
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().reference
     }
-    val lista_pedidos:MutableList<Reserva> by lazy {
+    val lista_pedidos: MutableList<Reserva> by lazy {
         Utilidades.obtenerListaPedidos()
     }
 
@@ -35,21 +35,22 @@ class Admin_pedidos : Fragment() {
     )
 
     private lateinit var busqueda: SearchView
-    private lateinit var cb_rechazado:CheckBox
-    private lateinit var cb_pendiente:CheckBox
-    private lateinit var cb_completado:CheckBox
+    private lateinit var cb_rechazado: CheckBox
+    private lateinit var cb_pendiente: CheckBox
+    private lateinit var cb_completado: CheckBox
     private lateinit var recyclerView: RecyclerView
 
-    private lateinit var adaptador:Adaptador_pedidos
+    private lateinit var adaptador: Adaptador_pedidos
 
     private var _binding: FragmentAdminPedidosBinding? = null
     private val binding get() = _binding!!
-    private lateinit var principal_admin:Admin_principal
+    private lateinit var principal_admin: Admin_principal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +59,6 @@ class Admin_pedidos : Fragment() {
         _binding = FragmentAdminPedidosBinding.inflate(inflater, container, false)
         principal_admin = activity as Admin_principal
 
-        //AQUI NADA
         return binding.root
     }
 
@@ -75,35 +75,36 @@ class Admin_pedidos : Fragment() {
 
         recyclerView = binding.pedidosRecycler
 
-
         cb_rechazado.isChecked = true
         cb_pendiente.isChecked = true
         cb_completado.isChecked = true
 
 
-        val lista_checkbox:List<CheckBox> = listOf(
+        val lista_checkbox: List<CheckBox> = listOf(
             cb_pendiente,
             cb_completado,
             cb_rechazado
         )
 
-        adaptador = Adaptador_pedidos(lista_pedidos,filtros_seleccionados)
+        adaptador = Adaptador_pedidos(lista_pedidos, filtros_seleccionados)
 
         Utilidades.reservas.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    lista_pedidos.clear()
-                    snapshot.children.forEach{
-                        val pojo_pedido = it.getValue(Reserva::class.java)
-                        lista_pedidos.add(pojo_pedido!!)
-                    }
-
-                    adaptador.notifyDataSetChanged()
+            override fun onDataChange(snapshot: DataSnapshot) {
+                lista_pedidos.clear()
+                snapshot.children.forEach {
+                    val pojo_pedido = it.getValue(Reserva::class.java)
+                    lista_pedidos.add(pojo_pedido!!)
                 }
 
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(context,"Error al acceder a los temas", Toast.LENGTH_SHORT).show()
-                }
-            })
+                lista_pedidos.sortByDescending { it.estado == "Aceptado" }
+                lista_pedidos.sortByDescending { it.estado == "Pendiente" }
+                adaptador.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, "Error al acceder a los temas", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         recyclerView.adapter = adaptador
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -111,7 +112,7 @@ class Admin_pedidos : Fragment() {
         recyclerView.adapter?.notifyDataSetChanged()
 
 
-        busqueda.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        busqueda.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
