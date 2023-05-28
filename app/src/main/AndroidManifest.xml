@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Tiendav12"
         tools:targetApi="31">
         <activity
+            android:name=".Normal_detalle_inscripcion"
+            android:exported="false" />
+        <activity
             android:name=".Admin_moderar_usuarios"
             android:exported="false" />
         <activity
@@ -21,9 +24,6 @@
             android:exported="false" />
         <activity
             android:name=".Chat_productos"
-            android:exported="false" />
-        <activity
-            android:name=".Normal_detalle_inscripcion"
             android:exported="false" />
         <activity
             android:name=".Normal_historial_inscripciones"

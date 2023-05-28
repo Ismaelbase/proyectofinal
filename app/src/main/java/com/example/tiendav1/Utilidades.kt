@@ -464,14 +464,11 @@ class Utilidades {
 
         //Obtener lista datos pero no para usar de manera sincrona o sea que algo dependa directamente de el
 
-        fun obtenerListaUsers(db_ref: DatabaseReference):MutableList<User>{
+        fun obtenerListaUsers():MutableList<User>{
             var lista= mutableListOf<User>()
 
             //Consulta a la bd
-            db_ref.child("SecondCharm")
-                .child("Users")
-                .addValueEventListener(object : ValueEventListener {
-
+            usuarios.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         lista.clear()
                         snapshot.children.forEach{ hijo: DataSnapshot?->
@@ -486,6 +483,25 @@ class Utilidades {
                         println(error.message)
                     }
                 })
+            return lista
+        }
+        fun obtenerListaCompletaUsers():MutableList<User>{
+            var lista= mutableListOf<User>()
+
+            //Consulta a la bd
+            usuarios.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    lista.clear()
+                    snapshot.children.forEach{ hijo: DataSnapshot?->
+                        val pojo_user = hijo?.getValue(User::class.java)
+                            lista.add(pojo_user!!)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
             return lista
         }
 //

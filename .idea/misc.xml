@@ -21,6 +21,9 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/puntos.xml" value="0.247" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/rechazar.xml" value="0.174" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/recogida_lista.xml" value="0.168" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/usuario_admin.xml" value="0.2285" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/usuario_baneado.xml" value="0.2285" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/usuario_normal.xml" value="0.2285" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/Item_Articulo.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_anadir_articulo.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_crear_evento.xml" value="0.33" />
@@ -29,7 +32,7 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_editar_inscripcion.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_gestion_inscripciones.xml" value="0.25" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_gestion_pedido.xml" value="0.5" />
-        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_moderar_usuarios.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_moderar_usuarios.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_principal.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_borrar_cuenta.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_cambiar_contrasena.xml" value="0.22" />
@@ -79,6 +82,7 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_historial.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_mensaje.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_pedido.xml" value="0.5" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/item_usuario.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19469026548672566" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/menu/bottom_nav_menu_admin.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2645" />

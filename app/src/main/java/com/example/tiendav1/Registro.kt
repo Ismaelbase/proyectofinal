@@ -74,7 +74,7 @@ class Registro : AppCompatActivity() {
         //Esconder la barra del menu
         supportActionBar!!.hide()
 
-        lista_usuarios = Utilidades.obtenerListaUsers(referencia_bd)
+        lista_usuarios = Utilidades.obtenerListaUsers()
 
         //Acceso a galeria.
         avatar.setOnClickListener {

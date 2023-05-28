@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         Utilidades.cambiarTema(modo_noche)
 
         // Obtener lista actual de usuarios en la app
-        lista_usuarios = Utilidades.obtenerListaUsers(referencia_bd)
+        lista_usuarios = Utilidades.obtenerListaUsers()
 
         if(Utilidades.recien_registrado != ""){
             usuario.setText(Utilidades.recien_registrado)
