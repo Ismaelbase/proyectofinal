@@ -319,7 +319,6 @@ class Utilidades {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if(snapshot.hasChildren()){
                             existe=true
-                        }else{
                         }
                         semaforo.countDown()
                     }
@@ -343,8 +342,6 @@ class Utilidades {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if(snapshot.hasChildren()){
                             existe=true
-                        }else{
-
                         }
                         semaforo.countDown()
                     }

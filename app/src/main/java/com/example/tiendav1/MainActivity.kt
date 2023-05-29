@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         Utilidades.cambiarTema(modo_noche)
 
         // Obtener lista actual de usuarios en la app
-        lista_usuarios = Utilidades.obtenerListaUsers()
+        lista_usuarios = Utilidades.obtenerListaCompletaUsers()
 
         if(Utilidades.recien_registrado != ""){
             usuario.setText(Utilidades.recien_registrado)
@@ -119,11 +119,18 @@ class MainActivity : AppCompatActivity() {
 
                         val resultado = snapshot.children.singleOrNull {
                             val pojo_usuario = it.getValue(User::class.java)
-                            pojo_usuario!!.usuario == nombre && pojo_usuario!!.contraseña == password && pojo_usuario.alta!!
+                            pojo_usuario!!.usuario == nombre && pojo_usuario!!.contraseña == password
                         }
 
                         if (resultado != null){ //El usuario existe y es correcto
                             val pojo_usuario = resultado.getValue(User::class.java)
+
+                            if(!pojo_usuario!!.alta!!){
+                                Toast.makeText(applicationContext, "Usuario baneado", Toast.LENGTH_LONG).show()
+                                usuario.text.clear()
+                                contrasena.text.clear()
+                                return
+                            }
 
                             if(pojo_usuario!!.admin!!){ //El usuario es administrador
                                 Utilidades.establecerTipoUsuario(applicationContext, true)
@@ -194,12 +201,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-
-
-
-
-
 
 
         registro.setOnClickListener {

@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/inscripcion_fecha" />
 
     <TextView
-        android:id="@+id/tv3"
+        android:id="@+id/inscripcion_label_libres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -41,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:text="Precio"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/inscripcion_imagen"
@@ -58,7 +59,7 @@
 
     <ImageView
         android:id="@+id/inscripcion_imagen"
-        android:layout_width="250dp"
+        android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +83,7 @@
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:text="Precio"
         android:textSize="18dp"
@@ -92,18 +94,18 @@
         android:id="@+id/inscripcion_boton_inscribirse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Inscribirse"
         app:layout_constraintEnd_toEndOf="@+id/inscripcion_imagen"
         app:layout_constraintStart_toStartOf="@+id/inscripcion_imagen"
-        app:layout_constraintTop_toBottomOf="@+id/tv3" />
+        app:layout_constraintTop_toBottomOf="@+id/inscripcion_label_libres" />
 
     <ImageView
         android:id="@+id/inscripcion_boton_volver"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inscripcion_boton_inscribirse"
         app:srcCompat="@drawable/volver_sc" />

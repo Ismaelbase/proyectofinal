@@ -19,5 +19,7 @@
     <color name="pendiente">#ffc48c</color>
     <color name="preparando">#f9d423</color>
     <color name="recogida_lista">#3fc1c9</color>
-    <color name="admin">#dca618</color>
+    <color name="admin">#90dca618</color>
+    <color name="normal">#90bbe28f</color>
+    <color name="baneado">#90fc6863</color>
 </resources>

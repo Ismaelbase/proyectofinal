@@ -3,12 +3,14 @@ package com.example.tiendav1
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.tiendav1.databinding.FragmentAdminConfigBinding
@@ -16,8 +18,12 @@ import com.example.tiendav1.databinding.FragmentConfigBinding
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Admin_config : Fragment() {
     private var _binding: FragmentAdminConfigBinding? = null
@@ -83,9 +89,7 @@ class Admin_config : Fragment() {
 
         val id_usuario = Utilidades.obtenerIDUsuario(ap.applicationContext)
 
-        referencia_bd.child("SecondCharm")
-            .child("Users")
-            .child(id_usuario)
+        Utilidades.usuarios.child(id_usuario)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_user = snapshot.getValue(User::class.java)!!
@@ -131,21 +135,46 @@ class Admin_config : Fragment() {
             accesoGaleria.launch("image/*")
         }
 
-        //Aqui configuro el aplicar cambios
+        //Acceso a camara
+        cambiar_avatar.setOnLongClickListener {
+            val fichero_temporal = crearFicheroImagen()
+            url_avatar = FileProvider.getUriForFile(
+                ap.applicationContext,
+                "com.example.tiendav1.fileprovider",
+                fichero_temporal
+            )
+            getCamara.launch(url_avatar)
+            true
+        }
 
+
+        //Aqui configuro el aplicar cambios
         var correcto = false
+
         aplicar_cambios.setOnClickListener {
 
             ap.runOnUiThread {
-                correcto = validarUsuario(cambiar_nombre) &&
-                        validarCorreo(cambiar_mail)
+                correcto = validarUsuario(cambiar_nombre) && validarCorreo(cambiar_mail)
             }
 
-            if (correcto) {
-                val nuevo_nombre = cambiar_nombre.text.toString().trim()
-                val nuevo_mail = cambiar_mail.text.toString().trim()
+            GlobalScope.launch(Dispatchers.IO) {
+                if (Utilidades.existeUser(cambiar_nombre.text.toString().trim()) &&
+                    pojo_user.usuario.toString().toString() != cambiar_nombre.text.toString().trim()
+                ) {
+                    ap.runOnUiThread {
+                        Toast.makeText(
+                            context,
+                            "Ya existe un usuario con ese nombre",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
-                GlobalScope.launch {
+                }else if(correcto){
+
+                    val nuevo_nombre = cambiar_nombre.text.toString().trim()
+                    val nuevo_mail = cambiar_mail.text.toString().trim()
+
+
                     val url_firebase: String?
 
                     if (url_avatar == null) {
@@ -173,10 +202,21 @@ class Admin_config : Fragment() {
                         pojo_user.admin!!
                     )
 
-                }
 
-                Toast.makeText(ap.application, "Cambios realizados con éxito", Toast.LENGTH_SHORT)
-                    .show()
+                    ap.runOnUiThread {
+                        Toast.makeText(
+                            ap.application,
+                            "Cambios realizados con éxito",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+
+                    //si no hago esto no me deja cambiar nada mas despues de cambiar el nombre
+                    // porque dice que ya existe el usuario
+                    ap.finish()
+
+                }
             }
         }
 
@@ -211,36 +251,69 @@ class Admin_config : Fragment() {
     }
 
     fun validarUsuario(e: EditText): Boolean {
-        var correcto: Boolean
+        var correcto: Boolean = false
         var valor = e.text.toString().trim()
 
-        if (valor.length >= 3 &&
-            valor.matches("[A-Z].+".toRegex())
-        ) {
+        if (valor.length >= 3 && valor.matches("[A-Z].+".toRegex())) {
             correcto = true
         } else {
-            e.error = "Formato de nombre incorrecto."
+            ap.runOnUiThread {
+                e.error = "Formato de nombre incorrecto."
+            }
             correcto = false
+
         }
 
         return correcto
     }
 
     fun validarCorreo(e: EditText): Boolean {
-        var correcto = true
+        var correcto: Boolean
         var valor = e.text.toString().trim()
 
         if (valor.isEmpty()) {
+            ap.runOnUiThread {
+                e.error = "El email es obligatorio."
+            }
             correcto = false
-            e.error = "El email es obligatorio."
+
 
             //Devuelve true si el e-mail introducido tiene el formato correcto
             //Por lo que ponemos ! ya que queremos que salte cuando NO es correcto.
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(valor).matches()) {
+            ap.runOnUiThread {
+                e.error = "El email no tiene un formato correcto."
+            }
             correcto = false
-            e.error = "El email no tiene un formato correcto."
+
+        }else{
+            correcto = true
         }
 
         return correcto
+    }
+
+    val getCamara = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            cambiar_avatar.setImageURI(url_avatar)
+        } else {
+            Toast.makeText(
+                ap.applicationContext,
+                "No has hecho ninguna foto",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    private fun crearFicheroImagen(): File {
+        val cal: Calendar? = Calendar.getInstance()
+        val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
+        val nombreFichero: String? = "JPGE_" + timeStamp + "_"
+        val carpetaDir: File? =
+            ap.applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
+
+        return ficheroImagen!!
     }
 }

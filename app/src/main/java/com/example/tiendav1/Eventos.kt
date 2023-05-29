@@ -73,7 +73,6 @@ class Eventos : Fragment() {
                 snapshot.children.forEach{
                     val pojo_evento = it.getValue(Evento::class.java)
                     if (pojo_evento!!.apuntados!!.toInt() < pojo_evento.aforo!!.toInt() &&
-                        Utilidades.fechaFutura(pojo_evento.fecha!!) &&
                         pojo_evento.activo!!){
                         lista_eventos.add(pojo_evento)
                     }

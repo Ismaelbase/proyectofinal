@@ -32,6 +32,9 @@ class Normal_inscripcion_evento : AppCompatActivity() {
     val libres: TextView by lazy {
         findViewById(R.id.inscripcion_libres)
     }
+    val label_libres: TextView by lazy {
+        findViewById(R.id.inscripcion_label_libres)
+    }
     val inscribirse:Button by lazy {
         findViewById(R.id.inscripcion_boton_inscribirse)
     }
@@ -78,6 +81,15 @@ class Normal_inscripcion_evento : AppCompatActivity() {
                         .apply(Utilidades.opcionesGlide(applicationContext))
                         .transition(Utilidades.transicion)
                         .into(imagen)
+
+                    if(!Utilidades.fechaFutura(pojo_evento.fecha!!)){
+                        inscribirse.isEnabled = false
+                        inscribirse.text = "Evento pasado"
+
+                        label_libres.text = "Plazas ocupadas"
+                        libres.text = pojo_evento.apuntados.toString()
+
+                    }
                 }
                 override fun onCancelled(error: DatabaseError) {
                 }
@@ -89,6 +101,16 @@ class Normal_inscripcion_evento : AppCompatActivity() {
                 runOnUiThread{
                     inscribirse.isEnabled = false
                     inscribirse.text = "Inscrito"
+
+                    if(!Utilidades.fechaFutura(pojo_evento.fecha!!)){
+                        inscribirse.isEnabled = false
+                        inscribirse.text = "¡Esperamos que \nlo disfrutaras!"
+
+                        label_libres.text = "Plazas ocupadas"
+                        libres.text = pojo_evento.apuntados.toString()
+
+                    }
+
                 }
             }
         }

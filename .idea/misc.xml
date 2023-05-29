@@ -8,6 +8,10 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_recycler1.xml" value="0.18" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_recycler2.xml" value="0.1795" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_recycler_rechazado.xml" value="0.162" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/borde_usuario_normal.xml" value="0.2285" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/usuario_adminl_borde.xml" value="0.2285" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/usuario_baneado_borde.xml" value="0.2285" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable-v24/usuario_normal_borde.xml" value="0.2285" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/aceptar.xml" value="0.174" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/bg_spinner.xml" value="0.1895" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/drawable/completado.xml" value="0.1735" />
@@ -32,6 +36,7 @@
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_editar_inscripcion.xml" value="0.5" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_gestion_inscripciones.xml" value="0.25" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_gestion_pedido.xml" value="0.5" />
+        <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_moderar_usuario_especifico.xml" value="0.271286231884058" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_moderar_usuarios.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_admin_principal.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/hola5/Desktop/Proyecto final de curso/app/src/main/res/layout/activity_borrar_cuenta.xml" value="0.33" />

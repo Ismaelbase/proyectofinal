@@ -52,12 +52,20 @@ class Adaptador_moderar_usuarios(private val lista_usuarios: MutableList<User>) 
 
         if (item_actual.admin!!){
             holder.fondo.setImageDrawable(contexto.resources.getDrawable(R.drawable.usuario_admin))
-        }else if (!item_actual.alta!!){
+            holder.itemView.setBackgroundResource(R.drawable.usuario_adminl_borde)
+            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.admin_symbol))
+        }else if (!item_actual.alta!!) {
             holder.fondo.setImageDrawable(contexto.resources.getDrawable(R.drawable.usuario_baneado))
+            holder.itemView.setBackgroundResource(R.drawable.usuario_baneado_borde)
+            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.desbanear_usuario))
+        }else{
+            holder.itemView.setBackgroundResource(R.drawable.usuario_normal_borde)
+            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.banear_usuario))
+
         }
 
-        holder.layout.setOnClickListener {
-            //Todo te lleva a moderar usuario especifico
+        holder.alta.setOnClickListener {
+            contexto.startActivity(Intent(contexto,Admin_moderar_usuario_especifico::class.java).putExtra("USUARIO", item_actual))
         }
 
     }
@@ -104,7 +112,7 @@ class Adaptador_moderar_usuarios(private val lista_usuarios: MutableList<User>) 
 
         val imagen: ImageView = itemView.findViewById(R.id.item_usuario_imagen)
         val nombre: TextView = itemView.findViewById(R.id.item_usuario_nombre)
-        val layout:ConstraintLayout = itemView.findViewById(R.id.item_usuario_layout)
+        val alta:ImageView = itemView.findViewById(R.id.item_usuario_alta)
         val fondo:ImageView = itemView.findViewById(R.id.item_usuario_fondo_color)
 
     }

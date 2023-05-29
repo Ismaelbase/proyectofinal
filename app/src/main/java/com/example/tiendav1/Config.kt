@@ -3,12 +3,14 @@ package com.example.tiendav1
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.example.tiendav1.databinding.FragmentConfigBinding
 import com.google.firebase.database.*
@@ -18,6 +20,9 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Config : Fragment() {
     private var _binding: FragmentConfigBinding? = null
@@ -123,83 +128,108 @@ class Config : Fragment() {
             accesoGaleria.launch("image/*")
         }
 
+        //Acceso a camara
+        cambiar_avatar.setOnLongClickListener {
+            val fichero_temporal = crearFicheroImagen()
+            url_avatar = FileProvider.getUriForFile(
+                pn.applicationContext,
+                "com.example.tiendav1.fileprovider",
+                fichero_temporal
+            )
+            getCamara.launch(url_avatar)
+            true
+        }
+
+
         //Aqui configuro el aplicar cambios
 
         var correcto = false
         aplicar_cambios.setOnClickListener {
+
+            pn.runOnUiThread {
+                correcto = validarUsuario(cambiar_nombre) && validarCorreo(cambiar_mail)
+            }
+
             GlobalScope.launch(Dispatchers.IO) {
-                pn.runOnUiThread {
-                    correcto = validarUsuario(cambiar_nombre) &&
-                            validarCorreo(cambiar_mail)
-                }
-                if (correcto && !Utilidades.existeUser(cambiar_nombre.text.toString().trim())) {
+                if (Utilidades.existeUser(cambiar_nombre.text.toString().trim()) &&
+                    pojo_user.usuario.toString().toString() != cambiar_nombre.text.toString().trim()
+                ) {
+                    pn.runOnUiThread {
+                        Toast.makeText(
+                            context,
+                            "Ya existe un usuario con ese nombre",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }else if(correcto){
+
                     val nuevo_nombre = cambiar_nombre.text.toString().trim()
                     val nuevo_mail = cambiar_mail.text.toString().trim()
 
-                    GlobalScope.launch {
-                        val url_firebase: String?
 
-                        if (url_avatar == null) {
-                            url_firebase = pojo_user.url_avatar
-                        } else {
+                    val url_firebase: String?
 
-                            url_firebase = Utilidades.guardarImagen(
-                                referencia_almacenamiento,
-                                pojo_user.id.toString(),
-                                url_avatar!!
-                            )
-                        }
+                    if (url_avatar == null) {
+                        url_firebase = pojo_user.url_avatar
+                    } else {
 
-                        Utilidades.escribirUser(
-                            referencia_bd,
+                        url_firebase = Utilidades.guardarImagen(
+                            referencia_almacenamiento,
                             pojo_user.id.toString(),
-                            nuevo_nombre,
-                            pojo_user.contraseña.toString(),
-                            nuevo_mail,
-                            pojo_user.puntos,
-                            url_firebase.toString(),
-                            pojo_user.fecha.toString(),
-                            pojo_user.alta!!,
-                            pojo_user.conectado!!,
-                            pojo_user.admin!!
+                            url_avatar!!
                         )
-
                     }
 
-                    Toast.makeText(
-                        pn.application,
-                        "Cambios realizados con éxito",
-                        Toast.LENGTH_SHORT
+                    Utilidades.escribirUser(
+                        referencia_bd,
+                        pojo_user.id.toString(),
+                        nuevo_nombre,
+                        pojo_user.contraseña.toString(),
+                        nuevo_mail,
+                        pojo_user.puntos,
+                        url_firebase.toString(),
+                        pojo_user.fecha.toString(),
+                        pojo_user.alta!!,
+                        pojo_user.conectado!!,
+                        pojo_user.admin!!
                     )
-                        .show()
-                }else{
+
+
                     pn.runOnUiThread {
                         Toast.makeText(
-                            pn.application,"El nombre de usuario ya existe",
-                            Toast.LENGTH_SHORT).show()
+                            pn.application,
+                            "Cambios realizados con éxito",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
                     }
+
+                    //si no hago esto no me deja cambiar nada mas despues de cambiar el nombre
+                    // porque dice que ya existe el usuario
+                    pn.finish()
 
                 }
             }
         }
 
 
-            //Aqui se configura el boton de logout
-            logout.setOnClickListener {
-                Utilidades.establecerIDUsuario(pn.applicationContext, "")
-                Utilidades.establecerTipoUsuario(pn.applicationContext, false)
+        //Aqui se configura el boton de logout
+        logout.setOnClickListener {
+            Utilidades.establecerIDUsuario(pn.applicationContext, "")
+            Utilidades.establecerTipoUsuario(pn.applicationContext, false)
 
-                startActivity(Intent(pn.applicationContext, MainActivity::class.java))
-            }
-            //Para cambiar la contraseña
-            cambiar_contrasena.setOnClickListener {
-                startActivity(Intent(pn.applicationContext, Cambiar_contrasena::class.java))
-            }
+            startActivity(Intent(pn.applicationContext, MainActivity::class.java))
+        }
+        //Para cambiar la contraseña
+        cambiar_contrasena.setOnClickListener {
+            startActivity(Intent(pn.applicationContext, Cambiar_contrasena::class.java))
+        }
 
-            //Para borrar la cuenta
-            borrar_cuenta.setOnClickListener {
-                startActivity(Intent(pn.applicationContext, Borrar_cuenta::class.java))
-            }
+        //Para borrar la cuenta
+        borrar_cuenta.setOnClickListener {
+            startActivity(Intent(pn.applicationContext, Borrar_cuenta::class.java))
+        }
 
     }
 
@@ -220,7 +250,10 @@ class Config : Fragment() {
         ) {
             correcto = true
         } else {
-            e.error = "Formato de nombre incorrecto."
+            pn.runOnUiThread {
+                e.error = "Formato de nombre incorrecto."
+            }
+
             correcto = false
         }
 
@@ -228,20 +261,52 @@ class Config : Fragment() {
     }
 
     fun validarCorreo(e: EditText): Boolean {
-        var correcto = true
+        var correcto: Boolean
         var valor = e.text.toString().trim()
 
         if (valor.isEmpty()) {
+            pn.runOnUiThread {
+                e.error = "El email es obligatorio."
+            }
             correcto = false
-            e.error = "El email es obligatorio."
+
 
             //Devuelve true si el e-mail introducido tiene el formato correcto
             //Por lo que ponemos ! ya que queremos que salte cuando NO es correcto.
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(valor).matches()) {
+            pn.runOnUiThread {
+                e.error = "El email no tiene un formato correcto."
+            }
             correcto = false
-            e.error = "El email no tiene un formato correcto."
+
+        }else{
+            correcto = true
         }
 
         return correcto
+    }
+
+    val getCamara = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            cambiar_avatar.setImageURI(url_avatar)
+        } else {
+            Toast.makeText(
+                pn.applicationContext,
+                "No has hecho ninguna foto",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    private fun crearFicheroImagen(): File {
+        val cal: Calendar? = Calendar.getInstance()
+        val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
+        val nombreFichero: String? = "JPGE_" + timeStamp + "_"
+        val carpetaDir: File? =
+            pn.applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
+
+        return ficheroImagen!!
     }
 }
