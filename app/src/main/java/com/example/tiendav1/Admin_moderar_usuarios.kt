@@ -12,6 +12,11 @@ import com.google.firebase.database.*
 
 class Admin_moderar_usuarios : AppCompatActivity() {
 
+    override fun onResume() {
+        super.onResume()
+        adaptador.notifyDataSetChanged()
+        busqueda.setQuery("",false)
+    }
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().reference
     }

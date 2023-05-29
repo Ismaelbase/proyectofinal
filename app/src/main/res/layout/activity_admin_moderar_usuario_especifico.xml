@@ -6,4 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".Admin_moderar_usuario_especifico">
 
+    <TextView
+        android:id="@+id/moderar_usuario_tv_cambiar_contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Cambiar contraseña"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_imagen"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_tv_nombre" />
+
+    <ImageView
+        android:id="@+id/moderar_usuario_imagen"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_tv_cambiar_imagen"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_tv_cambiar_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_tv_cambiar_imagen"
+        app:srcCompat="@drawable/user_avatar" />
+
+    <TextView
+        android:id="@+id/moderar_usuario_tv_cambiar_imagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Cambiar imagen"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/moderar_usuario_contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_tv_cambiar_contrasena"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_tv_cambiar_contrasena"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_tv_cambiar_contrasena" />
+
+    <Switch
+        android:id="@+id/moderar_usuario_alta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Alta"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_contrasena"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_contrasena"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_contrasena" />
+
+    <Button
+        android:id="@+id/moderar_usuario_boton_aplicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Aplicar"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_contrasena"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_contrasena"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_alta" />
+
+    <ImageView
+        android:id="@+id/moderar_usuario_boton_volver"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/volver_sc" />
+
+    <TextView
+        android:id="@+id/moderar_usuario_tv_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paquito"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/moderar_usuario_imagen"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/moderar_usuario_imagen"
+        app:layout_constraintTop_toBottomOf="@+id/moderar_usuario_imagen" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

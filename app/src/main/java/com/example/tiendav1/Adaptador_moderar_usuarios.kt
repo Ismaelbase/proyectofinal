@@ -57,16 +57,24 @@ class Adaptador_moderar_usuarios(private val lista_usuarios: MutableList<User>) 
         }else if (!item_actual.alta!!) {
             holder.fondo.setImageDrawable(contexto.resources.getDrawable(R.drawable.usuario_baneado))
             holder.itemView.setBackgroundResource(R.drawable.usuario_baneado_borde)
-            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.desbanear_usuario))
+            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.banear_usuario))
         }else{
             holder.itemView.setBackgroundResource(R.drawable.usuario_normal_borde)
-            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.banear_usuario))
+            holder.fondo.setImageDrawable(contexto.resources.getDrawable(R.drawable.usuario_normal))
+            holder.alta.setImageDrawable(contexto.resources.getDrawable(R.drawable.desbanear_usuario))
 
         }
-
-        holder.alta.setOnClickListener {
-            contexto.startActivity(Intent(contexto,Admin_moderar_usuario_especifico::class.java).putExtra("USUARIO", item_actual))
+        
+        if (item_actual.admin!!){
+            holder.layout.setOnClickListener {
+                Toast.makeText(contexto, "No puedes modificar a un admin.", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            holder.layout.setOnClickListener {
+                contexto.startActivity(Intent(contexto,Admin_moderar_usuario_especifico::class.java).putExtra("ID", item_actual.id))
+            }
         }
+        
 
     }
 
@@ -113,6 +121,7 @@ class Adaptador_moderar_usuarios(private val lista_usuarios: MutableList<User>) 
         val imagen: ImageView = itemView.findViewById(R.id.item_usuario_imagen)
         val nombre: TextView = itemView.findViewById(R.id.item_usuario_nombre)
         val alta:ImageView = itemView.findViewById(R.id.item_usuario_alta)
+        val layout:ConstraintLayout = itemView.findViewById(R.id.item_usuario_layout)
         val fondo:ImageView = itemView.findViewById(R.id.item_usuario_fondo_color)
 
     }

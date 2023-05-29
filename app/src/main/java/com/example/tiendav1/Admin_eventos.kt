@@ -20,6 +20,7 @@ class Admin_eventos : Fragment() {
     override fun onResume() {
         super.onResume()
         adaptador.notifyDataSetChanged()
+        busqueda.setQuery("", false)
     }
 
     val referencia_bd: DatabaseReference by lazy {
