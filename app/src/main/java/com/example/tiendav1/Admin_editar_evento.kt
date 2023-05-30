@@ -4,9 +4,11 @@ import android.app.DatePickerDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.Settings
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -15,6 +17,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
+import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 
 class Admin_editar_evento : AppCompatActivity() {
@@ -106,6 +110,17 @@ class Admin_editar_evento : AppCompatActivity() {
 
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
+        }
+
+        imagen.setOnLongClickListener {
+            val fichero_temporal = crearFicheroImagen()
+            url_foto = FileProvider.getUriForFile(
+                applicationContext,
+                "com.example.tiendav1.fileprovider",
+                fichero_temporal
+            )
+            getCamara.launch(url_foto)
+            true
         }
 
         boton_aplicar.setOnClickListener {
@@ -206,6 +221,29 @@ class Admin_editar_evento : AppCompatActivity() {
                 imagen.setImageURI(url_foto)
             }
         }
+
+    val getCamara = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            imagen.setImageURI(url_foto)
+        } else {
+            Toast.makeText(
+                applicationContext,
+                "No has hecho ninguna foto",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    private fun crearFicheroImagen(): File {
+        val cal: Calendar? = Calendar.getInstance()
+        val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
+        val nombreFichero: String? = "JPGE_" + timeStamp + "_"
+        val carpetaDir: File? = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
+
+        return ficheroImagen!!
+    }
 
 
 }

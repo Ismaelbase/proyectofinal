@@ -17,11 +17,14 @@ class Admin_moderar_usuarios : AppCompatActivity() {
         adaptador.notifyDataSetChanged()
         busqueda.setQuery("",false)
     }
+    val id_usuario:String by lazy {
+        Utilidades.obtenerIDUsuario(applicationContext)
+    }
     val referencia_bd: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().reference
     }
     val lista_usuarios:MutableList<User> by lazy {
-        Utilidades.obtenerListaCompletaUsers()
+        Utilidades.obtenerListaCompletaUsersMenosActual(id_usuario)
     }
     val busqueda:SearchView by lazy {
         findViewById(R.id.moderar_usuarios_searchview)
@@ -42,20 +45,6 @@ class Admin_moderar_usuarios : AppCompatActivity() {
         setContentView(R.layout.activity_admin_moderar_usuarios)
 
         supportActionBar?.hide()
-
-        Utilidades.usuarios.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                lista_usuarios.clear()
-                snapshot.children.forEach{
-                    val pojo_usuario = it.getValue(User::class.java)
-                    lista_usuarios.add(pojo_usuario!!)
-                }
-                adaptador.notifyDataSetChanged()
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext,"Error al acceder a los temas", Toast.LENGTH_SHORT).show()
-            }
-        })
 
         recycler.adapter = adaptador
         recycler.layoutManager = GridLayoutManager(applicationContext,3)

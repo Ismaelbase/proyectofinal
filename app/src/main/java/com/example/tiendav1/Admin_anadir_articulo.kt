@@ -4,8 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -13,6 +15,8 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 import kotlin.reflect.KFunction1
@@ -71,17 +75,27 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         disponible.isChecked = true
 
-
         val adaptador_spinner = ArrayAdapter(
             applicationContext,
             R.layout.custom_spinner,
             Articulo.categorias
         )
-        adaptador_spinner.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        adaptador_spinner.setDropDownViewResource(R.layout.custom_spinner)
         spinner_categoria.adapter = adaptador_spinner
 
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
+        }
+
+        imagen.setOnLongClickListener {
+            val fichero_temporal = crearFicheroImagen()
+            url_avatar = FileProvider.getUriForFile(
+                applicationContext,
+                "com.example.tiendav1.fileprovider",
+                fichero_temporal
+            )
+            getCamara.launch(url_avatar)
+            true
         }
 
         boton_anadir.setOnClickListener {
@@ -225,5 +239,28 @@ class Admin_anadir_articulo : AppCompatActivity() {
             url_avatar = uri
             imagen.setImageURI(url_avatar)
         }
+    }
+
+    val getCamara = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            imagen.setImageURI(url_avatar)
+        } else {
+            Toast.makeText(
+                applicationContext,
+                "No has hecho ninguna foto",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    private fun crearFicheroImagen(): File {
+        val cal: Calendar? = Calendar.getInstance()
+        val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
+        val nombreFichero: String? = "JPGE_" + timeStamp + "_"
+        val carpetaDir: File? = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
+
+        return ficheroImagen!!
     }
 }

@@ -501,6 +501,28 @@ class Utilidades {
             })
             return lista
         }
+
+        fun obtenerListaCompletaUsersMenosActual(id_actual:String):MutableList<User>{
+            var lista= mutableListOf<User>()
+
+            //Consulta a la bd
+            usuarios.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    lista.clear()
+                    snapshot.children.forEach{ hijo: DataSnapshot?->
+                        val pojo_user = hijo?.getValue(User::class.java)
+                        if(pojo_user!!.id!=id_actual) {
+                            lista.add(pojo_user!!)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
+            return lista
+        }
 //
         fun obtenerListaArticulos():MutableList<Articulo>{
             var lista = mutableListOf<Articulo>()
