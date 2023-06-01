@@ -11,6 +11,8 @@ import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.time.LocalDate
 
 class Comprar_articulo : AppCompatActivity() {
@@ -54,6 +56,11 @@ class Comprar_articulo : AppCompatActivity() {
 
         val id_articulo = intent.getStringExtra("ID").toString()
 
+        val app_id_moneda = getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = getSharedPreferences(sp_moneda, 0)
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
         Utilidades.articulos.child(id_articulo)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -61,9 +68,17 @@ class Comprar_articulo : AppCompatActivity() {
 
                     nombre.setText(pojo_articulo.nombre)
                     descripcion.setText(pojo_articulo.descripcion)
-                    precio.setText(pojo_articulo.precio.toString())
                     stock.setText(pojo_articulo.stock.toString())
                     categoria.setText(pojo_articulo.categoria)
+
+                    val df = DecimalFormat("#.00")
+                    df.roundingMode = RoundingMode.DOWN
+
+                    if(moneda_elegida) {
+                        precio.text = df.format(((pojo_articulo.precio!!.toDouble())*Utilidades.monedas.get("USD")!!)).toString()+"$"
+                    }else{
+                        precio.text = pojo_articulo.precio.toString()+"€"
+                    }
 
                     Glide.with(applicationContext)
                         .load(pojo_articulo.url_foto)

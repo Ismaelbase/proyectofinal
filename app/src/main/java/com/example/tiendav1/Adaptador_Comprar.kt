@@ -17,6 +17,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import org.w3c.dom.Text
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var filtros_check: List<Boolean>) :
     RecyclerView.Adapter<Adaptador_Comprar.UserViewHolder>(), Filterable {
@@ -48,12 +51,20 @@ class Adaptador_Comprar(private val lista_articulos: MutableList<Articulo>, var 
             .into(holder.imagen)
 
         holder.nombre.text = item_actual.nombre
-//        holder.categoria.text = item_actual.categoria
-//        holder.stock.text = "Stock: "+item_actual.cantidad.toString()
-//        holder.puntos.text = item_actual.puntos.toString()
-        holder.precio.text = item_actual.precio.toString()+"€"
-//        holder.descripcion.text = item_actual.descripcion
 
+        val app_id_moneda = contexto.getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = contexto.getSharedPreferences(sp_moneda, 0)
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
+        val df = DecimalFormat("#.00")
+        df.roundingMode = RoundingMode.DOWN
+
+        if(moneda_elegida) {
+            holder.precio.text = df.format(((item_actual.precio!!.toDouble())*Utilidades.monedas.get("USD")!!)).toString()+"$"
+        }else{
+            holder.precio.text = item_actual.precio.toString()+"€"
+        }
 
         holder.carrito.setOnClickListener {
             contexto.startActivity(Intent(contexto, Comprar_articulo::class.java).putExtra("ID", item_actual.id))

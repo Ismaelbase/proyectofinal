@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var switch: List<Boolean>) :
     RecyclerView.Adapter<Adaptador_historial.UserViewHolder>(), Filterable {
@@ -43,7 +45,20 @@ class Adaptador_historial(private val lista_historial: MutableList<Reserva>, var
 
         holder.nombre.text = item_actual.nombre_articulo
         holder.fecha.text = item_actual.fecha
-        holder.precio.text = item_actual.precio.toString()+"€"
+
+        val app_id_moneda = contexto.getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = contexto.getSharedPreferences(sp_moneda, 0)
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
+        val df = DecimalFormat("#.00")
+        df.roundingMode = RoundingMode.DOWN
+
+        if(moneda_elegida) {
+            holder.precio.text = df.format(((item_actual.precio!!.toDouble())*Utilidades.monedas.get("USD")!!)).toString()+"$"
+        }else{
+            holder.precio.text = item_actual.precio.toString()+"€"
+        }
 
         holder.itemView.setOnClickListener {
             contexto.startActivity(Intent(contexto, Normal_detalles_reserva::class.java).putExtra("ID", item_actual.id))

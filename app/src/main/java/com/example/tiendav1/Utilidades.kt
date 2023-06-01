@@ -21,6 +21,11 @@ import java.util.concurrent.CountDownLatch
 class Utilidades {
     companion object {
 
+        var monedas = mapOf<String,Double> (
+            "EUR" to 1.0,
+            "USD" to 1.18
+        )
+
         //Volver de actividades:
         var comprar = false
         var normal_historial = false

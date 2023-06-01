@@ -10,6 +10,8 @@ import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class Normal_inscripcion_evento : AppCompatActivity() {
 
@@ -51,6 +53,11 @@ class Normal_inscripcion_evento : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val app_id_moneda = getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = getSharedPreferences(sp_moneda, 0)
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
 
         val id_evento = intent.getStringExtra("ID").toString()
         val id_usuario = Utilidades.obtenerIDUsuario(applicationContext)
@@ -72,9 +79,18 @@ class Normal_inscripcion_evento : AppCompatActivity() {
                     val calculo = pojo_evento.aforo!!.toInt() - pojo_evento.apuntados!!.toInt()
 
                     nombre.setText(pojo_evento.nombre)
-                    precio.setText(pojo_evento.precio.toString())
                     libres.setText(calculo.toString())
                     fecha.setText(pojo_evento.fecha)
+
+                    val df = DecimalFormat("#.00")
+                    df.roundingMode = RoundingMode.DOWN
+
+                    if(moneda_elegida) {
+                        precio.text = df.format(((pojo_evento.precio!!.toDouble())*Utilidades.monedas.get("USD")!!)).toString()+"$"
+                    }else{
+                        precio.text = pojo_evento.precio.toString()+"€"
+                    }
+
 
                     Glide.with(applicationContext)
                         .load(pojo_evento.url_foto)

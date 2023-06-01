@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class Normal_detalles_reserva : AppCompatActivity() {
 
@@ -50,6 +52,11 @@ class Normal_detalles_reserva : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val app_id_moneda = getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = getSharedPreferences(sp_moneda, 0)
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
         val id_reserva = intent.getStringExtra("ID")
 
         Utilidades.reservas.child(id_reserva!!)
@@ -64,8 +71,17 @@ class Normal_detalles_reserva : AppCompatActivity() {
                         .into(imagen)
 
                     nombre.text = pojo_reserva.nombre_articulo
-                    precio.text = pojo_reserva.precio.toString()
                     fecha.text = pojo_reserva.fecha
+
+                    val df = DecimalFormat("#.00")
+                    df.roundingMode = RoundingMode.DOWN
+
+                    if(moneda_elegida) {
+                        precio.text = df.format(((pojo_reserva.precio!!.toDouble())*Utilidades.monedas.get("USD")!!)).toString()+"$"
+                    }else{
+                        precio.text = pojo_reserva.precio.toString()+"€"
+                    }
+
 
                     when (pojo_reserva.estado) {
                         "Pendiente" -> {
