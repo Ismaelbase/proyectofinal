@@ -87,10 +87,14 @@ class Admin_crear_evento : AppCompatActivity() {
         val mes = fecha_hoy.monthValue
         val anyo = fecha_hoy.year
 
-        if (mes < 10) {
+        fecha_texto.text = "$dia/$mes/$anyo"
+
+        if(fecha_texto.text.split("/")[0].toInt()<10 && fecha_texto.text.split("/")[1].toInt()<10){
+            fecha_texto.text = "0$dia/0$mes/$anyo"
+        }else if (fecha_texto.text.split("/")[0].toInt()<10) {
+            fecha_texto.text = "0$dia/$mes/$anyo"
+        }else if(fecha_texto.text.split("/")[1].toInt()<10){
             fecha_texto.text = "$dia/0$mes/$anyo"
-        } else {
-            fecha_texto.text = "$dia/$mes/$anyo"
         }
 
         //Abrimos un datepicker limitado a hoy o fechas futuras para evitar errores
@@ -103,9 +107,15 @@ class Admin_crear_evento : AppCompatActivity() {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    if (mes<10){
+                    if(dia<10){
+                        if(mes<10){
+                            fecha_texto.text = "0$dayOfMonth/0${month+1}/$year"
+                        }else{
+                            fecha_texto.text = "0$dayOfMonth/${month+1}/$year"
+                        }
+                    }else if(mes<10) {
                         fecha_texto.text = "$dayOfMonth/0${month + 1}/$year"
-                    }else {
+                    }else{
                         fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
                     }
                 },
@@ -146,7 +156,10 @@ class Admin_crear_evento : AppCompatActivity() {
                         runOnUiThread {
                             Timer().schedule(object : TimerTask() {
                                 override fun run() {
-                                    imagen.setImageResource(R.drawable.anadir_imagen_symbol_sc)
+                                    runOnUiThread {
+                                        imagen.setImageResource(R.drawable.anadir_imagen_symbol_sc)
+                                    }
+
                                 }
                             }, 3000)
                         }
@@ -178,7 +191,9 @@ class Admin_crear_evento : AppCompatActivity() {
                                 aforo.text.toString().toInt(),
                                 url_firebase,
                                 0,
-                                activo.isChecked
+                                activo.isChecked,
+                                Estado.CREADO,
+                                Utilidades.obtenerIDUsuario(applicationContext)
                             )
 
                             Utilidades.tostadaCorrutina(

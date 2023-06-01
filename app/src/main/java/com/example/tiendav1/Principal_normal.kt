@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.util.Util
 import com.example.tiendav1.databinding.ActivityPrincipalNormalBinding
 import com.google.firebase.database.*
 
@@ -16,6 +17,17 @@ class Principal_normal : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        if(Utilidades.noti_evento_mod){
+            navController.navigate(R.id.Eventos)
+            navView.selectedItemId = R.id.Eventos
+            Utilidades.noti_evento_mod = false
+        }
+        if(Utilidades.noti_evento_add){
+            navController.navigate(R.id.Eventos)
+            navView.selectedItemId = R.id.Eventos
+            Utilidades.noti_evento_add = false
+        }
 
         if (Utilidades.comprar){
             navController.navigate(R.id.Comprar)

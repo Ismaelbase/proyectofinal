@@ -98,7 +98,17 @@ class Admin_editar_evento : AppCompatActivity() {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
+                    if(dia<10){
+                        if(mes<10){
+                            fecha_texto.text = "0$dayOfMonth/0${month+1}/$year"
+                        }else{
+                            fecha_texto.text = "0$dayOfMonth/${month+1}/$year"
+                        }
+                    }else if(mes<10) {
+                        fecha_texto.text = "$dayOfMonth/0${month + 1}/$year"
+                    }else{
+                        fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
+                    }
                 },
                 anyo,
                 mes,
@@ -195,7 +205,9 @@ class Admin_editar_evento : AppCompatActivity() {
                         aforo.text.toString().toInt(),
                         url_firebase.toString(),
                         pojo_articulo.apuntados!!.toInt(),
-                        activo.isChecked
+                        activo.isChecked,
+                        Estado.MODIFICADO,
+                        Utilidades.obtenerIDUsuario(applicationContext)
                     )
 
                     Utilidades.tostadaCorrutina(

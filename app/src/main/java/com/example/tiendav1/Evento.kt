@@ -12,5 +12,7 @@ data class Evento(
     var aforo:Int? = null,
     var url_foto:String? = null,
     var apuntados:Int? = null,
-    var activo:Boolean? = null
+    var activo:Boolean? = null,
+    var estado_noti:Int? = 0,
+    var usuario_noti:String? = null
 ): Parcelable

@@ -34,6 +34,10 @@ class Utilidades {
         var admin_gestion_pedido = false
 
 
+        //Volver actividades NOTIFICACIONES
+        var noti_evento_mod = false
+        var noti_evento_add = false
+
         //Referencias a bd rapidas
         val usuarios = FirebaseDatabase.getInstance()
             .getReference()
@@ -235,7 +239,9 @@ class Utilidades {
             aforo:Int,
             url_foto:String,
             apuntados:Int,
-            activo:Boolean
+            activo:Boolean,
+            estado_noti:Int,
+            usuario_noti:String
 
         ) = db_ref.child("SecondCharm").child("Eventos").child(id).setValue(Evento(
             id,
@@ -245,7 +251,9 @@ class Utilidades {
             aforo,
             url_foto,
             apuntados,
-            activo
+            activo,
+            estado_noti,
+            usuario_noti
         ))
 
         fun escribirInscripcion(

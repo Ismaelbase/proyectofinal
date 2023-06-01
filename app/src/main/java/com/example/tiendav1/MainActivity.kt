@@ -1,16 +1,27 @@
 package com.example.tiendav1
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.Settings
+import android.os.Parcelable
 import android.view.View
 import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.time.LocalDate
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +63,6 @@ class MainActivity : AppCompatActivity() {
     val referencia_almacenamiento: StorageReference by lazy {
         FirebaseStorage.getInstance().getReference()
     }
-
     val usuario: EditText by lazy {
         findViewById(R.id.main_et_usuario)
     }
@@ -72,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var lista_usuarios: MutableList<User>
     var modo_noche: Boolean = false
+    private lateinit var generador: AtomicInteger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,22 +90,6 @@ class MainActivity : AppCompatActivity() {
 
         //Esconder la barra del menu
         supportActionBar!!.hide()
-
-        //Prueba acceder a la BD de articulos
-        val fecha = LocalDate.now()
-        val id_articulo = Utilidades.articulos.push().key!!
-
-//        Utilidades.escribirArticulo(
-//            referencia_bd,
-//            id_articulo,
-//            "Pantalones",
-//            8.50,
-//            "Estilosos y casi nuevos",
-//            "Ropa",
-//            "https://cdn1.percentil.com/img/p/9/6/9/15365969-20235681-thickbox.jpg",
-//            fecha.toString(),
-//            2
-//        )
 
         //Carga el modo en función de la última preferencia elegida
 
@@ -213,6 +208,111 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,Registro::class.java))
         }
 
+
+
+        // NOTIFICACIONES
+        generador= AtomicInteger(0)
+        crearCanalNotificaciones()
+
+        Utilidades.eventos.addChildEventListener(object :ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_evento = snapshot.getValue(Evento::class.java)
+                val id_notificacion = generador.incrementAndGet()
+                val androidID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
+                if(pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext) &&
+                        pojo_evento!!.estado_noti == Estado.CREADO){
+                    Utilidades.eventos.child(pojo_evento!!.id.toString())
+                        .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                    generarNotificacion(id_notificacion,
+                        pojo_evento,
+                        "Nuevo evento",
+                        "Nuevo evento creado",
+                        MainActivity::class.java)
+
+                    Utilidades.noti_evento_add = true
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_evento = snapshot.getValue(Evento::class.java)
+                val id_noti = generador.incrementAndGet()
+
+                if(pojo_evento!!.estado_noti == Estado.MODIFICADO &&
+                        pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext)){
+
+                    Utilidades.eventos.child(pojo_evento!!.id.toString())
+                        .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                    generarNotificacion(id_noti,
+                        pojo_evento,
+                        "Evento modificado",
+                        "Un evento ha sido modificado",
+                        MainActivity::class.java)
+
+                    Utilidades.noti_evento_mod = true
+
+                }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun generarNotificacion(id_noti:Int, pojo: Parcelable, contenido:String, titulo:String, destino:Class<*>) {
+
+        val idcanal = getString(R.string.id_canal)
+        val iconolargo = BitmapFactory.decodeResource(resources,R.drawable.logo1)
+        val actividad = Intent(applicationContext,destino)
+
+        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK )
+        actividad.putExtra("club", pojo)
+
+        val pendingIntent = PendingIntent.getActivity(this,0,actividad, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val notification = NotificationCompat.Builder(this, idcanal)
+            .setLargeIcon(iconolargo)
+            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setContentTitle(titulo)
+            .setContentText(contenido)
+            .setSubText("sistema de información")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        with(NotificationManagerCompat.from(this)){
+            notify(id_noti,notification)
+        }
+    }
+
+    private fun crearCanalNotificaciones() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val nombre = getString(R.string.nombre_canal)
+            val idcanal = getString(R.string.id_canal)
+            val descripcion = getString(R.string.description_canal)
+            val importancia = NotificationManager.IMPORTANCE_HIGH
+
+            val channel = NotificationChannel(idcanal, nombre, importancia).apply {
+                description = descripcion
+            }
+
+            val nm: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.createNotificationChannel(channel)
+        }
     }
 
     fun valido():Boolean{
