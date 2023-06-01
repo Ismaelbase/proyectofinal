@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         modo_noche = SP.getBoolean("modo", false)
         Utilidades.cambiarTema(modo_noche)
 
+        // ------------ MONEDA ------------
+        val app_id_moneda = getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = getSharedPreferences(sp_moneda, 0)
+        SP_MONEDA.getBoolean("moneda", false)
+
         // -------------- CHECK DE QUE EL USER ESTA LOGEADO --------------
 
         if (Utilidades.obtenerIDUsuario(applicationContext) != "") { // Si el id no es vacio

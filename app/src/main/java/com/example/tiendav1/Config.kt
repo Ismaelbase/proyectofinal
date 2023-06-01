@@ -39,8 +39,11 @@ class Config : Fragment() {
     private lateinit var aplicar_cambios: Button
     private lateinit var logout: Button
     private lateinit var imagen_noche: ImageView
+    private lateinit var imagen_moneda:ImageView
+    private lateinit var switch_moneda:Switch
 
     var modo_noche: Boolean = false
+    var modo_moneda: Boolean = false
     private var url_avatar: Uri? = null
 
 
@@ -78,6 +81,8 @@ class Config : Fragment() {
         aplicar_cambios = binding.configBAplicarcambios
         logout = binding.configBLogout
         imagen_noche = binding.configIvNoche
+        imagen_moneda = binding.configIvMoneda
+        switch_moneda = binding.configSwMoneda
 
 
         val id_usuario = Utilidades.obtenerIDUsuario(pn.applicationContext)
@@ -102,6 +107,41 @@ class Config : Fragment() {
                 }
 
             })
+
+
+        //MONEDA
+        //Crear
+        val app_id_moneda = getString(com.example.tiendav1.R.string.app_id)
+        val sp_moneda = "${app_id_moneda}_moneda"
+        var SP_MONEDA = pn.getSharedPreferences(sp_moneda, 0)
+
+        //consultar el valor
+        val moneda_elegida = SP_MONEDA.getBoolean("moneda", false)
+
+        //Asignar valor
+        switch_moneda.isChecked = moneda_elegida
+
+        if(moneda_elegida){
+            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc3)
+        }else{
+            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc3)
+        }
+
+        //cambiar moneda
+        switch_moneda.setOnCheckedChangeListener { compoundButton, isChecked ->
+            modo_moneda = switch_moneda.isChecked
+            with(SP_MONEDA.edit()) {
+                putBoolean("moneda", modo_moneda)
+                apply()
+            }
+
+            if(modo_moneda){
+                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc3)
+            }else{
+                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc3)
+            }
+        }
+
 
         //Cargamos las Shared Preferences
         val app_id = getString(com.example.tiendav1.R.string.app_id)

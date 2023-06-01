@@ -135,10 +135,10 @@
         android:id="@+id/config_b_cambiarcontrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="Cambiar\ncontraseña"
         app:layout_constraintStart_toStartOf="@+id/config_et_cambiarmail"
-        app:layout_constraintTop_toBottomOf="@+id/config_et_cambiarmail" />
+        app:layout_constraintTop_toBottomOf="@+id/config_iv_moneda" />
 
     <Button
         android:id="@+id/config_b_borrarcuenta"
@@ -149,5 +149,25 @@
         app:layout_constraintEnd_toEndOf="@+id/config_iv_avatar"
         app:layout_constraintStart_toStartOf="@+id/config_iv_avatar"
         app:layout_constraintTop_toTopOf="@+id/config_b_cambiarcontrasena" />
+
+    <Switch
+        android:id="@+id/config_sw_moneda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/config_et_cambiarmail"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/config_et_cambiarmail"
+        app:layout_constraintTop_toBottomOf="@+id/config_et_cambiarmail" />
+
+    <ImageView
+        android:id="@+id/config_iv_moneda"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/euro_sc3"
+        app:layout_constraintBottom_toBottomOf="@+id/config_sw_moneda"
+        app:layout_constraintStart_toEndOf="@+id/config_sw_moneda"
+        app:layout_constraintTop_toTopOf="@+id/config_sw_moneda" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
