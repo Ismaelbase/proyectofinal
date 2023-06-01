@@ -32,6 +32,8 @@ class Utilidades {
         var admin_editar = false
         var admin_anadir = false
         var admin_gestion_pedido = false
+        var normal_detalle_evento = false
+        var admin_editar_evento = false
 
 
         //Volver actividades NOTIFICACIONES

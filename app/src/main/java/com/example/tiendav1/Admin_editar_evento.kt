@@ -1,6 +1,7 @@
 package com.example.tiendav1
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -118,6 +119,22 @@ class Admin_editar_evento : AppCompatActivity() {
             dpd.show()
         }
 
+        var fecha_bien = fecha_texto.text.toString().replace("0", "")
+
+        if(fecha_bien.split("/")[0].length == 1 && fecha_bien.split("/")[1].length == 1){
+            fecha_bien = "0${fecha_bien.split("/")[0]}/0${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
+        }else if (fecha_bien.split("/")[0].length == 1) {
+            fecha_bien =
+                "0${fecha_bien.split("/")[0]}/${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
+        }else if (fecha_bien.split("/")[1].length == 1) {
+            fecha_bien ="${fecha_bien.split("/")[0]}/0${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
+        }
+
+        fecha_texto.text = fecha_bien
+
+
+
+
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
         }
@@ -222,7 +239,8 @@ class Admin_editar_evento : AppCompatActivity() {
         }
 
         boton_volver.setOnClickListener {
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.admin_editar_evento = true
         }
     }
 

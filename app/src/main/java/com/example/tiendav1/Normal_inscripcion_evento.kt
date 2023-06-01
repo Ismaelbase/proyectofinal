@@ -1,5 +1,6 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -152,7 +153,8 @@ class Normal_inscripcion_evento : AppCompatActivity() {
 
 
         boton_volver.setOnClickListener {
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.admin_editar_evento = true
         }
     }
 }

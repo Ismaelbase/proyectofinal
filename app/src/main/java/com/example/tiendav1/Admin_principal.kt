@@ -22,6 +22,12 @@ class Admin_principal : AppCompatActivity() {
             navView.selectedItemId = R.id.Admin_inventario
             Utilidades.admin_editar = false
         }
+
+        if (Utilidades.admin_editar_evento){
+            navController.navigate(R.id.Admin_eventos)
+            navView.selectedItemId = R.id.Admin_eventos
+            Utilidades.admin_editar_evento = false
+        }
         if (Utilidades.admin_anadir){
             navController.navigate(R.id.Admin_inventario)
             navView.selectedItemId = R.id.Admin_inventario

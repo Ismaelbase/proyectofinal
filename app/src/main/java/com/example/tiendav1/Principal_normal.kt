@@ -18,6 +18,12 @@ class Principal_normal : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        if(Utilidades.normal_detalle_evento){
+            navController.navigate(R.id.Eventos)
+            navView.selectedItemId = R.id.Eventos
+            Utilidades.normal_detalle_evento = false
+        }
+
         if(Utilidades.noti_evento_mod){
             navController.navigate(R.id.Eventos)
             navView.selectedItemId = R.id.Eventos

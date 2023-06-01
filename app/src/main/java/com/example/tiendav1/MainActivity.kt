@@ -184,9 +184,6 @@ class MainActivity : AppCompatActivity() {
                                 }.start()
                             }
 
-
-
-
                         }
 
 
@@ -225,7 +222,7 @@ class MainActivity : AppCompatActivity() {
                     Utilidades.eventos.child(pojo_evento!!.id.toString())
                         .child("estado_noti").setValue(Estado.NOTIFICADO)
 
-                    generarNotificacion(id_notificacion,
+                    generarNotificacionEvento(id_notificacion,
                         pojo_evento,
                         "Nuevo evento",
                         "Nuevo evento creado",
@@ -245,11 +242,19 @@ class MainActivity : AppCompatActivity() {
                     Utilidades.eventos.child(pojo_evento!!.id.toString())
                         .child("estado_noti").setValue(Estado.NOTIFICADO)
 
-                    generarNotificacion(id_noti,
-                        pojo_evento,
-                        "Evento modificado",
-                        "Un evento ha sido modificado",
-                        MainActivity::class.java)
+                    if(Utilidades.obtenerTipoUsuario(applicationContext)){
+                        generarNotificacionEvento(id_noti,
+                            pojo_evento,
+                            "Evento modificado",
+                            "Un evento ha sido modificado",
+                            Admin_editar_evento::class.java)
+                    }else{
+                        generarNotificacionEvento(id_noti,
+                            pojo_evento,
+                            "Evento modificado",
+                            "Un evento ha sido modificado",
+                            Normal_inscripcion_evento::class.java)
+                    }
 
                     Utilidades.noti_evento_mod = true
 
@@ -271,14 +276,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun generarNotificacion(id_noti:Int, pojo: Parcelable, contenido:String, titulo:String, destino:Class<*>) {
+    private fun generarNotificacionEvento(id_noti:Int, pojo: Evento, contenido:String, titulo:String, destino:Class<*>) {
 
         val idcanal = getString(R.string.id_canal)
         val iconolargo = BitmapFactory.decodeResource(resources,R.drawable.logo1)
         val actividad = Intent(applicationContext,destino)
 
         actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK )
-        actividad.putExtra("club", pojo)
+        actividad.putExtra("ID", pojo.id.toString())
 
         val pendingIntent = PendingIntent.getActivity(this,0,actividad, PendingIntent.FLAG_UPDATE_CURRENT)
 
