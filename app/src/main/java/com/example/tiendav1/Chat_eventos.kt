@@ -41,8 +41,8 @@ class Chat_eventos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_eventos)
-
         supportActionBar?.hide()
+
         lista = mutableListOf()
 
         val id_evento = intent.getStringExtra("ID")
@@ -58,6 +58,7 @@ class Chat_eventos : AppCompatActivity() {
             })
 
         val id_usuario = Utilidades.obtenerIDUsuario(applicationContext)
+
         Utilidades.usuarios.child(id_usuario)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -68,6 +69,8 @@ class Chat_eventos : AppCompatActivity() {
                 }
             })
 
+
+
         enviar.setOnClickListener {
             val txt = texto.text.toString().trim()
 
@@ -77,7 +80,7 @@ class Chat_eventos : AppCompatActivity() {
                 val formateador = SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
                 val fecha_hora = formateador.format(ahora.time)
 
-                val id_mensaje = Utilidades.chat_productos.push().key
+                val id_mensaje = Utilidades.chat_eventos.push().key
                 val mensaje_nuevo = Mensaje(
                     id_mensaje,
                     usuario_actual.id,

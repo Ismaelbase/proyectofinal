@@ -1,17 +1,26 @@
 package com.example.tiendav1
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.Image
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.mediapipe.tasks.core.BaseOptions
+import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.google.mediapipe.tasks.vision.imageclassifier.ImageClassifier
+import com.google.mediapipe.tasks.vision.imageclassifier.ImageClassifier.ImageClassifierOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,6 +29,10 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 import kotlin.reflect.KFunction1
+import com.google.mediapipe.framework.image.BitmapImageBuilder;
+import com.google.mediapipe.framework.image.MPImage;
+import com.google.mediapipe.tasks.vision.imageclassifier.ImageClassifierResult
+
 
 class Admin_anadir_articulo : AppCompatActivity() {
 
@@ -61,7 +74,7 @@ class Admin_anadir_articulo : AppCompatActivity() {
     val boton_volver: ImageView by lazy {
         findViewById(R.id.anadir_articulo_volver)
     }
-    val disponible:Switch by lazy {
+    val disponible: Switch by lazy {
         findViewById(R.id.anadir_articulo_disponible)
     }
 
@@ -73,19 +86,29 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        disponible.isChecked = true
+        //CLASIFICADOR
 
-        val adaptador_spinner = ArrayAdapter(
-            applicationContext,
-            R.layout.custom_spinner,
-            Articulo.categorias
-        )
-        adaptador_spinner.setDropDownViewResource(R.layout.custom_spinner)
-        spinner_categoria.adapter = adaptador_spinner
+        val options = ImageClassifierOptions.builder()
+            .setBaseOptions(
+                BaseOptions.builder()
+                    .setModelAssetPath("proyectofinal/app/src/main/assets/efficientnet_lite0.tflite")
+                    .build()
+            )
+            .setRunningMode(RunningMode.IMAGE)
+            .setMaxResults(5)
+            .build()
 
-        imagen.setOnClickListener {
-            accesoGaleria.launch("image/*")
+        var imageClassifier = ImageClassifier.createFromOptions(this@Admin_anadir_articulo, options)
+
+
+// Load an image on the user’s device as a Bitmap object using BitmapFactory.
+        val opciones_bitmap = BitmapFactory.Options().apply {
+            BitmapFactory.Options().inMutable = true
+            BitmapFactory.Options().inScaled = false
+
         }
+
+
 
         imagen.setOnLongClickListener {
             val fichero_temporal = crearFicheroImagen()
@@ -95,8 +118,58 @@ class Admin_anadir_articulo : AppCompatActivity() {
                 fichero_temporal
             )
             getCamara.launch(url_avatar)
+
             true
         }
+
+//        var imagen_bitmap : Bitmap = ContextCompat.getDrawable(applicationContext, imagen.getDrawable())!!.toBitmap()
+
+        imagen.setOnClickListener {
+            accesoGaleria.launch("image/*")
+        }
+
+        imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
+            var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
+
+            var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
+
+            var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
+
+            var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
+            //partimos el texto por comillas dobles
+            texto = texto.split("\"".toRegex())[1]
+
+            nombre.setText(texto)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        disponible.isChecked = true
+
+        val adaptador_spinner = ArrayAdapter(
+            applicationContext,
+            R.layout.custom_spinner,
+            Articulo.categorias
+        )
+        adaptador_spinner.setDropDownViewResource(R.layout.custom_spinner)
+        spinner_categoria.adapter = adaptador_spinner
 
         boton_anadir.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
@@ -137,7 +210,7 @@ class Admin_anadir_articulo : AppCompatActivity() {
                                 ).show()
                             }
 
-                        }else{
+                        } else {
                             imagen.setImageResource(R.drawable.anadir_imagen_symbol_error)
 
                             Timer().schedule(object : TimerTask() {
@@ -259,7 +332,8 @@ class Admin_anadir_articulo : AppCompatActivity() {
         val cal: Calendar? = Calendar.getInstance()
         val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
         val nombreFichero: String? = "JPGE_" + timeStamp + "_"
-        val carpetaDir: File? = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val carpetaDir: File? =
+            applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
 
         return ficheroImagen!!
