@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     val referencia_bd: DatabaseReference by lazy {
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         // Obtener lista actual de usuarios en la app
         lista_usuarios = Utilidades.obtenerListaCompletaUsers()
 
-        if(Utilidades.recien_registrado != ""){
+        if (Utilidades.recien_registrado != "") {
             usuario.setText(Utilidades.recien_registrado)
             Utilidades.recien_registrado = ""
         }
@@ -112,8 +112,8 @@ class MainActivity : AppCompatActivity() {
         cuenta_atras.visibility = View.INVISIBLE
 
         login.setOnClickListener {
-            if(valido()){
-                Utilidades.usuarios.addListenerForSingleValueEvent(object : ValueEventListener{
+            if (valido()) {
+                Utilidades.usuarios.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val nombre = usuario.text.toString().trim()
                         val password = contrasena.text.toString().trim()
@@ -123,34 +123,52 @@ class MainActivity : AppCompatActivity() {
                             pojo_usuario!!.usuario == nombre && pojo_usuario!!.contraseña == password
                         }
 
-                        if (resultado != null){ //El usuario existe y es correcto
+                        if (resultado != null) { //El usuario existe y es correcto
                             val pojo_usuario = resultado.getValue(User::class.java)
 
-                            if(!pojo_usuario!!.alta!!){
-                                Toast.makeText(applicationContext, "Usuario baneado", Toast.LENGTH_LONG).show()
+                            if (!pojo_usuario!!.alta!!) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Usuario baneado",
+                                    Toast.LENGTH_LONG
+                                ).show()
                                 usuario.text.clear()
                                 contrasena.text.clear()
                                 return
                             }
 
-                            if(pojo_usuario!!.admin!!){ //El usuario es administrador
+                            if (pojo_usuario!!.admin!!) { //El usuario es administrador
                                 Utilidades.establecerTipoUsuario(applicationContext, true)
 
-                                startActivity(Intent(applicationContext, Admin_principal::class.java))
-                            }else{ //El usuario es normal
-                                startActivity(Intent(applicationContext, Principal_normal::class.java))
+                                startActivity(
+                                    Intent(
+                                        applicationContext,
+                                        Admin_principal::class.java
+                                    )
+                                )
+                            } else { //El usuario es normal
+                                startActivity(
+                                    Intent(
+                                        applicationContext,
+                                        Principal_normal::class.java
+                                    )
+                                )
                                 Utilidades.establecerTipoUsuario(applicationContext, false)
 
                             }
 
                             Utilidades.establecerIDUsuario(applicationContext, pojo_usuario.id!!)
 
-                        }else{//El usuario no existe o no es correcto
+                        } else {//El usuario no existe o no es correcto
                             intentos -= 1
 
-                            if(intentos != 0){
-                                Toast.makeText(applicationContext, "Usuario no encontrado, tienes ${intentos} intentos.", Toast.LENGTH_SHORT).show()
-                            }else{
+                            if (intentos != 0) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Usuario no encontrado, tienes ${intentos} intentos.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
                                 intentos = 4
 
                                 usuario.isEnabled = false
@@ -171,15 +189,23 @@ class MainActivity : AppCompatActivity() {
 
                                 }, 5000)
 
-                                object : CountDownTimer(5000,1000){
+                                object : CountDownTimer(5000, 1000) {
                                     override fun onTick(cuenta: Long) {
-                                        Toast.makeText(applicationContext, cuenta.toString(), Toast.LENGTH_SHORT)
+                                        Toast.makeText(
+                                            applicationContext,
+                                            cuenta.toString(),
+                                            Toast.LENGTH_SHORT
+                                        )
                                             .show()
-                                        cuenta_atras.setText("Espera "+cuenta/1000+" segundos.")
+                                        cuenta_atras.setText("Espera " + cuenta / 1000 + " segundos.")
                                     }
 
                                     override fun onFinish() {
-                                        Utilidades.tostadaCorrutina(this@MainActivity,applicationContext,"Puedes intentarlo de nuevo")
+                                        Utilidades.tostadaCorrutina(
+                                            this@MainActivity,
+                                            applicationContext,
+                                            "Puedes intentarlo de nuevo"
+                                        )
                                     }
                                 }.start()
                             }
@@ -202,31 +228,32 @@ class MainActivity : AppCompatActivity() {
 
 
         registro.setOnClickListener {
-            startActivity(Intent(applicationContext,Registro::class.java))
+            startActivity(Intent(applicationContext, Registro::class.java))
         }
 
 
-
-        // NOTIFICACIONES
-        generador= AtomicInteger(0)
+        // NOTIFICACIONES EVENTOS
+        generador = AtomicInteger(0)
         crearCanalNotificaciones()
 
-        Utilidades.eventos.addChildEventListener(object :ChildEventListener{
+        Utilidades.eventos.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val pojo_evento = snapshot.getValue(Evento::class.java)
                 val id_notificacion = generador.incrementAndGet()
-                val androidID = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-                if(pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext) &&
-                        pojo_evento!!.estado_noti == Estado.CREADO){
+                if (pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext) &&
+                    pojo_evento!!.estado_noti == Estado.CREADO
+                ) {
                     Utilidades.eventos.child(pojo_evento!!.id.toString())
                         .child("estado_noti").setValue(Estado.NOTIFICADO)
 
-                    generarNotificacionEvento(id_notificacion,
+                    generarNotificacionEvento(
+                        id_notificacion,
                         pojo_evento,
-                        "Nuevo evento",
-                        "Nuevo evento creado",
-                        MainActivity::class.java)
+                        "${pojo_evento!!.nombre}",
+                        "¡Evento nuevo en SecondCharm!",
+                        Normal_inscripcion_evento::class.java
+                    )
 
                     Utilidades.noti_evento_add = true
                 }
@@ -236,59 +263,320 @@ class MainActivity : AppCompatActivity() {
                 val pojo_evento = snapshot.getValue(Evento::class.java)
                 val id_noti = generador.incrementAndGet()
 
-                if(pojo_evento!!.estado_noti == Estado.MODIFICADO &&
-                        pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext)){
+                if (pojo_evento!!.estado_noti == Estado.MODIFICADO &&
+                    pojo_evento!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext)
+                ) {
 
                     Utilidades.eventos.child(pojo_evento!!.id.toString())
                         .child("estado_noti").setValue(Estado.NOTIFICADO)
 
-                    if(Utilidades.obtenerTipoUsuario(applicationContext)){
-                        generarNotificacionEvento(id_noti,
+                    if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                        generarNotificacionEvento(
+                            id_noti,
                             pojo_evento,
-                            "Evento modificado",
+                            "Cambios en ${pojo_evento!!.nombre}",
                             "Un evento ha sido modificado",
-                            Admin_editar_evento::class.java)
-                    }else{
-                        generarNotificacionEvento(id_noti,
+                            Admin_editar_evento::class.java
+                        )
+                    } else {
+                        generarNotificacionEvento(
+                            id_noti,
                             pojo_evento,
-                            "Evento modificado",
+                            "Cambios en ${pojo_evento!!.nombre}",
                             "Un evento ha sido modificado",
-                            Normal_inscripcion_evento::class.java)
+                            Normal_inscripcion_evento::class.java
+                        )
                     }
-
                     Utilidades.noti_evento_mod = true
 
                 }
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
+                false
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+                false
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                false
             }
 
         })
+
+        //NOTIFIACIONES ARTICULOS
+
+        Utilidades.articulos.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_articulo = snapshot.getValue(Articulo::class.java)
+                val id_notificacion = generador.incrementAndGet()
+
+                if (pojo_articulo!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext) &&
+                    pojo_articulo!!.estado_noti == Estado.CREADO
+                ) {
+
+                    Utilidades.articulos.child(pojo_articulo!!.id.toString())
+                        .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                    generarNotificacionArticulo(
+                        id_notificacion,
+                        pojo_articulo,
+                        "${pojo_articulo!!.nombre}",
+                        "¡Nuevo articulo en venta!",
+                        Comprar_articulo::class.java
+                    )
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_articulo = snapshot.getValue(Articulo::class.java)
+                val id_noti = generador.incrementAndGet()
+
+                if (pojo_articulo!!.estado_noti == Estado.MODIFICADO &&
+                    pojo_articulo!!.usuario_noti != Utilidades.obtenerIDUsuario(applicationContext)
+                ) {
+
+                    Utilidades.articulos.child(pojo_articulo!!.id.toString())
+                        .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                    if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                        generarNotificacionArticulo(
+                            id_noti,
+                            pojo_articulo,
+                            "Articulo editado",
+                            "${pojo_articulo!!.nombre} ha sido modificado",
+                            Admin_editar_articulo::class.java
+                        )
+                    } else {
+                        generarNotificacionArticulo(
+                            id_noti,
+                            pojo_articulo,
+                            "Articulo editado",
+                            "${pojo_articulo!!.nombre} ha sido modificado",
+                            Comprar_articulo::class.java
+                        )
+                    }
+
+                }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                false
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                false
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                false
+            }
+
+        })
+
+        //NOTIFICACIONES RESERVAS
+
+        Utilidades.reservas.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_reserva = snapshot.getValue(Reserva::class.java)
+                val id_notificacion = generador.incrementAndGet()
+
+                if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                    if (pojo_reserva!!.estado_noti == Estado.CREADO) {
+
+                        Utilidades.reservas.child(pojo_reserva!!.id.toString())
+                            .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                        generarNotificacionReserva(
+                            id_notificacion,
+                            pojo_reserva!!,
+                            "${pojo_reserva!!.nombre_usuario} a reservado: ${pojo_reserva!!.nombre_articulo}",
+                            "¡Tienes una nueva reserva!",
+                            Admin_gestion_pedido::class.java
+                        )
+                    }
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_reserva = snapshot.getValue(Reserva::class.java)
+                val id_noti = generador.incrementAndGet()
+
+                //Notificaciones para el admin
+                if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                    if (pojo_reserva!!.estado == "Completo") {
+                        generarNotificacionReserva(
+                            id_noti,
+                            pojo_reserva!!,
+                            "${pojo_reserva!!.nombre_usuario} a recogido: ${pojo_reserva!!.nombre_articulo}",
+                            "¡Pedido completado!",
+                            Admin_gestion_pedido::class.java
+                        )
+                    }else if (pojo_reserva!!.estado == "Cancelado"){
+                        generarNotificacionReserva(
+                            id_noti,
+                            pojo_reserva!!,
+                            "${pojo_reserva!!.nombre_usuario} a cancelado: ${pojo_reserva!!.nombre_articulo}",
+                            "¡Pedido cancelado!",
+                            Admin_gestion_pedido::class.java
+                        )
+                    }
+                    //Notificaciones para el usuario
+                } else {
+                    if (Utilidades.obtenerIDUsuario(applicationContext) == pojo_reserva!!.id_usuario) {
+                        if (pojo_reserva!!.estado == "Aceptado") {
+                            generarNotificacionReserva(
+                                id_noti,
+                                pojo_reserva!!,
+                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido aceptado.",
+                                "¡Pedido aceptado!",
+                                Normal_detalles_reserva::class.java
+                            )
+                        }else if (pojo_reserva!!.estado == "Rechazado") {
+                            generarNotificacionReserva(
+                                id_noti,
+                                pojo_reserva!!,
+                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido rechazado.",
+                                "¡Pedido rechazado!",
+                                Normal_detalles_reserva::class.java
+                            )
+                        }else if (pojo_reserva!!.estado == "Listo para recoger") {
+                            generarNotificacionReserva(
+                                id_noti,
+                                pojo_reserva!!,
+                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} esta listo para recoger.",
+                                "¡Pedido listo!",
+                                Normal_detalles_reserva::class.java
+                            )
+                        }
+                        Utilidades.reservas.child(pojo_reserva!!.id.toString())
+                            .child("estado_noti").setValue(Estado.NOTIFICADO)
+                    }
+
+                }
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                false
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                false
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                false
+            }
+
+        })
+
     }
 
-    private fun generarNotificacionEvento(id_noti:Int, pojo: Evento, contenido:String, titulo:String, destino:Class<*>) {
+    private fun generarNotificacionEvento(
+        id_noti: Int,
+        pojo: Evento,
+        contenido: String,
+        titulo: String,
+        destino: Class<*>
+    ) {
 
         val idcanal = getString(R.string.id_canal)
-        val iconolargo = BitmapFactory.decodeResource(resources,R.drawable.logo1)
-        val actividad = Intent(applicationContext,destino)
+        val svg_icono =
+            getDrawable(R.drawable.ic_notificacion_eventos)!!.toBitmap(width = 70, height = 70)
+        val iconolargo =
+            BitmapFactory.decodeResource(resources, R.drawable.ic_notifications_black_24dp)
+        val actividad = Intent(applicationContext, destino)
 
-        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK )
+        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         actividad.putExtra("ID", pojo.id.toString())
 
-        val pendingIntent = PendingIntent.getActivity(this,0,actividad, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent =
+            PendingIntent.getActivity(this, 0, actividad, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification = NotificationCompat.Builder(this, idcanal)
-            .setLargeIcon(iconolargo)
+            .setLargeIcon(svg_icono)
+            .setSmallIcon(R.drawable.ic_notificacion_eventos)
+            .setContentTitle(titulo)
+            .setContentText(contenido)
+            .setSubText("sistema de información")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(id_noti, notification)
+        }
+    }
+
+    private fun generarNotificacionArticulo(
+        id_noti: Int,
+        pojo: Articulo,
+        contenido: String,
+        titulo: String,
+        destino: Class<*>
+    ) {
+
+        val idcanal = getString(R.string.id_canal)
+        val svg_icono = getDrawable(R.drawable.logo_sc_2)!!.toBitmap(width = 70, height = 70)
+        val actividad = Intent(applicationContext, destino)
+
+        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        actividad.putExtra("ID", pojo.id.toString())
+
+        val pendingIntent =
+            PendingIntent.getActivity(this, 0, actividad, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val notification = NotificationCompat.Builder(this, idcanal)
+            .setLargeIcon(svg_icono)
+            .setSmallIcon(R.drawable.logo_sc_2)
+            .setContentTitle(titulo)
+            .setContentText(contenido)
+            .setSubText("sistema de información")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(id_noti, notification)
+        }
+    }
+
+    private fun generarNotificacionReserva(
+        id_noti: Int,
+        pojo: Reserva,
+        contenido: String,
+        titulo: String,
+        destino: Class<*>
+    ) {
+
+        val idcanal = getString(R.string.id_canal)
+        val svg_icono =
+            getDrawable(R.drawable.ic_notifications_black_24dp)!!.toBitmap(
+                width = 70,
+                height = 70
+            )
+        val iconolargo =
+            BitmapFactory.decodeResource(resources, R.drawable.ic_notifications_black_24dp)
+        val actividad = Intent(applicationContext, destino)
+
+        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        if(destino == Normal_detalles_reserva::class.java) {
+            actividad.putExtra("ID", pojo.id.toString())
+        }else{
+            actividad.putExtra("PEDIDO", pojo)
+        }
+
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, actividad, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val notification = NotificationCompat.Builder(this, idcanal)
+            .setLargeIcon(svg_icono)
             .setSmallIcon(R.drawable.ic_notifications_black_24dp)
             .setContentTitle(titulo)
             .setContentText(contenido)
@@ -298,8 +586,8 @@ class MainActivity : AppCompatActivity() {
             .setAutoCancel(true)
             .build()
 
-        with(NotificationManagerCompat.from(this)){
-            notify(id_noti,notification)
+        with(NotificationManagerCompat.from(this)) {
+            notify(id_noti, notification)
         }
     }
 
@@ -320,18 +608,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun valido():Boolean{
+    fun valido(): Boolean {
 
-        var correcto:Boolean
+        var correcto: Boolean
 
-        if(usuario.text.toString().trim()==""){
-            usuario.error="Falta el nombre de usuario"
-            correcto=false
-        }else if(contrasena.text.toString().trim()==""){
-            contrasena.error="Falta la contraseña"
-            correcto=false
-        }else{
-            correcto=true
+        if (usuario.text.toString().trim() == "") {
+            usuario.error = "Falta el nombre de usuario"
+            correcto = false
+        } else if (contrasena.text.toString().trim() == "") {
+            contrasena.error = "Falta la contraseña"
+            correcto = false
+        } else {
+            correcto = true
         }
 
         return correcto

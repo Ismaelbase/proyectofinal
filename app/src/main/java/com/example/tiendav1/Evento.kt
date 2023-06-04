@@ -9,10 +9,10 @@ data class Evento(
     var nombre:String? = null,
     var fecha:String? = null,
     var precio:Double? = null,
-    var aforo:Int? = null,
+    var aforo:Int = 0,
     var url_foto:String? = null,
-    var apuntados:Int? = null,
+    var apuntados:Int = 0,
     var activo:Boolean? = null,
-    var estado_noti:Int? = 0,
+    var estado_noti:Int? = null,
     var usuario_noti:String? = null
 ): Parcelable

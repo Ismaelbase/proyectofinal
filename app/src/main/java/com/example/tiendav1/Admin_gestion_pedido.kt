@@ -67,7 +67,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
         setContentView(R.layout.activity_admin_gestion_pedido)
         supportActionBar?.hide()
 
-        val pojo_pedido:Reserva = intent!!.getParcelableExtra("PEDIDO")!!
+        val pojo_pedido: Reserva = intent!!.getParcelableExtra("PEDIDO")!!
 
         val id_usuario = pojo_pedido.id_usuario
         val id_articulo = pojo_pedido.id_articulo
@@ -75,10 +75,10 @@ class Admin_gestion_pedido : AppCompatActivity() {
         fecha.text = pojo_pedido.fecha
         estado_texto.text = pojo_pedido.estado
 
-        if(pojo_pedido.estado == "Pendiente") {
+        if (pojo_pedido.estado == "Pendiente") {
             estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
             estado_texto.text = "Pendiente"
-        }else if(pojo_pedido.estado == "Aceptado") {
+        } else if (pojo_pedido.estado == "Aceptado") {
             estado_color.setImageDrawable(getDrawable(R.drawable.pendiente))
             estado_texto.text = "Pendiente"
 
@@ -93,23 +93,35 @@ class Admin_gestion_pedido : AppCompatActivity() {
 
 
             listo_color.setOnClickListener {
-                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Manten para preparar pedido",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             listo_texto.setOnClickListener {
-                Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Manten para preparar pedido",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             listo_color.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
-                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado")
+                    .setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT)
+                    .show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
                 estado_texto.text = "Completado"
 
                 true
             }
             listo_texto.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
-                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
+                Utilidades.reservas.child(pojo_pedido.id!!).child("estado")
+                    .setValue("Listo para recoger")
+                Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT)
+                    .show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
                 estado_texto.text = "Completado"
                 true
@@ -120,7 +132,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
             rechazar_texto.setOnClickListener(null)
             rechazar_color.setOnClickListener(null)
 
-        }else if(pojo_pedido.estado == "Rechazado") {
+        } else if (pojo_pedido.estado == "Rechazado") {
             estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
             estado_texto.text = "Rechazado"
 
@@ -136,7 +148,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
             rechazar_color.setOnClickListener(null)
 
 
-        }else if (pojo_pedido.estado == "Listo para recoger"){
+        } else if (pojo_pedido.estado == "Listo para recoger") {
             estado_color.setImageDrawable(getDrawable(R.drawable.completado))
             estado_texto.text = "Completado"
 
@@ -150,7 +162,21 @@ class Admin_gestion_pedido : AppCompatActivity() {
             aceptar_color.setOnClickListener(null)
             rechazar_texto.setOnClickListener(null)
             rechazar_color.setOnClickListener(null)
-        }else{
+        }else if (pojo_pedido.estado == "Cancelado"){
+            estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
+            estado_texto.text = "Cancelado"
+
+            rechazar_color.visibility = View.INVISIBLE
+            rechazar_texto.visibility = View.INVISIBLE
+
+            aceptar_color.visibility = View.INVISIBLE
+            aceptar_texto.visibility = View.INVISIBLE
+
+            aceptar_texto.setOnClickListener(null)
+            aceptar_color.setOnClickListener(null)
+            rechazar_texto.setOnClickListener(null)
+            rechazar_color.setOnClickListener(null)
+    }else{
             estado_color.setImageDrawable(getDrawable(R.drawable.completado))
             estado_texto.text = "Completado"
 
@@ -177,23 +203,24 @@ class Admin_gestion_pedido : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
+
         Utilidades.articulos.child(id_articulo!!)
             .addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                pojo_articulo = snapshot.getValue(Articulo::class.java)!!
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    pojo_articulo = snapshot.getValue(Articulo::class.java)!!
 
-                Glide.with(applicationContext)
-                    .load(pojo_articulo.url_foto)
-                    .transition(Utilidades.transicion)
-                    .into(imagen)
+                    Glide.with(applicationContext)
+                        .load(pojo_articulo.url_foto)
+                        .transition(Utilidades.transicion)
+                        .into(imagen)
 
-                nombre_articulo.text = pojo_articulo.nombre
-                stock.text = pojo_articulo.stock.toString()
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
+                    nombre_articulo.text = pojo_articulo.nombre
+                    stock.text = pojo_articulo.stock.toString()
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
 
         rechazar_color.setOnClickListener {
@@ -251,7 +278,6 @@ class Admin_gestion_pedido : AppCompatActivity() {
             estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
 
             Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Rechazado")
-            Utilidades.articulos.child(pojo_pedido.id_articulo!!).child("stock").setValue(pojo_articulo.stock!! + 1)
 
             Toast.makeText(applicationContext, "Pedido rechazado", Toast.LENGTH_SHORT).show()
 
@@ -265,6 +291,9 @@ class Admin_gestion_pedido : AppCompatActivity() {
 
             aceptar_color.visibility = View.INVISIBLE
             aceptar_texto.visibility = View.INVISIBLE
+
+            Utilidades.articulos.child(pojo_pedido.id_articulo!!).child("stock").setValue(pojo_articulo.stock!! - 1)
+            stock.text = (pojo_articulo.stock!! - 1).toString()
 
             listo_color.visibility = View.VISIBLE
             listo_texto.visibility = View.VISIBLE
@@ -325,6 +354,8 @@ class Admin_gestion_pedido : AppCompatActivity() {
             listo_color.visibility = View.VISIBLE
             listo_texto.visibility = View.VISIBLE
 
+            Utilidades.articulos.child(pojo_pedido.id_articulo!!).child("stock").setValue(pojo_articulo.stock!! - 1)
+            stock.text = (pojo_articulo.stock!! - 1).toString()
 
             listo_color.setOnClickListener {
                 Toast.makeText(applicationContext, "Manten para preparar pedido", Toast.LENGTH_SHORT).show()

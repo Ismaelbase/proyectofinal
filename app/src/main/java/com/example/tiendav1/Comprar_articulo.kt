@@ -80,6 +80,11 @@ class Comprar_articulo : AppCompatActivity() {
                         precio.text = pojo_articulo.precio.toString()+"€"
                     }
 
+                    if(!pojo_articulo.disponible!!){
+                        reservar.isEnabled = false
+                        reservar.text = "Aun no disponible"
+                    }
+
                     Glide.with(applicationContext)
                         .load(pojo_articulo.url_foto)
                         .apply(Utilidades.opcionesGlide(applicationContext))
@@ -117,9 +122,6 @@ class Comprar_articulo : AppCompatActivity() {
             val fecha = LocalDate.now().toString()
 
             if(pojo_articulo.stock!! > 0){
-                Utilidades.articulos.child(id_articulo)
-                    .child("stock")
-                    .setValue(pojo_articulo.stock!! - 1)
 
                 reservar.isEnabled = false
 
@@ -134,7 +136,8 @@ class Comprar_articulo : AppCompatActivity() {
                     pojo_articulo.nombre!!,
                     pojo_articulo.url_foto!!,
                     fecha,
-                    pojo_articulo.precio!!
+                    pojo_articulo.precio!!,
+                    Estado.CREADO
                 )
 
 

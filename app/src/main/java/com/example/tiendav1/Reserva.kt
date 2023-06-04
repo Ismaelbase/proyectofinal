@@ -14,6 +14,7 @@ data class Reserva(
     var url_articulo:String? = null,
     var fecha:String? = null,
     var precio:Double? = null,
+    var estado_noti:Int? = null,
     ): Parcelable{
     companion object{
         val estado = listOf(0,1,2,3,4)

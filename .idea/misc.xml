@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/hola5/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/drawable/ic_notificacion_eventos.xml" value="0.276" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.307" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_gestion_pedido.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_detalles_reserva.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/custom_spinner.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_config.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/item_articulo.xml" value="0.75" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/item_historia_inscripcion.xml" value="0.36666666666666664" />

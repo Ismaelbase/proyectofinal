@@ -24,6 +24,11 @@ class Principal_normal : AppCompatActivity() {
             Utilidades.normal_detalle_evento = false
         }
 
+        if(Utilidades.normal_detalles_reserva){
+            navController.navigate(R.id.Comprar)
+            navView.selectedItemId = R.id.Comprar
+            Utilidades.normal_detalles_reserva = false
+        }
         if(Utilidades.noti_evento_mod){
             navController.navigate(R.id.Eventos)
             navView.selectedItemId = R.id.Eventos

@@ -63,6 +63,9 @@ class Adaptador_pedidos(
         }else if (item_actual.estado == "Completo"){
             holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.completado))
             holder.estado_texto.text = "Completado"
+        }else if (item_actual.estado == "Cancelado"){
+            holder.estado_color.setColorFilter(contexto.resources.getColor(R.color.rechazar))
+            holder.estado_texto.text = "Cancelado"
         }
 
         holder.usuario.setOnClickListener {
@@ -126,6 +129,8 @@ class Adaptador_pedidos(
                         posicion = 0
                     }else if(it.estado == "Completo") {
                         posicion = 1
+                    }else if ( it.estado == "Cancelado"){
+                        posicion = 2
                     }
 
                     filtros_check[posicion]

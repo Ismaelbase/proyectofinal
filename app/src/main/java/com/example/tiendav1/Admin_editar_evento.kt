@@ -99,15 +99,13 @@ class Admin_editar_evento : AppCompatActivity() {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    if(dia<10){
-                        if(mes<10){
-                            fecha_texto.text = "0$dayOfMonth/0${month+1}/$year"
-                        }else{
-                            fecha_texto.text = "0$dayOfMonth/${month+1}/$year"
-                        }
-                    }else if(mes<10) {
+                    if (dayOfMonth < 10 && month < 10) {
+                        fecha_texto.text = "0$dayOfMonth/0${month + 1}/$year"
+                    } else if (dayOfMonth < 10) {
+                        fecha_texto.text = "0$dayOfMonth/${month + 1}/$year"
+                    } else if (month < 10) {
                         fecha_texto.text = "$dayOfMonth/0${month + 1}/$year"
-                    }else{
+                    } else {
                         fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
                     }
                 },
@@ -118,22 +116,6 @@ class Admin_editar_evento : AppCompatActivity() {
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000
             dpd.show()
         }
-
-        var fecha_bien = fecha_texto.text.toString().replace("0", "")
-
-        if(fecha_bien.split("/")[0].length == 1 && fecha_bien.split("/")[1].length == 1){
-            fecha_bien = "0${fecha_bien.split("/")[0]}/0${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
-        }else if (fecha_bien.split("/")[0].length == 1) {
-            fecha_bien =
-                "0${fecha_bien.split("/")[0]}/${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
-        }else if (fecha_bien.split("/")[1].length == 1) {
-            fecha_bien ="${fecha_bien.split("/")[0]}/0${fecha_bien.split("/")[1]}/${fecha_bien.split("/")[2]}"
-        }
-
-        fecha_texto.text = fecha_bien
-
-
-
 
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
@@ -214,7 +196,6 @@ class Admin_editar_evento : AppCompatActivity() {
                     }
 
                     Utilidades.escribirEvento(
-                        referencia_bd,
                         pojo_articulo.id!!,
                         nombre.text.toString(),
                         fecha_texto.text.toString(),

@@ -88,6 +88,7 @@ class Admin_editar_articulo : AppCompatActivity() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_articulo = snapshot.getValue(Articulo::class.java)!!
+
                     nombre.setText(pojo_articulo.nombre)
                     precio.setText(pojo_articulo.precio.toString())
                     descripcion.setText(pojo_articulo.descripcion)
@@ -152,8 +153,8 @@ class Admin_editar_articulo : AppCompatActivity() {
                             )
                         }
 
-                        Utilidades.escribirArticulo(referencia_bd,
-                        pojo_articulo.id!!,
+                        Utilidades.escribirArticulo(
+                        id_articulo,
                         nuevo_nombre,
                         nuevo_precio,
                         nueva_descripcion,
@@ -161,13 +162,16 @@ class Admin_editar_articulo : AppCompatActivity() {
                         url_firebase!!,
                         pojo_articulo.fecha!!,
                         nuevo_stock,
-                        disponible.isChecked)
+                        disponible.isChecked,
+                        Estado.MODIFICADO,
+                        Utilidades.obtenerIDUsuario(applicationContext))
 
                         Utilidades.tostadaCorrutina(
                             this@Admin_editar_articulo,
                             applicationContext,
                             "Articulo editado correctamente"
                         )
+
                         finish()
 
                     }

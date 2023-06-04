@@ -59,6 +59,8 @@ class Normal_historial_compras : AppCompatActivity() {
                             }
                         }
                     }
+                    lista_reserva.sortByDescending { it.estado == "Aceptado" }
+                    lista_reserva.sortByDescending { it.estado == "Pendiente" }
                     adaptador.notifyDataSetChanged()
                 }
 

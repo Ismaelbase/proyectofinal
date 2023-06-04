@@ -1,5 +1,6 @@
 package com.example.tiendav1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -138,19 +139,22 @@ class Normal_detalles_reserva : AppCompatActivity() {
             })
 
         boton_cancelar_reserva.setOnClickListener {
-            Utilidades.reservas.child(id_reserva).child("estado").setValue("Rechazado")
+            Utilidades.reservas.child(id_reserva).child("estado").setValue("Cancelado")
             Toast.makeText(applicationContext, "Reserva cancelada", Toast.LENGTH_SHORT).show()
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.normal_detalles_reserva = true
         }
 
         boton_recoger_pedido.setOnClickListener {
             Utilidades.reservas.child(id_reserva).child("estado").setValue("Completo")
             Toast.makeText(applicationContext, "Pedido recogido", Toast.LENGTH_SHORT).show()
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.normal_detalles_reserva = true
         }
 
         boton_volver.setOnClickListener {
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.normal_detalles_reserva = true
         }
 
     }

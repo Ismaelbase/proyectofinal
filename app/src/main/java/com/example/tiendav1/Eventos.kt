@@ -74,7 +74,9 @@ class Eventos : Fragment() {
                     val pojo_evento = it.getValue(Evento::class.java)
                     if (pojo_evento!!.apuntados!!.toInt() < pojo_evento.aforo!!.toInt() &&
                         pojo_evento.activo!!){
-                        lista_eventos.add(pojo_evento)
+                        if(pojo_evento!!.id != null){
+                            lista_eventos.add(pojo_evento!!)
+                        }
                     }
                 }
                 adaptador.notifyDataSetChanged()

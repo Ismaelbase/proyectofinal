@@ -95,6 +95,8 @@ class Admin_crear_evento : AppCompatActivity() {
             fecha_texto.text = "0$dia/$mes/$anyo"
         }else if(fecha_texto.text.split("/")[1].toInt()<10){
             fecha_texto.text = "$dia/0$mes/$anyo"
+        }else{
+            fecha_texto.text = "$dia/$mes/$anyo"
         }
 
         //Abrimos un datepicker limitado a hoy o fechas futuras para evitar errores
@@ -107,24 +109,25 @@ class Admin_crear_evento : AppCompatActivity() {
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    if(dia<10){
-                        if(mes<10){
-                            fecha_texto.text = "0$dayOfMonth/0${month+1}/$year"
-                        }else{
-                            fecha_texto.text = "0$dayOfMonth/${month+1}/$year"
-                        }
-                    }else if(mes<10) {
+                    if (dayOfMonth < 10 && month < 10) {
+                        fecha_texto.text = "0$dayOfMonth/0${month + 1}/$year"
+                    } else if (dayOfMonth < 10) {
+                        fecha_texto.text = "0$dayOfMonth/${month + 1}/$year"
+                    } else if (month < 10) {
                         fecha_texto.text = "$dayOfMonth/0${month + 1}/$year"
-                    }else{
+                    } else {
                         fecha_texto.text = "$dayOfMonth/${month + 1}/$year"
                     }
+
                 },
                 anyo,
                 mes,
                 dia
+
             )
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000
             dpd.show()
+
         }
 
         activo.isChecked = true
@@ -183,7 +186,6 @@ class Admin_crear_evento : AppCompatActivity() {
                             )
 
                             Utilidades.escribirEvento(
-                                referencia_bd,
                                 id_evento,
                                 nombre.text.toString().trim(),
                                 fecha_texto.text.toString().trim(),

@@ -78,7 +78,10 @@ class Admin_eventos : Fragment() {
                 lista_eventos.clear()
                 snapshot.children.forEach{
                     val pojo_eventos = it.getValue(Evento::class.java)
-                    lista_eventos.add(pojo_eventos!!)
+                    if(pojo_eventos!!.id != null){
+                        lista_eventos.add(pojo_eventos!!)
+                    }
+
                 }
                 adaptador.notifyDataSetChanged()
             }

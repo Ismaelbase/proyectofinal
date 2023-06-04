@@ -113,7 +113,6 @@ class Admin_anadir_articulo : AppCompatActivity() {
                             )
 
                             Utilidades.escribirArticulo(
-                                referencia_bd,
                                 id_articulo,
                                 nombre.text.toString(),
                                 precio.text.toString().toDouble(),
@@ -122,7 +121,9 @@ class Admin_anadir_articulo : AppCompatActivity() {
                                 url_firebase,
                                 fecha,
                                 stock.text.toString().toInt(),
-                                disponible.isChecked
+                                disponible.isChecked,
+                                Estado.CREADO,
+                                Utilidades.obtenerIDUsuario(applicationContext)
                             )
 
                             Utilidades.admin_anadir = true

@@ -34,6 +34,7 @@ class Utilidades {
         var admin_gestion_pedido = false
         var normal_detalle_evento = false
         var admin_editar_evento = false
+        var normal_detalles_reserva = false
 
 
         //Volver actividades NOTIFICACIONES
@@ -172,7 +173,7 @@ class Utilidades {
             conectado:Boolean,
             admin:Boolean
 
-        ) = db_ref.child("SecondCharm").child("Users").child(id).setValue(User(
+        ) = usuarios.child(id).setValue(User(
                     id,
                     usuario,
                     contraseña,
@@ -186,7 +187,6 @@ class Utilidades {
                 ))
 
         fun escribirArticulo(
-            db_ref:DatabaseReference,
             id:String,
             nombre:String,
             precio:Double,
@@ -195,9 +195,12 @@ class Utilidades {
             url_foto:String,
             fecha:String,
             stock:Int,
-            disponible:Boolean
+            disponible:Boolean,
+            estado_noti:Int,
+            usuario_noti:String
 
-        ) = db_ref.child("SecondCharm").child("Articulos").child(id).setValue(Articulo(
+
+        ) = articulos.child(id).setValue(Articulo(
             id,
             nombre,
             precio,
@@ -206,7 +209,9 @@ class Utilidades {
             url_foto,
             fecha,
             stock,
-            disponible
+            disponible,
+            estado_noti,
+            usuario_noti
         ))
 
         fun escribirReserva(
@@ -218,7 +223,8 @@ class Utilidades {
             nombre_articulo:String,
             url_articulo:String,
             fecha:String,
-            precio:Double
+            precio:Double,
+            estado_noti: Int
 
         ) = reservas.child(id).setValue(Reserva(
             id,
@@ -229,11 +235,11 @@ class Utilidades {
             nombre_articulo,
             url_articulo,
             fecha,
-            precio
+            precio,
+            estado_noti
         ))
 
         fun escribirEvento(
-            db_ref:DatabaseReference,
             id:String,
             nombre:String,
             fecha:String,
@@ -245,7 +251,7 @@ class Utilidades {
             estado_noti:Int,
             usuario_noti:String
 
-        ) = db_ref.child("SecondCharm").child("Eventos").child(id).setValue(Evento(
+        ) = eventos.child(id).setValue(Evento(
             id,
             nombre,
             fecha,
