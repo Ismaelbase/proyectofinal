@@ -35,6 +35,7 @@ class Utilidades {
         var normal_detalle_evento = false
         var admin_editar_evento = false
         var normal_detalles_reserva = false
+        var normal_evento = false
 
 
         //Volver actividades NOTIFICACIONES
@@ -274,7 +275,8 @@ class Utilidades {
             url_evento:String,
             url_usuario:String,
             fecha:String,
-            precio: Double
+            precio: Double,
+            estado_noti: Int
 
         ) = inscripcion.child(id).setValue(Inscripcion(
             id,
@@ -286,7 +288,8 @@ class Utilidades {
             url_evento,
             url_usuario,
             fecha,
-            precio
+            precio,
+            estado_noti
 
         ))
 

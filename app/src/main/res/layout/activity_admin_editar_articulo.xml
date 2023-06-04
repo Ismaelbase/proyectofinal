@@ -150,9 +150,9 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editar_articulo_aplicar"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editar_articulo_aplicar"
         app:srcCompat="@drawable/volver_sc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.database.*
 
 class Cambiar_contrasena : AppCompatActivity() {
@@ -51,6 +52,14 @@ class Cambiar_contrasena : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
+
+        contraseña_nueva2.addTextChangedListener {
+            if (contraseña_nueva1.text.toString() != contraseña_nueva2.text.toString()) {
+                contraseña_nueva2.setTextColor(resources.getColor(R.color.rojo_error))
+            } else {
+                contraseña_nueva2.setTextColor(resources.getColor(R.color.black))
+            }
+        }
 
         boton_aplicar.setOnClickListener {
             if (contraseña_actual.text.isEmpty() ||

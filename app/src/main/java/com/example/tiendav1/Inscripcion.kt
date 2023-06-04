@@ -15,6 +15,7 @@ data class Inscripcion(
     var url_usuario:String? = null,
     var fecha:String? = null,
     var precio:Double? = null,
+    var estado_noti:Int? = null
     ): Parcelable{
     companion object{
         val estado_inscripcion = listOf(0,1,2)

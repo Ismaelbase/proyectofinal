@@ -10,16 +10,17 @@
         android:id="@+id/comprar_categoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Categoria"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/comprar_stock"
-        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
-        app:layout_constraintTop_toTopOf="@+id/comprar_precio" />
+        app:layout_constraintEnd_toEndOf="@+id/comprar_stock"
+        app:layout_constraintStart_toStartOf="@+id/comprar_stock"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_stock" />
 
     <ImageView
         android:id="@+id/comprar_imagen"
-        android:layout_width="209dp"
-        android:layout_height="152dp"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,26 +32,28 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="top|left"
+        android:gravity="center|top"
         android:inputType="textEmailAddress|textMultiLine"
         android:lines="20"
         android:minLines="2"
         android:scrollbars="vertical"
         android:scrollHorizontally="false"
         android:text="Prueba"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="@+id/comprar_imagen"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/comprar_imagen"
-        app:layout_constraintTop_toBottomOf="@+id/comprar_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_precio"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/comprar_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:text="Nombre"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/comprar_imagen"
         app:layout_constraintStart_toStartOf="@+id/comprar_imagen"
         app:layout_constraintTop_toBottomOf="@+id/comprar_imagen" />
@@ -59,11 +62,13 @@
         android:id="@+id/comprar_precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Precio €"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
-        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/comprar_nombre"
+        app:layout_constraintStart_toStartOf="@+id/comprar_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_nombre" />
 
     <TextView
         android:id="@+id/comprar_stock"
@@ -72,26 +77,29 @@
         android:layout_marginTop="10dp"
         android:text="Stock"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/comprar_precio"
-        app:layout_constraintTop_toBottomOf="@+id/comprar_precio" />
+        app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/editar_articulo_descripcion" />
 
     <Button
         android:id="@+id/comprar_reserva"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Reservar"
         app:layout_constraintEnd_toEndOf="@+id/editar_articulo_descripcion"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/editar_articulo_descripcion"
-        app:layout_constraintTop_toBottomOf="@+id/comprar_stock" />
+        app:layout_constraintTop_toBottomOf="@+id/comprar_categoria" />
 
     <ImageView
         android:id="@+id/comprar_volver"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comprar_reserva"
         app:srcCompat="@drawable/volver_sc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

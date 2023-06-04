@@ -22,6 +22,8 @@ class Principal_normal : AppCompatActivity() {
             navController.navigate(R.id.Eventos)
             navView.selectedItemId = R.id.Eventos
             Utilidades.normal_detalle_evento = false
+
+            startActivity(Intent(applicationContext,Normal_historial_inscripciones::class.java))
         }
 
         if(Utilidades.normal_detalles_reserva){
@@ -50,6 +52,11 @@ class Principal_normal : AppCompatActivity() {
             navController.navigate(R.id.Comprar)
             navView.selectedItemId = R.id.Comprar
             Utilidades.normal_historial = false
+        }
+        if(Utilidades.normal_evento){
+            navController.navigate(R.id.Eventos)
+            navView.selectedItemId = R.id.Eventos
+            Utilidades.normal_evento = false
         }
 
         if(Utilidades.obtenerIDUsuario(applicationContext) == ""){

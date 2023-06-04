@@ -68,8 +68,8 @@ class Comprar_articulo : AppCompatActivity() {
 
                     nombre.setText(pojo_articulo.nombre)
                     descripcion.setText(pojo_articulo.descripcion)
-                    stock.setText(pojo_articulo.stock.toString())
-                    categoria.setText(pojo_articulo.categoria)
+                    stock.setText("Stock actual: "+pojo_articulo.stock.toString())
+                    categoria.setText("Categoria: " + pojo_articulo.categoria)
 
                     val df = DecimalFormat("#.00")
                     df.roundingMode = RoundingMode.DOWN

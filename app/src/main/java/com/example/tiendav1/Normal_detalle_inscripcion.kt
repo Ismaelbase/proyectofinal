@@ -83,7 +83,8 @@ class Normal_detalle_inscripcion : AppCompatActivity() {
 
 
         boton_volver.setOnClickListener {
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.normal_detalle_evento = true
         }
 
     }

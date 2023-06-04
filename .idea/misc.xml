@@ -6,9 +6,37 @@
         <entry key="..\:/Users/hola5/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/drawable/ic_notificacion_eventos.xml" value="0.276" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.307" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout-v31/fragment_config.xml" value="0.2765625" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_anadir_articulo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_crear_evento.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_editar_articulo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_editar_evento.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_editar_inscripcion.xml" value="0.25" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_gestion_inscripciones.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_gestion_pedido.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_moderar_usuario_especifico.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_moderar_usuarios.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_admin_principal.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_borrar_cuenta.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_cambiar_contrasena.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_chat_eventos.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_chat_productos.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_comprar_articulo.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_main.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_detalle_inscripcion.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_detalles_reserva.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_historial_compras.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_historial_inscripciones.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_normal_inscripcion_evento.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/activity_registro.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/custom_spinner.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_admin_chats.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_admin_config.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_admin_eventos.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_admin_inventario.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_admin_pedidos.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_chats.xml" value="0.27760416666666665" />
+        <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_comprar.xml" value="0.27760416666666665" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/fragment_config.xml" value="0.33" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/item_articulo.xml" value="0.75" />
         <entry key="..\:/Users/hola5/Desktop/Projecto final 2/proyectofinal/app/src/main/res/layout/item_historia_inscripcion.xml" value="0.36666666666666664" />

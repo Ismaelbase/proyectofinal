@@ -8,19 +8,21 @@
 
     <Button
         android:id="@+id/admin_config_b_aplicarcambios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:text="Aplicar\ncambios"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintStart_toStartOf="@+id/admin_config_b_cambiarcontrasena"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_b_cambiarcontrasena" />
 
     <Button
         android:id="@+id/admin_config_b_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:text="Logout"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintEnd_toEndOf="@+id/admin_config_b_borrarcuenta"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_b_borrarcuenta" />
 
@@ -39,7 +41,6 @@
         android:id="@+id/admin_config_tv_bienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Bienvenida"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,12 +51,12 @@
     <ImageView
         android:id="@+id/admin_config_iv_logo"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="350dp"
         android:src="@drawable/texto_logo1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.056" />
@@ -64,7 +65,7 @@
         android:id="@+id/admin_config_tv_cambiarnombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="Cambiar nombre"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/admin_config_iv_logo"
@@ -118,6 +119,7 @@
         android:minHeight="48dp"
         android:text="Modo \nNoche"
         app:layout_constraintEnd_toEndOf="@+id/admin_config_iv_noche"
+        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="@+id/admin_config_iv_noche"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_iv_noche" />
 
@@ -133,18 +135,20 @@
 
     <Button
         android:id="@+id/admin_config_b_cambiarcontrasena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="60dp"
         android:text="Cambiar\ncontraseña"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintStart_toStartOf="@+id/admin_config_et_cambiarmail"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_et_cambiarmail" />
 
     <Button
         android:id="@+id/admin_config_b_borrarcuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:text="Borrar\ncuenta"
+        app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintBottom_toBottomOf="@+id/admin_config_b_cambiarcontrasena"
         app:layout_constraintEnd_toEndOf="@+id/admin_config_iv_avatar"
         app:layout_constraintStart_toStartOf="@+id/admin_config_iv_avatar"

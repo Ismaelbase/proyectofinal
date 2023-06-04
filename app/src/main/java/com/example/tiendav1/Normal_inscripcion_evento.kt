@@ -146,6 +146,7 @@ class Normal_inscripcion_evento : AppCompatActivity() {
                 pojo_usuario.url_avatar!!,
                 pojo_evento.fecha!!,
                 pojo_evento.precio!!,
+                Estado.CREADO
             )
             inscribirse.isEnabled = false
             inscribirse.text = "Inscrito"
@@ -154,7 +155,7 @@ class Normal_inscripcion_evento : AppCompatActivity() {
 
         boton_volver.setOnClickListener {
             startActivity(Intent(applicationContext,MainActivity::class.java))
-            Utilidades.admin_editar_evento = true
+            Utilidades.normal_evento = true
         }
     }
 }

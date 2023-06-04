@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.util.Util
 import com.google.firebase.database.*
 
 class Admin_editar_inscripcion : AppCompatActivity() {
@@ -33,6 +34,9 @@ class Admin_editar_inscripcion : AppCompatActivity() {
     }
     val estado_texto:TextView by lazy {
         findViewById(R.id.admin_editar_inscripcion_estado_texto)
+    }
+    val flecha:ImageView by lazy {
+        findViewById(R.id.admin_editar_inscripcion_usuario_flecha)
     }
     val boton_aceptar:Button by lazy {
         findViewById(R.id.admin_editar_inscripcion_aceptar)
@@ -96,6 +100,7 @@ class Admin_editar_inscripcion : AppCompatActivity() {
                                     boton_aceptar.isEnabled = false
                                     boton_rechazar.isEnabled = false
                                     estado_color.setImageResource(R.drawable.rechazar)
+                                    flecha.setImageResource(R.drawable.cancelado_sc1)
                                     estado_texto.text = "Rechazado"
                                 }else if (pojo_inscripcion.estado == "Pendiente"){
                                     estado_color.setImageResource(R.drawable.pendiente)
@@ -120,18 +125,23 @@ class Admin_editar_inscripcion : AppCompatActivity() {
 
         boton_aceptar.setOnClickListener {
             pojo_inscripcion.estado = "Aceptado"
+            pojo_inscripcion.estado_noti = Estado.CREADO
             Utilidades.inscripcion.child(id_inscripcion).setValue(pojo_inscripcion)
 
             //Se suma uno a apuntados de ese evento
             pojo_evento.apuntados = pojo_evento.apuntados!!.toInt() + 1
             Utilidades.eventos.child(pojo_inscripcion.id_evento!!).setValue(pojo_evento)
 
-            finish()
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.admin_editar_evento = true
         }
         boton_rechazar.setOnClickListener {
             pojo_inscripcion.estado = "Rechazado"
+            pojo_inscripcion.estado_noti = Estado.CREADO
             Utilidades.inscripcion.child(id_inscripcion).setValue(pojo_inscripcion)
-            finish()
+
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            Utilidades.admin_editar_evento = true
         }
 
         boton_volver.setOnClickListener {

@@ -473,7 +473,84 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        //NOTIFICACIONES INSCRIPCIONES
+
+        Utilidades.inscripcion.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_inscripcion = snapshot.getValue(Inscripcion::class.java)
+                val id_notificacion = generador.incrementAndGet()
+
+                if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                    if (pojo_inscripcion!!.estado_noti == Estado.CREADO && pojo_inscripcion!!.estado == "Pendiente"){
+                        Utilidades.reservas.child(pojo_inscripcion!!.id.toString())
+                            .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+                        generarNotificacionInscripcion(
+                            id_notificacion,
+                            pojo_inscripcion!!,
+                            "${pojo_inscripcion!!.nombre_usuario} se ha inscrito a : ${pojo_inscripcion!!.nombre_evento}",
+                            "¡Nueva inscripcion!",
+                            Admin_editar_inscripcion::class.java
+                        )
+                    }
+                }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val pojo_inscripcion = snapshot.getValue(Inscripcion::class.java)
+                val id_noti = generador.incrementAndGet()
+
+                //Notificaciones para el admin
+                if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+                    //Notificaciones para el usuario
+                } else {
+                    if (Utilidades.obtenerIDUsuario(applicationContext) == pojo_inscripcion!!.id_usuario) {
+                        if (pojo_inscripcion!!.estado_noti == Estado.CREADO){
+                            if (pojo_inscripcion!!.estado == "Aceptado") {
+                                generarNotificacionInscripcion(
+                                    id_noti,
+                                    pojo_inscripcion!!,
+                                    "Tu inscripcion a ${pojo_inscripcion!!.nombre_evento} ha sido aceptado.",
+                                    "¡Inscripción aceptada!",
+                                    Normal_detalle_inscripcion::class.java
+                                )
+                            }else if (pojo_inscripcion!!.estado == "Rechazado") {
+                                generarNotificacionInscripcion(
+                                    id_noti,
+                                    pojo_inscripcion!!,
+                                    "Tu inscripcion a ${pojo_inscripcion!!.nombre_evento} ha sido rechazada.",
+                                    "¡Inscripcion rechazada!",
+                                    Normal_detalle_inscripcion::class.java
+                                )
+                            }
+                            Utilidades.inscripcion.child(pojo_inscripcion!!.id.toString())
+                                .child("estado_noti").setValue(Estado.NOTIFICADO)
+                        }
+                    }
+
+                }
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                false
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                false
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                false
+            }
+
+        })
+
+
+
     }
+
+
 
     private fun generarNotificacionEvento(
         id_noti: Int,
@@ -571,6 +648,46 @@ class MainActivity : AppCompatActivity() {
         }else{
             actividad.putExtra("PEDIDO", pojo)
         }
+
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, actividad, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val notification = NotificationCompat.Builder(this, idcanal)
+            .setLargeIcon(svg_icono)
+            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setContentTitle(titulo)
+            .setContentText(contenido)
+            .setSubText("sistema de información")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(id_noti, notification)
+        }
+    }
+
+    private fun generarNotificacionInscripcion(
+        id_noti: Int,
+        pojo: Inscripcion,
+        contenido: String,
+        titulo: String,
+        destino: Class<*>
+    ) {
+
+        val idcanal = getString(R.string.id_canal)
+        val svg_icono =
+            getDrawable(R.drawable.ic_notifications_black_24dp)!!.toBitmap(
+                width = 70,
+                height = 70
+            )
+        val iconolargo =
+            BitmapFactory.decodeResource(resources, R.drawable.ic_notifications_black_24dp)
+        val actividad = Intent(applicationContext, destino)
+
+        actividad.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        actividad.putExtra("ID", pojo.id.toString())
 
 
         val pendingIntent = PendingIntent.getActivity(this, 0, actividad, PendingIntent.FLAG_UPDATE_CURRENT)

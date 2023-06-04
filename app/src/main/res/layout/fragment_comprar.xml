@@ -71,7 +71,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/historial_compras_sc4"
+        android:src="@drawable/historia_compras_sc_32"
         app:layout_constraintStart_toEndOf="@+id/comprar_searchview"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
