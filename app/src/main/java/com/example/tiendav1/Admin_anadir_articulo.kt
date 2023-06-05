@@ -32,6 +32,10 @@ import kotlin.reflect.KFunction1
 import com.google.mediapipe.framework.image.BitmapImageBuilder;
 import com.google.mediapipe.framework.image.MPImage;
 import com.google.mediapipe.tasks.vision.imageclassifier.ImageClassifierResult
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 
 
 class Admin_anadir_articulo : AppCompatActivity() {
@@ -122,26 +126,73 @@ class Admin_anadir_articulo : AppCompatActivity() {
             true
         }
 
-//        var imagen_bitmap : Bitmap = ContextCompat.getDrawable(applicationContext, imagen.getDrawable())!!.toBitmap()
-
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
+            var cambiado = true
+            if (cambiado) {
+                cambiado = false
+                imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
+
+                    var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
+                    var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
+                    var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
+                    var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
+
+                    texto = texto.split("\"".toRegex())[1]
+
+                    //Traductor
+                    val opciones_traductor = TranslatorOptions.Builder()
+                        .setSourceLanguage(TranslateLanguage.ENGLISH)
+                        .setTargetLanguage(TranslateLanguage.SPANISH)
+                        .build()
+
+                    val InglesEspanol = Translation.getClient(opciones_traductor)
+
+                    val condiciones = DownloadConditions.Builder().requireWifi().build()
+                    InglesEspanol.downloadModelIfNeeded(condiciones).addOnSuccessListener {
+                        InglesEspanol.translate(texto).addOnSuccessListener {
+                                translatedText -> texto = translatedText
+                            nombre.setText(texto.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+                        }
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Error al descargar el modelo", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
         }
 
-        imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
-            var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
-
-            var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
-
-            var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
-
-            var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
-            //partimos el texto por comillas dobles
-            texto = texto.split("\"".toRegex())[1]
-
-            nombre.setText(texto)
-        }
-
+        //Hacemos que esto se ejecute solo si ha cambiado imagen
+//
+//        imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
+//            var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
+//            var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
+//            var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
+//            var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
+//
+//            texto = texto.split("\"".toRegex())[1]
+//
+//            //Traductor
+//            val opciones_traductor = TranslatorOptions.Builder()
+//                .setSourceLanguage(TranslateLanguage.ENGLISH)
+//                .setTargetLanguage(TranslateLanguage.SPANISH)
+//                .build()
+//
+//            val InglesEspanol = Translation.getClient(opciones_traductor)
+//
+//            val condiciones = DownloadConditions.Builder().requireWifi().build()
+//            InglesEspanol.downloadModelIfNeeded(condiciones).addOnSuccessListener {
+//                    InglesEspanol.translate(texto).addOnSuccessListener {
+//                    translatedText -> texto = translatedText
+//                    nombre.setText(texto.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+//                }
+//
+//            }.addOnFailureListener {
+//                Toast.makeText(this, "Error al descargar el modelo", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        }
 
 
 
