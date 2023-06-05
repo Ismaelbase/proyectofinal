@@ -6,11 +6,6 @@
     app:startDestination="@id/Config">
 
     <fragment
-        android:id="@+id/Puntos"
-        android:name="com.example.tiendav1.Puntos"
-        android:label="Puntos"
-        tools:layout="@layout/fragment_puntos"/>
-    <fragment
         android:id="@+id/Config"
         android:name="com.example.tiendav1.Config"
         android:label="Config"

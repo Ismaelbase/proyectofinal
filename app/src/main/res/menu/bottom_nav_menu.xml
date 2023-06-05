@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/Config"
         android:icon="@drawable/ic_baseline_settings_24"
@@ -16,12 +15,7 @@
         android:icon="@drawable/ic_baseline_event_24"
         android:title="Eventos" />
     <item
-        android:id="@+id/Puntos"
-        android:icon="@drawable/ic_baseline_star_purple500_24"
-        android:title="Puntos" />
-    <item
         android:id="@+id/Chats"
         android:icon="@drawable/ic_baseline_chat_24"
         android:title="Chats" />
-
 </menu>

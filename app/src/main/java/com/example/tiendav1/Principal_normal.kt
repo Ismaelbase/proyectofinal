@@ -89,12 +89,6 @@ class Principal_normal : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-
-
-
-
-
-
         //Configuracion de FRAGMENTOS
 
         binding = ActivityPrincipalNormalBinding.inflate(layoutInflater)
@@ -112,7 +106,6 @@ class Principal_normal : AppCompatActivity() {
                 R.id.Config,
                 R.id.Comprar,
                 R.id.Eventos,
-                R.id.Puntos,
                 R.id.Chats
             )
 
@@ -124,7 +117,6 @@ class Principal_normal : AppCompatActivity() {
                 R.id.Config-> navController.navigate(R.id.Config)
                 R.id.Comprar-> navController.navigate(R.id.Comprar)
                 R.id.Eventos-> navController.navigate(R.id.Eventos)
-                R.id.Puntos-> navController.navigate(R.id.Puntos)
                 R.id.Chats-> navController.navigate(R.id.Chats)
             }
             true

@@ -482,7 +482,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (Utilidades.obtenerTipoUsuario(applicationContext)) {
                     if (pojo_inscripcion!!.estado_noti == Estado.CREADO && pojo_inscripcion!!.estado == "Pendiente"){
-                        Utilidades.reservas.child(pojo_inscripcion!!.id.toString())
+                        Utilidades.inscripcion.child(pojo_inscripcion!!.id.toString())
                             .child("estado_noti").setValue(Estado.NOTIFICADO)
 
                         generarNotificacionInscripcion(
