@@ -191,12 +191,6 @@ class MainActivity : AppCompatActivity() {
 
                                 object : CountDownTimer(5000, 1000) {
                                     override fun onTick(cuenta: Long) {
-                                        Toast.makeText(
-                                            applicationContext,
-                                            cuenta.toString(),
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
                                         cuenta_atras.setText("Espera " + cuenta / 1000 + " segundos.")
                                     }
 

@@ -132,16 +132,19 @@ class Admin_editar_inscripcion : AppCompatActivity() {
             pojo_evento.apuntados = pojo_evento.apuntados!!.toInt() + 1
             Utilidades.eventos.child(pojo_inscripcion.id_evento!!).setValue(pojo_evento)
 
-            startActivity(Intent(applicationContext,MainActivity::class.java))
-            Utilidades.admin_editar_evento = true
+
+            finish()
+//            startActivity(Intent(applicationContext,MainActivity::class.java))
+//            Utilidades.admin_editar_evento = true
         }
         boton_rechazar.setOnClickListener {
             pojo_inscripcion.estado = "Rechazado"
             pojo_inscripcion.estado_noti = Estado.CREADO
             Utilidades.inscripcion.child(id_inscripcion).setValue(pojo_inscripcion)
 
-            startActivity(Intent(applicationContext,MainActivity::class.java))
-            Utilidades.admin_editar_evento = true
+//            startActivity(Intent(applicationContext,MainActivity::class.java))
+//            Utilidades.admin_editar_evento = true
+            finish()
         }
 
         boton_volver.setOnClickListener {

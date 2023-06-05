@@ -39,7 +39,7 @@
             android:layout_below="@+id/item_evento_imagen"
             android:layout_alignEnd="@+id/item_evento_imagen"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="90dp"
             android:layout_marginBottom="15dp"
             android:gravity="center_horizontal"
             android:text="Ejemplo"
@@ -48,12 +48,12 @@
 
         <ImageView
             android:id="@+id/item_evento_capacidad"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignStart="@+id/item_evento_imagen"
             android:layout_alignTop="@+id/item_evento_nombre"
             android:layout_alignBottom="@+id/item_evento_nombre"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="-10dp"
             android:layout_marginBottom="-14dp"
             app:srcCompat="@drawable/medio_vacio_sc2" />
