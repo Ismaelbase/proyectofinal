@@ -12,6 +12,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:text="Aplicar\ncambios"
+        android:textStyle="bold"
         app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintStart_toStartOf="@+id/admin_config_b_cambiarcontrasena"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_b_cambiarcontrasena" />
@@ -22,6 +23,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:text="Logout"
+        android:textStyle="bold"
         app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintEnd_toEndOf="@+id/admin_config_b_borrarcuenta"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_b_borrarcuenta" />
@@ -139,6 +141,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="60dp"
         android:text="Cambiar\ncontraseña"
+        android:textStyle="bold"
         app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintStart_toStartOf="@+id/admin_config_et_cambiarmail"
         app:layout_constraintTop_toBottomOf="@+id/admin_config_et_cambiarmail" />
@@ -148,6 +151,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:text="Borrar\ncuenta"
+        android:textStyle="bold"
         app:cornerRadius="@android:dimen/system_app_widget_background_radius"
         app:layout_constraintBottom_toBottomOf="@+id/admin_config_b_cambiarcontrasena"
         app:layout_constraintEnd_toEndOf="@+id/admin_config_iv_avatar"

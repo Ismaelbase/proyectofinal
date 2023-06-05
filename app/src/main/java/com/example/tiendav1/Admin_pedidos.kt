@@ -93,7 +93,10 @@ class Admin_pedidos : Fragment() {
                 lista_pedidos.clear()
                 snapshot.children.forEach {
                     val pojo_pedido = it.getValue(Reserva::class.java)
-                    lista_pedidos.add(pojo_pedido!!)
+                    if(pojo_pedido!!.id != null){
+                        lista_pedidos.add(pojo_pedido!!)
+                    }
+
                 }
 
                 lista_pedidos.sortByDescending { it.estado == "Aceptado" }

@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Tiendav12" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/principal_verde</item>
-        <item name="colorPrimaryVariant">@color/principal_verde</item>
-        <item name="colorOnPrimary">@color/principal_morado</item>
+        <item name="colorPrimary">@color/principal_verde2</item>
+        <item name="colorPrimaryVariant">@color/principal_verde2</item>
+        <item name="colorOnPrimary">@color/principal_morado2</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -23,8 +23,8 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:padding">5dp</item>
         <item name="android:background">@drawable/borde_recycler1</item>
-        <item name="android:popupBackground">@color/principal_morado</item>
-        <item name="android:dropDownSelector">@color/principal_verde</item>
+        <item name="android:popupBackground">@color/principal_morado2</item>
+        <item name="android:dropDownSelector">@color/principal_verde2</item>
         <item name="android:dropDownWidth">match_parent</item>
         <item name="android:dropDownVerticalOffset">10dp</item>
         <item name="android:dropDownHorizontalOffset">10dp</item>

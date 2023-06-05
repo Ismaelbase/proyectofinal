@@ -24,9 +24,11 @@
             android:exported="false" />
         <activity
             android:name=".Chat_eventos"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".Chat_productos"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".Normal_historial_inscripciones"
@@ -57,9 +59,11 @@
             android:exported="false" />
         <activity
             android:name=".Admin_anadir_articulo"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".Admin_editar_articulo"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".Comprar_articulo"
@@ -74,11 +78,13 @@
             android:exported="false" />
         <activity
             android:name=".Admin_principal"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="uiMode"
             android:exported="false"
             android:label="@string/title_activity_admin_principal" />
         <activity
             android:name=".Principal_normal"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="uiMode"
             android:exported="false"
             android:label="@string/title_activity_principal_normal" />

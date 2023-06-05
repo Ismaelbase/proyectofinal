@@ -37,6 +37,9 @@ class Utilidades {
         var normal_detalles_reserva = false
         var normal_evento = false
 
+        //Movidas
+        var primeraVez = false
+
 
         //Volver actividades NOTIFICACIONES
         var noti_evento_mod = false

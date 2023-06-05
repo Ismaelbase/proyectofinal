@@ -40,6 +40,59 @@ import com.google.mlkit.nl.translate.TranslatorOptions
 
 class Admin_anadir_articulo : AppCompatActivity() {
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Utilidades.primeraVez = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //La primera vez que entra no se ejecuta on resume
+        if (Utilidades.primeraVez){
+            val options = ImageClassifierOptions.builder()
+                .setBaseOptions(
+                    BaseOptions.builder()
+                        .setModelAssetPath("proyectofinal/app/src/main/assets/efficientnet_lite0.tflite")
+                        .build()
+                )
+                .setRunningMode(RunningMode.IMAGE)
+                .setMaxResults(5)
+                .build()
+
+            var imageClassifier = ImageClassifier.createFromOptions(this@Admin_anadir_articulo, options)
+
+            var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
+            var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
+            var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
+            var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
+
+            texto = texto.split("\"".toRegex())[1]
+
+            //Traductor
+            val opciones_traductor = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                .setTargetLanguage(TranslateLanguage.SPANISH)
+                .build()
+
+            val InglesEspanol = Translation.getClient(opciones_traductor)
+
+            val condiciones = DownloadConditions.Builder().requireWifi().build()
+            InglesEspanol.downloadModelIfNeeded(condiciones).addOnSuccessListener {
+                InglesEspanol.translate(texto).addOnSuccessListener {
+                        translatedText -> texto = translatedText
+                    nombre.setText(texto.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+                }
+
+            }.addOnFailureListener {
+                Toast.makeText(this, "Error al descargar el modelo", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        Utilidades.primeraVez = true
+
+    }
+
     val validadores: Map<EditText, KFunction1<EditText, Boolean>> by lazy {
         mapOf(
             nombre to this::validarNombre,
@@ -90,30 +143,6 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        //CLASIFICADOR
-
-        val options = ImageClassifierOptions.builder()
-            .setBaseOptions(
-                BaseOptions.builder()
-                    .setModelAssetPath("proyectofinal/app/src/main/assets/efficientnet_lite0.tflite")
-                    .build()
-            )
-            .setRunningMode(RunningMode.IMAGE)
-            .setMaxResults(5)
-            .build()
-
-        var imageClassifier = ImageClassifier.createFromOptions(this@Admin_anadir_articulo, options)
-
-
-// Load an image on the user’s device as a Bitmap object using BitmapFactory.
-        val opciones_bitmap = BitmapFactory.Options().apply {
-            BitmapFactory.Options().inMutable = true
-            BitmapFactory.Options().inScaled = false
-
-        }
-
-
-
         imagen.setOnLongClickListener {
             val fichero_temporal = crearFicheroImagen()
             url_avatar = FileProvider.getUriForFile(
@@ -128,92 +157,15 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         imagen.setOnClickListener {
             accesoGaleria.launch("image/*")
-            var cambiado = true
-            if (cambiado) {
-                cambiado = false
-                imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
-
-                    var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
-                    var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
-                    var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
-                    var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
-
-                    texto = texto.split("\"".toRegex())[1]
-
-                    //Traductor
-                    val opciones_traductor = TranslatorOptions.Builder()
-                        .setSourceLanguage(TranslateLanguage.ENGLISH)
-                        .setTargetLanguage(TranslateLanguage.SPANISH)
-                        .build()
-
-                    val InglesEspanol = Translation.getClient(opciones_traductor)
-
-                    val condiciones = DownloadConditions.Builder().requireWifi().build()
-                    InglesEspanol.downloadModelIfNeeded(condiciones).addOnSuccessListener {
-                        InglesEspanol.translate(texto).addOnSuccessListener {
-                                translatedText -> texto = translatedText
-                            nombre.setText(texto.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
-                        }
-
-                    }.addOnFailureListener {
-                        Toast.makeText(this, "Error al descargar el modelo", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-            }
         }
 
-        //Hacemos que esto se ejecute solo si ha cambiado imagen
-//
-//        imagen.addOnLayoutChangeListener { view, i, i2, i3, i4, i5, i6, i7, i8 ->
-//            var imagen_bitmap: Bitmap = imagen.drawable.toBitmap()
-//            var mpImage: MPImage? = BitmapImageBuilder(imagen_bitmap).build()
-//            var resultado: ImageClassifierResult = imageClassifier.classify(mpImage)
-//            var texto = resultado.classificationResult().classifications()[0].categories()[0].toString()
-//
-//            texto = texto.split("\"".toRegex())[1]
-//
-//            //Traductor
-//            val opciones_traductor = TranslatorOptions.Builder()
-//                .setSourceLanguage(TranslateLanguage.ENGLISH)
-//                .setTargetLanguage(TranslateLanguage.SPANISH)
-//                .build()
-//
-//            val InglesEspanol = Translation.getClient(opciones_traductor)
-//
-//            val condiciones = DownloadConditions.Builder().requireWifi().build()
-//            InglesEspanol.downloadModelIfNeeded(condiciones).addOnSuccessListener {
-//                    InglesEspanol.translate(texto).addOnSuccessListener {
-//                    translatedText -> texto = translatedText
-//                    nombre.setText(texto.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
-//                }
-//
-//            }.addOnFailureListener {
-//                Toast.makeText(this, "Error al descargar el modelo", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
+        nombre.setOnClickListener {
+            nombre.setText("")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
         disponible.isChecked = true
-
         val adaptador_spinner = ArrayAdapter(
             applicationContext,
             R.layout.custom_spinner,
@@ -287,6 +239,7 @@ class Admin_anadir_articulo : AppCompatActivity() {
 
         boton_volver.setOnClickListener {
             Utilidades.admin_anadir = true
+            Utilidades.primeraVez = false
             startActivity(Intent(applicationContext, Admin_principal::class.java))
         }
 
