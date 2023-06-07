@@ -122,9 +122,9 @@ class Config : Fragment() {
         switch_moneda.isChecked = moneda_elegida
 
         if(moneda_elegida){
-            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc3)
+            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc2)
         }else{
-            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc3)
+            imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc2)
         }
 
         //cambiar moneda
@@ -136,9 +136,9 @@ class Config : Fragment() {
             }
 
             if(modo_moneda){
-                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc3)
+                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.dolar_sc2)
             }else{
-                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc3)
+                imagen_moneda.setImageResource(com.example.tiendav1.R.drawable.euro_sc2)
             }
         }
 

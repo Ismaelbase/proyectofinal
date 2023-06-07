@@ -19,7 +19,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
-        android:src="@drawable/historia_eventos_sc5"
+        android:src="@drawable/historia_eventos_sc2"
         app:layout_constraintBottom_toBottomOf="@+id/eventos_searchview"
         app:layout_constraintStart_toEndOf="@+id/eventos_searchview"
         app:layout_constraintTop_toTopOf="@+id/eventos_searchview" />
