@@ -21,6 +21,8 @@ import org.w3c.dom.Text
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.CountDownLatch
+import kotlin.concurrent.thread
 
 class Admin_editar_evento : AppCompatActivity() {
 
@@ -54,7 +56,7 @@ class Admin_editar_evento : AppCompatActivity() {
     val boton_aplicar: Button by lazy {
         findViewById(R.id.editar_evento_aplicar_cambios)
     }
-    val activo:Switch by lazy {
+    val activo: Switch by lazy {
         findViewById(R.id.editar_evento_activo)
     }
 
@@ -169,7 +171,10 @@ class Admin_editar_evento : AppCompatActivity() {
                         aforo.error = "El aforo no puede ser negativo"
                     }
 
-                } else if (Utilidades.existeevento(nombre.text.toString(),fecha_texto.text.toString().trim()) && nombre.text.toString() !=
+                } else if (Utilidades.existeevento(
+                        nombre.text.toString(),
+                        fecha_texto.text.toString().trim()
+                    ) && nombre.text.toString() !=
                     pojo_articulo.nombre
                 ) {
                     runOnUiThread {
@@ -178,7 +183,8 @@ class Admin_editar_evento : AppCompatActivity() {
                 } else if (aforo.text.toString().toInt() < pojo_articulo.apuntados!!.toInt()) {
 
                     runOnUiThread {
-                        aforo.error = "El aforo no puede ser menor que el número de apuntados actual:\n - ${pojo_articulo.apuntados} apuntados"
+                        aforo.error =
+                            "El aforo no puede ser menor que el número de apuntados actual:\n - ${pojo_articulo.apuntados} apuntados"
                     }
 
                 } else {
@@ -208,6 +214,37 @@ class Admin_editar_evento : AppCompatActivity() {
                         Utilidades.obtenerIDUsuario(applicationContext)
                     )
 
+                    thread { Thread.sleep(2000)}
+
+                    //Recorremos todas las inscripciones
+                    Utilidades.inscripcion.addListenerForSingleValueEvent(object :  ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (inscripcion in snapshot.children) {
+                                val pojo_inscripcion = inscripcion.getValue(Inscripcion::class.java)
+
+                                if (pojo_inscripcion!!.id_evento == pojo_articulo.id) {
+                                    Utilidades.escribirInscripcion(
+                                        pojo_inscripcion.id!!,
+                                        pojo_inscripcion.id_usuario!!,
+                                        pojo_inscripcion.id_evento!!,
+                                        pojo_inscripcion.estado!!,
+                                        pojo_inscripcion.nombre_usuario!!,
+                                        nombre.text.toString(),
+                                        url_firebase.toString(),
+                                        pojo_inscripcion.url_usuario!!,
+                                        pojo_inscripcion.fecha!!,
+                                        precio.text.toString().toDouble(),
+                                        pojo_inscripcion.estado_noti!!
+                                    )
+                                }
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+
                     Utilidades.tostadaCorrutina(
                         this@Admin_editar_evento, applicationContext,
                         "Cambios aplicados correctamente"
@@ -220,7 +257,7 @@ class Admin_editar_evento : AppCompatActivity() {
         }
 
         boton_volver.setOnClickListener {
-            startActivity(Intent(applicationContext,MainActivity::class.java))
+            startActivity(Intent(applicationContext, MainActivity::class.java))
             Utilidades.admin_editar_evento = true
         }
     }
@@ -250,7 +287,8 @@ class Admin_editar_evento : AppCompatActivity() {
         val cal: Calendar? = Calendar.getInstance()
         val timeStamp: String? = SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
         val nombreFichero: String? = "JPGE_" + timeStamp + "_"
-        val carpetaDir: File? = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val carpetaDir: File? =
+            applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val ficheroImagen: File? = File.createTempFile(nombreFichero!!, ".jpg", carpetaDir)
 
         return ficheroImagen!!

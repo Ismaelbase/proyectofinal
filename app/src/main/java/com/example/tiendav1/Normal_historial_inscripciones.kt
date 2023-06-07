@@ -76,6 +76,7 @@ class Normal_historial_inscripciones : AppCompatActivity() {
                 lista_inscripciones.clear()
                 snapshot.children.forEach{
                     val pojo_inscripcion = it.getValue(Inscripcion::class.java)
+
                     if (pojo_inscripcion!!.id_usuario == id_usuario){
                         lista_inscripciones.add(pojo_inscripcion!!)
                     }

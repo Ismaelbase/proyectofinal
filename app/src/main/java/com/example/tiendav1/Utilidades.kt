@@ -153,17 +153,6 @@ class Utilidades {
             }
         }
 
-        //TODO permitir al user hacer fotos para su avatar?
-//        fun crearFicheroImagen(contexto:Context): File {
-//            val cal: Calendar?= Calendar.getInstance()
-//            val timeStamp:String?= SimpleDateFormat("yyyyMMdd_HHmmss").format(cal!!.time)
-//            val nombreFichero:String?="JPGE_"+timeStamp+"_"
-//            val carpetaDir: File?=contexto.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-//            val ficheroImagen: File?= File.createTempFile(nombreFichero!!,".jpg",carpetaDir)
-//
-//            return ficheroImagen!!
-//        }
-
         fun escribirUser(
             db_ref:DatabaseReference,
             id:String,
@@ -695,5 +684,14 @@ class Utilidades {
             R.drawable.articulo_patin1,
             R.drawable.articulo_radio1
         )
+
+        fun thread(
+            start: Boolean = true,
+            isDaemon: Boolean = false,
+            contextClassLoader: ClassLoader? = null,
+            name: String? = null,
+            priority: Int = -1,
+            block: () -> Unit) {
+        }
     }
 }

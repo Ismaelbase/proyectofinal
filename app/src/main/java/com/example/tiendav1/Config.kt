@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.thread
 
 class Config : Fragment() {
     private var _binding: FragmentConfigBinding? = null
@@ -234,6 +235,65 @@ class Config : Fragment() {
                         pojo_user.conectado!!,
                         pojo_user.admin!!
                     )
+
+//                    thread { Thread.sleep(2000)}
+//
+                    //Recorremos reservas e inscripciones para cambiar el nombre del usuario y su imagen
+//                    Utilidades.reservas.addListenerForSingleValueEvent(object :  ValueEventListener{
+//                        override fun onDataChange(snapshot: DataSnapshot) {
+//                            for (reserva in snapshot.children) {
+//                                val pojo_reserva = reserva.getValue(Reserva::class.java)
+//
+//                                if (pojo_reserva!!.id_usuario == pojo_user.id.toString()) {
+//                                    Utilidades.escribirReserva(
+//                                        pojo_reserva.id!!,
+//                                        pojo_reserva.id_usuario!!,
+//                                        pojo_reserva.id_articulo!!,
+//                                        pojo_reserva.estado!!,
+//                                        nuevo_nombre,
+//                                        pojo_reserva.nombre_articulo!!,
+//                                        pojo_reserva.url_articulo!!,
+//                                        pojo_reserva.fecha!!,
+//                                        pojo_reserva.precio!!,
+//                                        pojo_reserva.estado_noti!!
+//                                    )
+//                                }
+//                            }
+//                        }
+//                        override fun onCancelled(error: DatabaseError) {
+//                            TODO("Not yet implemented")
+//                        }
+//
+//                    })
+//
+//                    Utilidades.inscripcion.addListenerForSingleValueEvent(object :  ValueEventListener{
+//                        override fun onDataChange(snapshot: DataSnapshot) {
+//                            for (reserva in snapshot.children) {
+//                                val pojo_inscripcion = reserva.getValue(Inscripcion::class.java)
+//
+//                                if (pojo_inscripcion!!.id_usuario == pojo_user.id.toString()) {
+//                                    Utilidades.escribirInscripcion(
+//                                        pojo_inscripcion.id!!,
+//                                        pojo_inscripcion.id_usuario!!,
+//                                        pojo_inscripcion.id_evento!!,
+//                                        pojo_inscripcion.estado!!,
+//                                        nuevo_nombre,
+//                                        pojo_inscripcion.nombre_evento!!,
+//                                        pojo_inscripcion.url_evento!!,
+//                                        url_firebase.toString(),
+//                                        pojo_inscripcion.fecha!!,
+//                                        pojo_inscripcion.precio!!,
+//                                        pojo_inscripcion.estado_noti!!
+//                                    )
+//                                }
+//                            }
+//                        }
+//                        override fun onCancelled(error: DatabaseError) {
+//                            TODO("Not yet implemented")
+//                        }
+//
+//                    })
+
 
 
                     pn.runOnUiThread {

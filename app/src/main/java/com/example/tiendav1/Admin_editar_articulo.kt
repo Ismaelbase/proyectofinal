@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.reflect.KFunction1
 
 class Admin_editar_articulo : AppCompatActivity() {
@@ -165,6 +166,36 @@ class Admin_editar_articulo : AppCompatActivity() {
                         disponible.isChecked,
                         Estado.MODIFICADO,
                         Utilidades.obtenerIDUsuario(applicationContext))
+
+                        thread { Thread.sleep(2000)}
+
+                        //Recorremos todos los artículos
+                        Utilidades.reservas.addListenerForSingleValueEvent(object :  ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                for (reserva in snapshot.children) {
+                                    val pojo_reserva = reserva.getValue(Reserva::class.java)
+
+                                    if (pojo_reserva!!.id_articulo == id_articulo) {
+                                        Utilidades.escribirReserva(
+                                            pojo_reserva.id!!,
+                                            pojo_reserva.id_usuario!!,
+                                            pojo_reserva.id_articulo!!,
+                                            pojo_reserva.estado!!,
+                                            pojo_reserva.nombre_usuario!!,
+                                            nuevo_nombre,
+                                            url_firebase!!,
+                                            pojo_reserva.fecha!!,
+                                            pojo_reserva.precio!!,
+                                            pojo_reserva.estado_noti!!
+                                        )
+                                    }
+                                }
+                            }
+                            override fun onCancelled(error: DatabaseError) {
+                                TODO("Not yet implemented")
+                            }
+
+                        })
 
                         Utilidades.tostadaCorrutina(
                             this@Admin_editar_articulo,

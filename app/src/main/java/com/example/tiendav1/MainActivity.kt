@@ -13,6 +13,7 @@ import android.os.CountDownTimer
 import android.provider.Settings
 import android.os.Parcelable
 import android.view.View
+import android.view.animation.RotateAnimation
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -78,6 +79,9 @@ class MainActivity : AppCompatActivity() {
     val cuenta_atras: TextView by lazy {
         findViewById(R.id.main_tv_cuentaatras)
     }
+    val imagen: ImageView by lazy {
+        findViewById(R.id.main_iv_logo)
+    }
 
 
     private lateinit var lista_usuarios: MutableList<User>
@@ -110,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
         var intentos = 4
         cuenta_atras.visibility = View.INVISIBLE
+
 
         login.setOnClickListener {
             if (valido()) {
@@ -400,6 +405,7 @@ class MainActivity : AppCompatActivity() {
 
                 //Notificaciones para el admin
                 if (Utilidades.obtenerTipoUsuario(applicationContext)) {
+
                     if (pojo_reserva!!.estado == "Completo") {
                         generarNotificacionReserva(
                             id_noti,
@@ -540,7 +546,52 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        //Rotacion de la imagen
 
+        val rotacion = RotateAnimation(
+            0f, 180f,
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f
+        )
+
+        rotacion.duration = 1000
+        rotacion.interpolator = android.view.animation.LinearInterpolator()
+        rotacion.fillAfter = true
+
+        val rotacion2 = RotateAnimation(
+            180f, 0f,
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+            RotateAnimation.RELATIVE_TO_SELF, 0.5f
+        )
+
+        rotacion2.duration = 1000
+        rotacion2.interpolator = android.view.animation.LinearInterpolator()
+        rotacion2.fillAfter = true
+
+        val hilo:Thread = object : Thread() {
+            override fun run() {
+                try {
+                    var contador = 0
+                    while (true) {
+                        sleep(2000)
+                        runOnUiThread {
+                            if (contador == 0) {
+                                imagen.startAnimation(rotacion)
+                                contador = 1
+                            } else {
+                                imagen.startAnimation(rotacion2)
+                                contador = 0
+                            }
+                        }
+                        sleep(2000)
+                    }
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        hilo.start()
 
     }
 
@@ -656,6 +707,7 @@ class MainActivity : AppCompatActivity() {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
+
 
         with(NotificationManagerCompat.from(this)) {
             notify(id_noti, notification)
