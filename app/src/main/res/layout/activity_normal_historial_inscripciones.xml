@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
+            android:fontFamily="@font/roboto_slab"
             android:text="Pendientes"
             app:layout_constraintBottom_toBottomOf="@+id/historial_inscripciones_cb_rechazadas"
             app:layout_constraintEnd_toEndOf="@+id/historial_inscripciones_searchview"
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_slab"
             android:text="Rechazadas"
             app:layout_constraintStart_toStartOf="@+id/historial_inscripciones_searchview"
             app:layout_constraintTop_toBottomOf="@+id/historial_inscripciones_searchview" />
@@ -58,6 +60,7 @@
             android:id="@+id/historial_inscripciones_cb_rechazadas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab"
             android:text="Aceptadas"
             app:layout_constraintBottom_toBottomOf="@+id/historial_inscripciones_cb_pendientes"
             app:layout_constraintEnd_toEndOf="parent"

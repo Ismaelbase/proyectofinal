@@ -19,6 +19,7 @@
             android:id="@+id/admin_gestion_inscripciones_cb_rechazados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab"
             android:text="Aceptados"
             app:layout_constraintBottom_toBottomOf="@+id/admin_gestion_inscripciones_cb_pendientes"
             app:layout_constraintEnd_toEndOf="@+id/admin_gestion_inscripciones_searchview"
@@ -36,7 +37,7 @@
 
         <SearchView
             android:id="@+id/admin_gestion_inscripciones_searchview"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +47,7 @@
             android:id="@+id/admin_gestion_inscripciones_cb_aceptados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab"
             android:text="Pendientes"
             app:layout_constraintBottom_toBottomOf="@+id/admin_gestion_inscripciones_cb_rechazados"
             app:layout_constraintEnd_toEndOf="@+id/admin_gestion_inscripciones_searchview"
@@ -56,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_slab"
             android:text="Rechazados"
             app:layout_constraintStart_toStartOf="@+id/admin_gestion_inscripciones_searchview"
             app:layout_constraintTop_toBottomOf="@+id/admin_gestion_inscripciones_searchview" />

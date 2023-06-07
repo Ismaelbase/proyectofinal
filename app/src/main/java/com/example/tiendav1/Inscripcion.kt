@@ -16,7 +16,9 @@ data class Inscripcion(
     var fecha:String? = null,
     var precio:Double? = null,
     var estado_noti:Int? = null
-    ): Parcelable{
+    ): Parcelable
+
+{
     companion object{
         val estado_inscripcion = listOf(0,1,2)
         val estado_inscripcion_txt = listOf("Pendiente","Aceptado","Rechazado")

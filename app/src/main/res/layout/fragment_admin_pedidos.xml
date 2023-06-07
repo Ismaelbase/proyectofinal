@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto_slab"
         android:text="Rechazados"
         app:layout_constraintStart_toEndOf="@+id/pedidos_cb_completos"
         app:layout_constraintTop_toBottomOf="@+id/pedidos_searchview" />
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto_slab"
         android:text="Completos"
         app:layout_constraintStart_toEndOf="@+id/pedidos_cb_pendientes"
         app:layout_constraintTop_toBottomOf="@+id/pedidos_searchview" />
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
+        android:fontFamily="@font/roboto_slab"
         android:text="Pendientes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pedidos_searchview" />

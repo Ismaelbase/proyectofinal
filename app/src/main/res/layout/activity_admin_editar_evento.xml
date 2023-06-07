@@ -6,11 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".Admin_editar_evento">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Precio"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/editar_evento_precio"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_precio" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Aforo"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_aforo"
+        app:layout_constraintTop_toBottomOf="@+id/editar_evento_nombre" />
+
     <ImageView
         android:id="@+id/editar_eventoimagen"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,19 +49,20 @@
         android:id="@+id/editar_evento_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:ems="10"
+        android:fontFamily="@font/roboto_slab"
         android:hint="Editar nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
         app:layout_constraintStart_toStartOf="@+id/editar_eventoimagen"
-        app:layout_constraintTop_toBottomOf="@+id/editar_eventoimagen" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/editar_evento_precio"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/roboto_slab"
         android:hint="Precio"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="@+id/editar_evento_aforo"
@@ -51,12 +73,12 @@
         android:id="@+id/editar_evento_aforo"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:ems="10"
+        android:fontFamily="@font/roboto_slab"
         android:hint="Aforo"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/editar_evento_nombre"
-        app:layout_constraintTop_toBottomOf="@+id/editar_evento_nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <ImageView
         android:id="@+id/editar_evento_datepicker"
@@ -72,6 +94,7 @@
         android:id="@+id/editar_evento_fecha_texto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
         android:text="12/02/2023"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/editar_evento_datepicker"
@@ -83,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/viga"
         android:text="Aplicar\nCambios"
         app:layout_constraintEnd_toEndOf="@+id/editar_eventoimagen"
         app:layout_constraintHorizontal_bias="0.588"
@@ -104,9 +128,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_slab"
         android:text="Activo"
         app:layout_constraintEnd_toEndOf="@+id/editar_evento_fecha_texto"
         app:layout_constraintStart_toStartOf="@+id/editar_evento_datepicker"
         app:layout_constraintTop_toBottomOf="@+id/editar_evento_fecha_texto" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Nombre"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/editar_evento_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/editar_eventoimagen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@
         android:id="@+id/item_historial_fecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
         android:text="Fecha"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_historial_imagen"
@@ -25,6 +26,7 @@
         android:id="@+id/item_historial_precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
         android:text="Precio"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_historial_imagen"
@@ -68,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:fontFamily="@font/roboto_slab"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/item_historial_imagen"
         app:layout_constraintTop_toTopOf="@+id/item_historial_imagen" />

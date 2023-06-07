@@ -91,7 +91,7 @@ class Config : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     pojo_user = snapshot.getValue(User::class.java)!!
-                    binding.configTvBienvenida.text = "Bienvenido ${pojo_user.usuario}"
+                    binding.configTvBienvenida.text = "Bienvenido ${pojo_user.usuario.toString()}"
                     cambiar_nombre.setText(pojo_user.usuario)
                     cambiar_mail.setText(pojo_user.correo)
 

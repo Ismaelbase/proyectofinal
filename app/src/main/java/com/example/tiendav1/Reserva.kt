@@ -21,3 +21,4 @@ data class Reserva(
         val estado_texto = listOf("Pendiente","Aceptado","Rechazado","Completo","Listo para recoger")
     }
 }
+
