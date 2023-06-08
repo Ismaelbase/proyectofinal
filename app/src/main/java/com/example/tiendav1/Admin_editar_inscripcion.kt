@@ -125,7 +125,7 @@ class Admin_editar_inscripcion : AppCompatActivity() {
 
         boton_aceptar.setOnClickListener {
             pojo_inscripcion.estado = "Aceptado"
-            pojo_inscripcion.estado_noti = Estado.CREADO
+            pojo_inscripcion.estado_noti = Estado.MODIFICADO
             Utilidades.inscripcion.child(id_inscripcion).setValue(pojo_inscripcion)
 
             //Se suma uno a apuntados de ese evento
@@ -137,7 +137,7 @@ class Admin_editar_inscripcion : AppCompatActivity() {
         }
         boton_rechazar.setOnClickListener {
             pojo_inscripcion.estado = "Rechazado"
-            pojo_inscripcion.estado_noti = Estado.CREADO
+            pojo_inscripcion.estado_noti = Estado.MODIFICADO
             Utilidades.inscripcion.child(id_inscripcion).setValue(pojo_inscripcion)
 
             startActivity(Intent(applicationContext,MainActivity::class.java))

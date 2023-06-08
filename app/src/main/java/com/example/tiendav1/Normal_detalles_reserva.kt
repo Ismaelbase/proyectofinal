@@ -139,14 +139,25 @@ class Normal_detalles_reserva : AppCompatActivity() {
             })
 
         boton_cancelar_reserva.setOnClickListener {
-            Utilidades.reservas.child(id_reserva).child("estado").setValue("Cancelado")
+            pojo_reserva.estado = "Cancelado"
+            pojo_reserva.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_reserva.id!!).setValue(pojo_reserva)
+
+//            Utilidades.reservas.child(id_reserva).child("estado_noti").setValue(Estado.MODIFICADO)
+//            Utilidades.reservas.child(id_reserva).child("estado").setValue("Cancelado")
             Toast.makeText(applicationContext, "Reserva cancelada", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext,MainActivity::class.java))
             Utilidades.normal_detalles_reserva = true
         }
 
         boton_recoger_pedido.setOnClickListener {
-            Utilidades.reservas.child(id_reserva).child("estado").setValue("Completo")
+            pojo_reserva.estado = "Completo"
+            pojo_reserva.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_reserva.id!!).setValue(pojo_reserva)
+
+//            Utilidades.reservas.child(id_reserva).child("estado_noti").setValue(Estado.MODIFICADO)
+//            Utilidades.reservas.child(id_reserva).child("estado").setValue("Completo")
+
             Toast.makeText(applicationContext, "Pedido recogido", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext,MainActivity::class.java))
             Utilidades.normal_detalles_reserva = true

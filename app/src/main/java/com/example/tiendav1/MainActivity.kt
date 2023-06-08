@@ -406,7 +406,7 @@ class MainActivity : AppCompatActivity() {
                 //Notificaciones para el admin
                 if (Utilidades.obtenerTipoUsuario(applicationContext)) {
 
-                    if (pojo_reserva!!.estado == "Completo") {
+                    if (pojo_reserva!!.estado == "Completo" && pojo_reserva!!.estado_noti == Estado.MODIFICADO) {
                         generarNotificacionReserva(
                             id_noti,
                             pojo_reserva!!,
@@ -414,7 +414,7 @@ class MainActivity : AppCompatActivity() {
                             "¡Pedido completado!",
                             Admin_gestion_pedido::class.java
                         )
-                    }else if (pojo_reserva!!.estado == "Cancelado"){
+                    }else if (pojo_reserva!!.estado == "Cancelado" && pojo_reserva!!.estado_noti == Estado.MODIFICADO){
                         generarNotificacionReserva(
                             id_noti,
                             pojo_reserva!!,
@@ -423,36 +423,42 @@ class MainActivity : AppCompatActivity() {
                             Admin_gestion_pedido::class.java
                         )
                     }
+                    Utilidades.reservas.child(pojo_reserva!!.id.toString())
+                        .child("estado_noti").setValue(Estado.NOTIFICADO)
                     //Notificaciones para el usuario
                 } else {
                     if (Utilidades.obtenerIDUsuario(applicationContext) == pojo_reserva!!.id_usuario) {
-                        if (pojo_reserva!!.estado == "Aceptado") {
-                            generarNotificacionReserva(
-                                id_noti,
-                                pojo_reserva!!,
-                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido aceptado.",
-                                "¡Pedido aceptado!",
-                                Normal_detalles_reserva::class.java
-                            )
-                        }else if (pojo_reserva!!.estado == "Rechazado") {
-                            generarNotificacionReserva(
-                                id_noti,
-                                pojo_reserva!!,
-                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido rechazado.",
-                                "¡Pedido rechazado!",
-                                Normal_detalles_reserva::class.java
-                            )
-                        }else if (pojo_reserva!!.estado == "Listo para recoger") {
-                            generarNotificacionReserva(
-                                id_noti,
-                                pojo_reserva!!,
-                                "Tu pedido de ${pojo_reserva!!.nombre_articulo} esta listo para recoger.",
-                                "¡Pedido listo!",
-                                Normal_detalles_reserva::class.java
-                            )
+                        if(pojo_reserva!!.estado_noti == Estado.MODIFICADO){
+                            if (pojo_reserva!!.estado == "Aceptado") {
+                                generarNotificacionReserva(
+                                    id_noti,
+                                    pojo_reserva!!,
+                                    "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido aceptado.",
+                                    "¡Pedido aceptado!",
+                                    Normal_detalles_reserva::class.java
+                                )
+                            }else if (pojo_reserva!!.estado == "Rechazado") {
+                                generarNotificacionReserva(
+                                    id_noti,
+                                    pojo_reserva!!,
+                                    "Tu pedido de ${pojo_reserva!!.nombre_articulo} ha sido rechazado.",
+                                    "¡Pedido rechazado!",
+                                    Normal_detalles_reserva::class.java
+                                )
+                            }else if (pojo_reserva!!.estado == "Listo para recoger") {
+                                generarNotificacionReserva(
+                                    id_noti,
+                                    pojo_reserva!!,
+                                    "Tu pedido de ${pojo_reserva!!.nombre_articulo} esta listo para recoger.",
+                                    "¡Pedido listo!",
+                                    Normal_detalles_reserva::class.java
+                                )
+                            }
+                            Utilidades.reservas.child(pojo_reserva!!.id.toString())
+                                .child("estado_noti").setValue(Estado.NOTIFICADO)
                         }
-                        Utilidades.reservas.child(pojo_reserva!!.id.toString())
-                            .child("estado_noti").setValue(Estado.NOTIFICADO)
+
+
                     }
 
                 }
@@ -505,7 +511,7 @@ class MainActivity : AppCompatActivity() {
                     //Notificaciones para el usuario
                 } else {
                     if (Utilidades.obtenerIDUsuario(applicationContext) == pojo_inscripcion!!.id_usuario) {
-                        if (pojo_inscripcion!!.estado_noti == Estado.CREADO){
+                        if (pojo_inscripcion!!.estado_noti == Estado.MODIFICADO){
                             if (pojo_inscripcion!!.estado == "Aceptado") {
                                 generarNotificacionInscripcion(
                                     id_noti,
@@ -573,7 +579,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     var contador = 0
                     while (true) {
-                        sleep(2000)
+                        sleep(1500)
                         runOnUiThread {
                             if (contador == 0) {
                                 imagen.startAnimation(rotacion)
@@ -583,7 +589,7 @@ class MainActivity : AppCompatActivity() {
                                 contador = 0
                             }
                         }
-                        sleep(2000)
+                        sleep(1500)
                     }
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
@@ -787,4 +793,5 @@ class MainActivity : AppCompatActivity() {
 
         return correcto
     }
+
 }

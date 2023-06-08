@@ -445,8 +445,10 @@ class Utilidades {
                     if (snapshot.hasChildren()) {
                         for (inscripcion in snapshot.children) {
                             if (
-                                inscripcion.child("id_evento").value.toString() == id_evento &&
-                                inscripcion.child("id_usuario").value.toString() == id_usuario
+                                (inscripcion.child("id_evento").value.toString() == id_evento &&
+                                inscripcion.child("id_usuario").value.toString() == id_usuario)
+                                && (inscripcion.child("estado").value.toString() == "Pendiente" ||
+                                        inscripcion.child("estado").value.toString() == "Aceptado")
                             ) {
                                 existe = true
                             }

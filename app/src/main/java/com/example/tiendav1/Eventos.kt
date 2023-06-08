@@ -79,6 +79,7 @@ class Eventos : Fragment() {
                         }
                     }
                 }
+                lista_eventos.sortByDescending { it.fecha }
                 adaptador.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {

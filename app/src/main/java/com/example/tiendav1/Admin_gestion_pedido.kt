@@ -108,8 +108,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
             }
 
             listo_color.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado")
-                    .setValue("Listo para recoger")
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT)
                     .show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
@@ -118,8 +123,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
                 true
             }
             listo_texto.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado")
-                    .setValue("Listo para recoger")
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT)
                     .show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
@@ -239,6 +249,12 @@ class Admin_gestion_pedido : AppCompatActivity() {
 
 
         rechazar_color.setOnLongClickListener {
+            pojo_pedido.estado = "Rechazado"
+            pojo_pedido.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Rechazado")
 
             aceptar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
             aceptar_texto.setTextColor(getColor(R.color.black))
@@ -254,7 +270,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
             estado_texto.text = "Rechazado"
             estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
 
-            Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Rechazado")
+
 
             Toast.makeText(applicationContext, "Pedido rechazado", Toast.LENGTH_SHORT).show()
 
@@ -262,6 +278,12 @@ class Admin_gestion_pedido : AppCompatActivity() {
         }
 
         rechazar_texto.setOnLongClickListener {
+            pojo_pedido.estado = "Rechazado"
+            pojo_pedido.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Rechazado")
 
             aceptar_color.setImageDrawable(getDrawable(R.drawable.desabilitado))
             aceptar_texto.setTextColor(getColor(R.color.black))
@@ -277,7 +299,7 @@ class Admin_gestion_pedido : AppCompatActivity() {
             estado_texto.text = "Rechazado"
             estado_color.setImageDrawable(getDrawable(R.drawable.rechazar))
 
-            Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Rechazado")
+
 
             Toast.makeText(applicationContext, "Pedido rechazado", Toast.LENGTH_SHORT).show()
 
@@ -285,7 +307,12 @@ class Admin_gestion_pedido : AppCompatActivity() {
         }
 
         aceptar_color.setOnLongClickListener {
+            pojo_pedido.estado = "Aceptado"
+            pojo_pedido.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
 
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//todo aqui no habia cambio de estado a aceptado?
             rechazar_color.visibility = View.INVISIBLE
             rechazar_texto.visibility = View.INVISIBLE
 
@@ -307,8 +334,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
             }
 
             listo_color.setOnLongClickListener {
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
 
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
 
                 listo_color.visibility = View.INVISIBLE
@@ -319,7 +351,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
                 true
             }
             listo_texto.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
 
                 listo_color.visibility = View.INVISIBLE
@@ -344,6 +382,12 @@ class Admin_gestion_pedido : AppCompatActivity() {
             true
         }
         aceptar_texto.setOnLongClickListener {
+            pojo_pedido.estado = "Aceptado"
+            pojo_pedido.estado_noti = Estado.MODIFICADO
+            Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//            Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//todo aqui tampoco habia cambio de estado a aceptado?
 
             rechazar_color.visibility = View.INVISIBLE
             rechazar_texto.visibility = View.INVISIBLE
@@ -365,8 +409,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
             }
 
             listo_color.setOnLongClickListener {
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
 
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
                 estado_texto.text = "Completado"
@@ -374,7 +423,13 @@ class Admin_gestion_pedido : AppCompatActivity() {
                 true
             }
             listo_texto.setOnLongClickListener {
-                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+                pojo_pedido.estado = "Listo para recoger"
+                pojo_pedido.estado_noti = Estado.MODIFICADO
+                Utilidades.reservas.child(pojo_pedido.id!!).setValue(pojo_pedido)
+
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado_noti").setValue(Estado.MODIFICADO)
+//                Utilidades.reservas.child(pojo_pedido.id!!).child("estado").setValue("Listo para recoger")
+
                 Toast.makeText(applicationContext, "Pedido listo para recoger", Toast.LENGTH_SHORT).show()
                 estado_color.setImageDrawable(getDrawable(R.drawable.completado))
                 estado_texto.text = "Completado"
