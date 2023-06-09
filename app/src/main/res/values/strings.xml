@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tiendav1</string>
+    <string name="app_name">SecondCharm</string>
     <string name="app_id">com.example.tiendav1</string>
     <string name="sc">SecondCharm</string>
     <string name="title_activity_principal_normal">Principal_normal</string>

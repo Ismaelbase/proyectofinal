@@ -107,45 +107,7 @@ class Registro : AppCompatActivity() {
 
         boton_registrarse.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
-                if (validarTodo() &&
-                    !Utilidades.existeUser(nombre.text.toString().trim()) &&
-                    url_avatar != null
-                ) { //Se puede añadir usuario a BD y devolver al main.
-
-                    val fecha = LocalDate.now()
-                    val id_usuario = Utilidades.usuarios.push().key!!
-
-                    val url_firebase = Utilidades.guardarImagen(
-                        referencia_almacenamiento,
-                        id_usuario,
-                        url_avatar!!
-                    )
-
-                    Utilidades.escribirUser(
-                        referencia_bd,
-                        id_usuario,
-                        nombre.text.toString().trim(),
-                        contrasena.text.toString().trim(),
-                        mail.text.toString().trim(),
-                        puntos = 0,
-                        url_firebase,
-                        fecha.toString(),
-                        true,
-                        true,
-                        false
-                    )
-
-                    Utilidades.tostadaCorrutina(
-                        this@Registro,
-                        applicationContext,
-                        "Bienvenido a SecondCharm."
-                    )
-
-                    Utilidades.recien_registrado = nombre.text.toString()!!
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
-
-
-                } else if (contrasena.text.toString() != contrasena2.text.toString()) {
+                 if (contrasena.text.toString() != contrasena2.text.toString()) {
                     runOnUiThread {
                         contrasena2.error = "Las contraseñas no coinciden."
                     }
@@ -165,7 +127,45 @@ class Registro : AppCompatActivity() {
                         applicationContext,
                         "Nombre no disponible."
                     )
-                }else{
+                }else if (validarTodo() &&
+                     !Utilidades.existeUser(nombre.text.toString().trim()) &&
+                     url_avatar != null
+                 ) { //Se puede añadir usuario a BD y devolver al main.
+
+                     val fecha = LocalDate.now()
+                     val id_usuario = Utilidades.usuarios.push().key!!
+
+                     val url_firebase = Utilidades.guardarImagen(
+                         referencia_almacenamiento,
+                         id_usuario,
+                         url_avatar!!
+                     )
+
+                     Utilidades.escribirUser(
+                         referencia_bd,
+                         id_usuario,
+                         nombre.text.toString().trim(),
+                         contrasena.text.toString().trim(),
+                         mail.text.toString().trim(),
+                         puntos = 0,
+                         url_firebase,
+                         fecha.toString(),
+                         true,
+                         true,
+                         false
+                     )
+
+                     Utilidades.tostadaCorrutina(
+                         this@Registro,
+                         applicationContext,
+                         "Bienvenido a SecondCharm."
+                     )
+
+                     Utilidades.recien_registrado = nombre.text.toString()!!
+                     startActivity(Intent(applicationContext, MainActivity::class.java))
+
+
+                 }else{
                     Utilidades.tostadaCorrutina(this@Registro,applicationContext,"Rellena los campos")
                 }
             }
