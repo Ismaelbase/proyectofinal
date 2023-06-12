@@ -11,12 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="0dp"
-        android:paddingBottom="130dp"
+        android:paddingBottom="190dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/chat_publico_lista_usuarios2" />
 
+    <ImageView
+        android:id="@+id/chat_publico_lista_usuarios2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/todos_usuarios_sc6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
@@ -53,4 +62,36 @@
         app:layout_constraintBottom_toBottomOf="@+id/normal_chat_publico_enviar"
         app:layout_constraintEnd_toStartOf="@+id/normal_chat_publico_enviar"
         app:layout_constraintTop_toTopOf="@+id/normal_chat_publico_enviar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/foro_publico_banner"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_publico_lista_usuarios2"
+        app:layout_constraintEnd_toStartOf="@+id/chat_publico_lista_usuarios2"
+        app:layout_constraintTop_toTopOf="@+id/chat_publico_lista_usuarios2" />
+
+    <ImageView
+        android:id="@+id/normal_foro_publico_barra2"
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/barra_morada_sc1"
+        app:layout_constraintBottom_toTopOf="@+id/normal_chat_publico_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/normal_foro_publico_barra1"
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/barra_morada_sc1"
+        app:layout_constraintBottom_toTopOf="@+id/normal_chat_publico_texto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
