@@ -516,7 +516,7 @@ class MainActivity : AppCompatActivity() {
                                 generarNotificacionInscripcion(
                                     id_noti,
                                     pojo_inscripcion!!,
-                                    "Tu inscripcion a ${pojo_inscripcion!!.nombre_evento} ha sido aceptado.",
+                                    "Tu inscripcion a ${pojo_inscripcion!!.nombre_evento} ha sido aceptada.",
                                     "¡Inscripción aceptada!",
                                     Normal_detalle_inscripcion::class.java
                                 )
